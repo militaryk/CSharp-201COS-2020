@@ -32,6 +32,12 @@ namespace DodgeDemo
             planetRec = new Rectangle(x, y, width, height);
             g.DrawImage(planetImage, planetRec);
         }
+        public void MovePlanet()
+        {
+            y += 5;
+
+            planetRec.Location = new Point(x, y);
+        }
 
 
     }

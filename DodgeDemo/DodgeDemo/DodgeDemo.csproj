@@ -55,6 +55,7 @@
     <Compile Include="Planet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spaceship.cs" />
     <EmbeddedResource Include="FrmDodge.resx">
       <DependentUpon>FrmDodge.cs</DependentUpon>
     </EmbeddedResource>
