@@ -19,6 +19,10 @@ namespace DodgeDemo
         bool left, right;
         int score, lives;
         string move;
+        bool turnLeft, turnRight;
+        //declare a list  missiles from the Missile class
+        List<Missile> missiles = new List<Missile>();
+
 
 
         public FrmDodge()
@@ -45,6 +49,12 @@ namespace DodgeDemo
                 //call the Planet class's drawPlanet method to draw the images
                 planet[i].DrawPlanet(g);
                 spaceship.DrawSpaceship(g);
+                foreach (Missile m in missiles)
+                {
+                    m.drawMissile(g);
+                    m.moveMissile(g);
+                }
+
             }
 
 
@@ -67,6 +77,14 @@ namespace DodgeDemo
 
         private void TmrShip_Tick(object sender, EventArgs e)
         {
+            if (turnRight)
+            {
+                spaceship.rotationAngle += 5;
+            }
+            if (turnLeft)
+            {
+                spaceship.rotationAngle -= 5;
+            }
             if (right) // if right arrow key pressed
             {
                 move = "right";
@@ -133,6 +151,15 @@ namespace DodgeDemo
 
 
         }
+
+        private void FrmDodge_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                missiles.Add(new Missile(spaceship.spaceRec, spaceship.rotationAngle));
+            }
+        }
+
         private void CheckLives()
         {
             if (lives == 0)
@@ -159,6 +186,5 @@ namespace DodgeDemo
 
             return Math.Sqrt(dx * dx + dy * dy) < 0.4;
         }
-
     }
 }
