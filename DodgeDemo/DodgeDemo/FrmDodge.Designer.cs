@@ -53,6 +53,7 @@
             this.PnlGame.Size = new System.Drawing.Size(503, 415);
             this.PnlGame.TabIndex = 0;
             this.PnlGame.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlGame_Paint);
+            this.PnlGame.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FrmDodge_MouseDown);
             // 
             // TmrPlanet
             // 
