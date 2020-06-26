@@ -83,7 +83,26 @@ namespace DodgeDemo
 
         private void FrmDodge_Load(object sender, EventArgs e)
         {
-            lives = int.Parse(txtLives.Text);// pass lives entered from textbox to lives variable
+            MessageBox.Show("Use the left and right arrow keys to move the spaceship. \n Don't get hit by the planets! \n Every planet that gets past scores a point. \n If a planet hits a spaceship a life is lost! \n \n Enter your Name press tab and enter the number of lives \n Click Start to begin", "Game Instructions");
+            txtName.Focus();
+
+        }
+
+        private void MnuStart_Click(object sender, EventArgs e)
+        {
+           score = 0;
+           lblScore.Text = score.ToString();
+           lives = int.Parse(txtLives.Text);// pass lives entered from textbox to lives variable
+           TmrPlanet.Enabled = true;
+           TmrShip.Enabled = true;
+           txtName.Enabled = false;
+        }
+
+        private void MnuStop_Click(object sender, EventArgs e)
+        {
+            TmrShip.Enabled = false;
+            TmrPlanet.Enabled = false;
+            txtName.Enabled = true;
         }
 
         private void TmrPlanet_Tick(object sender, EventArgs e)
@@ -91,7 +110,7 @@ namespace DodgeDemo
             for (int i = 0; i < 7; i++)
             {
                 planet[i].MovePlanet();
-                if (spaceship.spaceRec.IntersectsWith(planet[i].planetRec))
+                if (EllipsesIntersect(spaceship.spaceRec, planet[i].planetRec))
                 {
                     //reset planet[i] back to top of panel
                     planet[i].y = 30; // set  y value of planetRec
@@ -123,6 +142,22 @@ namespace DodgeDemo
                 MessageBox.Show("Game Over");
 
             }
+        }
+
+        private bool EllipsesIntersect(Rectangle a, Rectangle b)
+        {
+            double centerAX = a.X + 0.5 * a.Width;
+            double centerAY = a.Y + 0.5 * a.Height;
+            double centerBX = b.X + 0.5 * b.Width;
+            double centerBY = b.Y + 0.5 * b.Height;
+
+            double dx = centerBX - centerAX;
+            double dy = centerBY - centerAY;
+
+            dx /= a.Width + b.Width;
+            dy /= a.Height + b.Height;
+
+            return Math.Sqrt(dx * dx + dy * dy) < 0.4;
         }
 
     }
