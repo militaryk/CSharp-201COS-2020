@@ -17,7 +17,7 @@ namespace DodgeDemo
         Random yspeed = new Random();
         Spaceship spaceship = new Spaceship();
         bool left, right;
-        int score, lives;
+        byte score, lives;
         string move;
         bool turnLeft, turnRight;
         //declare a list  missiles from the Missile class
@@ -110,7 +110,7 @@ namespace DodgeDemo
         {
            score = 0;
            lblScore.Text = score.ToString();
-           lives = int.Parse(txtLives.Text);// pass lives entered from textbox to lives variable
+           lives = byte.Parse(txtLives.Text);// pass lives entered from textbox to lives variable
            TmrPlanet.Enabled = true;
            TmrShip.Enabled = true;
            txtName.Enabled = false;
