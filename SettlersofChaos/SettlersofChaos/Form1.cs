@@ -12,23 +12,30 @@ namespace SettlersofChaos
 {
     public partial class Form1 : Form
     {
-        private Hexagon hexagon;
+        private Hexagon[] hexagons = new Hexagon[3];
 
         public Form1()
         {
             InitializeComponent();
 
-            hexagon = new Hexagon
+            for (int i = 0; i < 3; i++)
             {
-                Position = new PointF(200, 200),
-                Radius = 100,
-            };
+                hexagons[i] = new Hexagon
+                {
+                    Row = i,
+                    Column = i,
+                    Radius = 50,
+                };
+            }
         }
 
         private void PnlGame_Paint(object sender, PaintEventArgs e)
         {
             var g = e.Graphics;
-            hexagon.Draw(g);
+            var size = PnlGame.Size;
+            var center = new PointF(size.Width / 2f, size.Height / 2f);
+            foreach (var hexagon in hexagons)
+                hexagon.Draw(g, center);
         }
     }
 }
