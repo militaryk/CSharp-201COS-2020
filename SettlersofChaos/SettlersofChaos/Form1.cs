@@ -10,11 +10,12 @@ using System.Windows.Forms;
 
 namespace SettlersofChaos
 {
-    public partial class Form1 : Form
+    public partial class FormGame : Form
     {
         private Hexagon[] hexagons = new Hexagon[3];
+        private Fight[] redblocks = new Fight[10];
 
-        public Form1()
+        public FormGame()
         {
             InitializeComponent();
 
@@ -27,6 +28,11 @@ namespace SettlersofChaos
                     Radius = 50,
                 };
             }
+            for (int i = 0; i < 10; i++)
+                redblocks[i] = new Fight
+                {
+                    
+                };
         }
 
         private void PnlGame_Paint(object sender, PaintEventArgs e)
@@ -36,6 +42,7 @@ namespace SettlersofChaos
             var center = new PointF(size.Width / 2f, size.Height / 2f);
             foreach (var hexagon in hexagons)
                 hexagon.Draw(g, center);
+            redblocks.Draw
         }
     }
 }
