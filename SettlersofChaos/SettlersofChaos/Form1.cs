@@ -28,12 +28,13 @@ namespace SettlersofChaos
                     Radius = 50,
                 };
             }
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++) {
                 redblocks[i] = new Fight
                 {
-                    
+
                 };
-        }
+            }
+            }
 
         private void PnlGame_Paint(object sender, PaintEventArgs e)
         {
@@ -42,7 +43,15 @@ namespace SettlersofChaos
             var center = new PointF(size.Width / 2f, size.Height / 2f);
             foreach (var hexagon in hexagons)
                 hexagon.Draw(g, center);
-            redblocks.Draw
+        }
+
+        private void PnlFight_Paint(object sender, PaintEventArgs e)
+        {
+            var g = e.Graphics;
+            foreach (var block in redblocks)
+            {
+                block.Draw(g);
+            }
         }
     }
 }

@@ -46,10 +46,11 @@
             // PnlFight
             // 
             this.PnlFight.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.PnlFight.Location = new System.Drawing.Point(0, 103);
+            this.PnlFight.Location = new System.Drawing.Point(0, 70);
             this.PnlFight.Name = "PnlFight";
-            this.PnlFight.Size = new System.Drawing.Size(800, 257);
+            this.PnlFight.Size = new System.Drawing.Size(800, 300);
             this.PnlFight.TabIndex = 0;
+            this.PnlFight.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlFight_Paint);
             // 
             // FormGame
             // 

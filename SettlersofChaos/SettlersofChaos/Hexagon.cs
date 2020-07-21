@@ -15,7 +15,7 @@ namespace SettlersofChaos
         //Axial Coordinate
         public int Column;
         public int Row;
-        public const int NUM_SIDES = 4;
+        public const int NUM_SIDES = 6;
 
         public void Draw(Graphics g, PointF centerOfWindow)
         {
