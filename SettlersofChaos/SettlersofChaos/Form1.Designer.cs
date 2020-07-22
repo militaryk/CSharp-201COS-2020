@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.PnlGame = new System.Windows.Forms.Panel();
             this.PnlFight = new System.Windows.Forms.Panel();
+            this.ArtilleryTicks = new System.Windows.Forms.Timer(this.components);
             this.PnlGame.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,12 +54,18 @@
             this.PnlFight.TabIndex = 0;
             this.PnlFight.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlFight_Paint);
             // 
+            // ArtilleryTicks
+            // 
+            this.ArtilleryTicks.Enabled = true;
+            this.ArtilleryTicks.Tick += new System.EventHandler(this.ArtilleryTicks_Tick);
+            // 
             // FormGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.PnlGame);
+            this.DoubleBuffered = true;
             this.Name = "FormGame";
             this.Text = "SettlersOfChaos";
             this.PnlGame.ResumeLayout(false);
@@ -69,6 +77,7 @@
 
         private System.Windows.Forms.Panel PnlGame;
         private System.Windows.Forms.Panel PnlFight;
+        private System.Windows.Forms.Timer ArtilleryTicks;
     }
 }
 

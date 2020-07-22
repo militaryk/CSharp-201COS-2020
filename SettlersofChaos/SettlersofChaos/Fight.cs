@@ -7,21 +7,23 @@ using System.Threading.Tasks;
 
 namespace SettlersofChaos
 {
-    class Fight
+    class Artilltery
     {
         public Point Position;
         public Size Size;
-        public int RedPosY;
-        Random RedPosRamdom = new Random();
-        int RedPosX;
-        public Fight()
+        public int RedPosX;
+        int RedPosY;
+        int RedPosAxis;
+        public Artilltery(Random random)
         {
-            RedPosX= RedPosRamdom.Next(1, 100);
-            Position = new Point(RedPosX, RedPosY);
-            Size = new Size(100, 100);
+            RedPosX = random.Next(1, 5000);
+            RedPosAxis = random.Next(0, 3);
+            RedPosY = RedPosAxis * 100;
+            Size = new Size(50, 100);
         }
         public void Draw(Graphics g)
         {
+            Position = new Point(RedPosX, RedPosY);
             g.FillRectangle(Brushes.Red, new Rectangle(Position, Size));
 
         }

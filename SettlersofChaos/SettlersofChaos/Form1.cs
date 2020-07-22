@@ -3,21 +3,27 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace SettlersofChaos
 {
     public partial class FormGame : Form
     {
         private Hexagon[] hexagons = new Hexagon[3];
-        private Fight[] redblocks = new Fight[10];
-
+        private Artilltery[] redblocks = new Artilltery[10];
+        public int speed = 10;
+        ArtilleryShell artilleryShell = new ArtilleryShell();
         public FormGame()
         {
             InitializeComponent();
+            typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlGame, new object[] { true });
+            var random = new Random();
+            var RedAxis = new Random();
 
             for (int i = 0; i < 3; i++)
             {
@@ -29,10 +35,8 @@ namespace SettlersofChaos
                 };
             }
             for (int i = 0; i < 10; i++) {
-                redblocks[i] = new Fight
-                {
+                redblocks[i] = new Artilltery(random);
 
-                };
             }
             }
 
@@ -52,6 +56,16 @@ namespace SettlersofChaos
             {
                 block.Draw(g);
             }
+            artilleryShell.DrawShell(g);
+        }
+
+        public void ArtilleryTicks_Tick(object sender, EventArgs e)
+        {
+            foreach (var block in redblocks)
+            {
+                block.RedPosX -= speed;
+            }
+            PnlFight.Invalidate();
         }
     }
 }
