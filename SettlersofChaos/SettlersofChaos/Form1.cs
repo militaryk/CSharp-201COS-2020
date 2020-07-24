@@ -15,13 +15,16 @@ namespace SettlersofChaos
     public partial class FormGame : Form
     {
         private Hexagon[] hexagons = new Hexagon[3];
-        private Artilltery[] redblocks = new Artilltery[10];
+        private Artilltery[] redblocks = new Artilltery[50];
         public int speed = 10;
+        string shellmove;
+        public bool left, right;
         ArtilleryShell artilleryShell = new ArtilleryShell();
         public FormGame()
         {
             InitializeComponent();
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlGame, new object[] { true });
+            typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlFight, new object[] { true });
             var random = new Random();
             var RedAxis = new Random();
 
@@ -34,7 +37,7 @@ namespace SettlersofChaos
                     Radius = 50,
                 };
             }
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 50; i++) {
                 redblocks[i] = new Artilltery(random);
 
             }
@@ -67,5 +70,42 @@ namespace SettlersofChaos
             }
             PnlFight.Invalidate();
         }
-    }
+
+        private void FormGame_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Up) { left = true; }
+            if (e.KeyData == Keys.Down) { right = true; }
+        }
+
+        private void TmrShellMove_Tick(object sender, EventArgs e)
+        {
+            if (spaceship.spaceRec.IntersectsWith(planet[i].planetRec))
+            {
+                //reset planet[i] back to top of panel
+                lives -= 1;// lose a life
+            }
+            else
+            {
+                if (right) // if right arrow key pressed
+                {
+                    shellmove = "up";
+                    artilleryShell.MoveShell(shellmove);
+                }
+                if (left) // if left arrow key pressed
+                {
+                    shellmove = "down";
+                    artilleryShell.MoveShell(shellmove);
+                }
+            }
+        }
+
+        private void FormGame_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Up) { left = false; }
+            if (e.KeyData == Keys.Down) { right = false; }
+        }
+
+
+        }
 }
+

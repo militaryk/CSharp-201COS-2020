@@ -24,7 +24,6 @@ namespace SettlersofChaos
             y = 10;
             width = 40;
             height = 40;
-            rotationAngle = 0;
             artilleryshell = Properties.Resources.shell;
             ShellRec = new Rectangle(x, y, width, height);
         }
@@ -40,32 +39,32 @@ namespace SettlersofChaos
         {
             ShellRec.Location = new Point(x, y);
 
-            if (move == "right")
+            if (move == "up")
             {
-                if (ShellRec.Location.X > 450)
+                if (ShellRec.Location.Y > 265)
                 {
 
-                    x = 450;
+                    y = 270;
                     ShellRec.Location = new Point(x, y);
                 }
                 else
                 {
-                    x += 5;
+                    y += 15;
                     ShellRec.Location = new Point(x, y);
                 }
 
             }
-            if (move == "left")
+            if (move == "down")
             {
-                if (ShellRec.Location.X < 10)
+                if (ShellRec.Location.Y < -5)
                 {
 
-                    x = 10;
+                    y = -10;
                     ShellRec.Location = new Point(x, y);
                 }
                 else
                 {
-                    x -= 5;
+                    y -= 15;
                     ShellRec.Location = new Point(x, y);
                 }
 

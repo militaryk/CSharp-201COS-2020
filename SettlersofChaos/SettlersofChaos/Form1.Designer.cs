@@ -31,7 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.PnlGame = new System.Windows.Forms.Panel();
             this.PnlFight = new System.Windows.Forms.Panel();
-            this.ArtilleryTicks = new System.Windows.Forms.Timer(this.components);
+            this.TmrArtilleryTicks = new System.Windows.Forms.Timer(this.components);
+            this.TmrShellMove = new System.Windows.Forms.Timer(this.components);
             this.PnlGame.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,10 +55,17 @@
             this.PnlFight.TabIndex = 0;
             this.PnlFight.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlFight_Paint);
             // 
-            // ArtilleryTicks
+            // TmrArtilleryTicks
             // 
-            this.ArtilleryTicks.Enabled = true;
-            this.ArtilleryTicks.Tick += new System.EventHandler(this.ArtilleryTicks_Tick);
+            this.TmrArtilleryTicks.Enabled = true;
+            this.TmrArtilleryTicks.Interval = 16;
+            this.TmrArtilleryTicks.Tick += new System.EventHandler(this.ArtilleryTicks_Tick);
+            // 
+            // TmrShellMove
+            // 
+            this.TmrShellMove.Enabled = true;
+            this.TmrShellMove.Interval = 50;
+            this.TmrShellMove.Tick += new System.EventHandler(this.TmrShellMove_Tick);
             // 
             // FormGame
             // 
@@ -68,6 +76,8 @@
             this.DoubleBuffered = true;
             this.Name = "FormGame";
             this.Text = "SettlersOfChaos";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormGame_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FormGame_KeyUp);
             this.PnlGame.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -77,7 +87,8 @@
 
         private System.Windows.Forms.Panel PnlGame;
         private System.Windows.Forms.Panel PnlFight;
-        private System.Windows.Forms.Timer ArtilleryTicks;
+        private System.Windows.Forms.Timer TmrArtilleryTicks;
+        private System.Windows.Forms.Timer TmrShellMove;
     }
 }
 
