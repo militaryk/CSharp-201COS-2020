@@ -63,16 +63,6 @@ namespace SettlersofChaos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Redsquare {
-            get {
-                object obj = ResourceManager.GetObject("Redsquare", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap shell {
             get {
                 object obj = ResourceManager.GetObject("shell", resourceCulture);
