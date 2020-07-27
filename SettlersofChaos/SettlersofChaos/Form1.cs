@@ -16,10 +16,12 @@ namespace SettlersofChaos
     {
         private Hexagon[] hexagons = new Hexagon[3];
         private Artilltery[] redblocks = new Artilltery[50];
+
         public int speed = 10;
         string shellmove;
         public bool left, right;
         ArtilleryShell artilleryShell = new ArtilleryShell();
+        ArtilleryTarget artilleryTarget = new ArtilleryTarget();
         public FormGame()
         {
             InitializeComponent();
@@ -39,7 +41,6 @@ namespace SettlersofChaos
             }
             for (int i = 0; i < 50; i++) {
                 redblocks[i] = new Artilltery(random);
-
             }
             }
 
@@ -60,6 +61,8 @@ namespace SettlersofChaos
                 block.Draw(g);
             }
             artilleryShell.DrawShell(g);
+            artilleryTarget.Draw(g);
+
         }
 
         public void ArtilleryTicks_Tick(object sender, EventArgs e)
@@ -79,10 +82,13 @@ namespace SettlersofChaos
 
         private void TmrShellMove_Tick(object sender, EventArgs e)
         {
-            if (spaceship.spaceRec.IntersectsWith(planet[i].planetRec))
+            if (CollidesWithRedBlock())
             {
                 //reset planet[i] back to top of panel
-                lives -= 1;// lose a life
+                YouMissedLBL.Visible = true;
+                TmrArtilleryTicks.Enabled = false;
+                TmrShellMove.Enabled = false;
+
             }
             else
             {
@@ -97,6 +103,18 @@ namespace SettlersofChaos
                     artilleryShell.MoveShell(shellmove);
                 }
             }
+        }
+
+        private bool CollidesWithRedBlock()
+        {
+            foreach (var block in redblocks)
+            {
+                if (artilleryShell.ShellRec.IntersectsWith(new Rectangle(block.Position, block.Size))){
+                    return true;
+                }
+                
+            }
+            return false;
         }
 
         private void FormGame_KeyUp(object sender, KeyEventArgs e)

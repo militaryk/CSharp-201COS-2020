@@ -33,7 +33,9 @@
             this.PnlFight = new System.Windows.Forms.Panel();
             this.TmrArtilleryTicks = new System.Windows.Forms.Timer(this.components);
             this.TmrShellMove = new System.Windows.Forms.Timer(this.components);
+            this.YouMissedLBL = new System.Windows.Forms.Label();
             this.PnlGame.SuspendLayout();
+            this.PnlFight.SuspendLayout();
             this.SuspendLayout();
             // 
             // PnlGame
@@ -49,6 +51,7 @@
             // PnlFight
             // 
             this.PnlFight.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.PnlFight.Controls.Add(this.YouMissedLBL);
             this.PnlFight.Location = new System.Drawing.Point(0, 70);
             this.PnlFight.Name = "PnlFight";
             this.PnlFight.Size = new System.Drawing.Size(800, 300);
@@ -67,6 +70,21 @@
             this.TmrShellMove.Interval = 50;
             this.TmrShellMove.Tick += new System.EventHandler(this.TmrShellMove_Tick);
             // 
+            // YouMissedLBL
+            // 
+            this.YouMissedLBL.BackColor = System.Drawing.Color.Transparent;
+            this.YouMissedLBL.Cursor = System.Windows.Forms.Cursors.Default;
+            this.YouMissedLBL.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F);
+            this.YouMissedLBL.ForeColor = System.Drawing.Color.Red;
+            this.YouMissedLBL.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.YouMissedLBL.Location = new System.Drawing.Point(0, 0);
+            this.YouMissedLBL.Name = "YouMissedLBL";
+            this.YouMissedLBL.Size = new System.Drawing.Size(800, 300);
+            this.YouMissedLBL.TabIndex = 0;
+            this.YouMissedLBL.Text = "You Missed";
+            this.YouMissedLBL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.YouMissedLBL.Visible = false;
+            // 
             // FormGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -79,6 +97,7 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormGame_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FormGame_KeyUp);
             this.PnlGame.ResumeLayout(false);
+            this.PnlFight.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -89,6 +108,7 @@
         private System.Windows.Forms.Panel PnlFight;
         private System.Windows.Forms.Timer TmrArtilleryTicks;
         private System.Windows.Forms.Timer TmrShellMove;
+        private System.Windows.Forms.Label YouMissedLBL;
     }
 }
 
