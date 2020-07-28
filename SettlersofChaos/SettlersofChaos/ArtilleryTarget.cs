@@ -9,24 +9,24 @@ namespace SettlersofChaos
 {
     class ArtilleryTarget
     {
-        public Point Position;
-        public Size Size;
-        int TargetPosX;
+        public Point TargetPosition;
+        public Size TargetSize;
+        public int TargetPosX;
         int TargetPosY;
         int TargretBlockHeight;
         int TargetBlockWidth;
         public ArtilleryTarget()
         {
-            TargetPosX = 0;
-            TargetPosY = 200;
+            TargetPosX = 5000;
+            TargetPosY = 0;
             TargretBlockHeight = 300;
             TargetBlockWidth = 50;
         }
         public void Draw(Graphics g)
         {
-            Size = new Size(TargetBlockWidth, TargretBlockHeight);
-            Position = new Point(TargetPosX, TargetPosY);
-            g.FillRectangle(Brushes.Blue, new Rectangle(Position, Size));
+            TargetSize = new Size(TargetBlockWidth, TargretBlockHeight);
+            TargetPosition = new Point(TargetPosX, TargetPosY);
+            g.FillRectangle(Brushes.Blue, new Rectangle(TargetPosition, TargetSize));
 
         }
     }

@@ -31,9 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.PnlGame = new System.Windows.Forms.Panel();
             this.PnlFight = new System.Windows.Forms.Panel();
+            this.YouMissedLBL = new System.Windows.Forms.Label();
             this.TmrArtilleryTicks = new System.Windows.Forms.Timer(this.components);
             this.TmrShellMove = new System.Windows.Forms.Timer(this.components);
-            this.YouMissedLBL = new System.Windows.Forms.Label();
+            this.LblTargetHit = new System.Windows.Forms.Label();
             this.PnlGame.SuspendLayout();
             this.PnlFight.SuspendLayout();
             this.SuspendLayout();
@@ -51,24 +52,14 @@
             // PnlFight
             // 
             this.PnlFight.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.PnlFight.Controls.Add(this.LblTargetHit);
             this.PnlFight.Controls.Add(this.YouMissedLBL);
             this.PnlFight.Location = new System.Drawing.Point(0, 70);
             this.PnlFight.Name = "PnlFight";
             this.PnlFight.Size = new System.Drawing.Size(800, 300);
             this.PnlFight.TabIndex = 0;
+            this.PnlFight.Visible = false;
             this.PnlFight.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlFight_Paint);
-            // 
-            // TmrArtilleryTicks
-            // 
-            this.TmrArtilleryTicks.Enabled = true;
-            this.TmrArtilleryTicks.Interval = 16;
-            this.TmrArtilleryTicks.Tick += new System.EventHandler(this.ArtilleryTicks_Tick);
-            // 
-            // TmrShellMove
-            // 
-            this.TmrShellMove.Enabled = true;
-            this.TmrShellMove.Interval = 50;
-            this.TmrShellMove.Tick += new System.EventHandler(this.TmrShellMove_Tick);
             // 
             // YouMissedLBL
             // 
@@ -77,13 +68,38 @@
             this.YouMissedLBL.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F);
             this.YouMissedLBL.ForeColor = System.Drawing.Color.Red;
             this.YouMissedLBL.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.YouMissedLBL.Location = new System.Drawing.Point(0, 0);
+            this.YouMissedLBL.Location = new System.Drawing.Point(-3, 104);
             this.YouMissedLBL.Name = "YouMissedLBL";
             this.YouMissedLBL.Size = new System.Drawing.Size(800, 300);
             this.YouMissedLBL.TabIndex = 0;
             this.YouMissedLBL.Text = "You Missed";
             this.YouMissedLBL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.YouMissedLBL.Visible = false;
+            // 
+            // TmrArtilleryTicks
+            // 
+            this.TmrArtilleryTicks.Interval = 33;
+            this.TmrArtilleryTicks.Tick += new System.EventHandler(this.ArtilleryTicks_Tick);
+            // 
+            // TmrShellMove
+            // 
+            this.TmrShellMove.Interval = 25;
+            this.TmrShellMove.Tick += new System.EventHandler(this.TmrShellMove_Tick);
+            // 
+            // LblTargetHit
+            // 
+            this.LblTargetHit.BackColor = System.Drawing.Color.Transparent;
+            this.LblTargetHit.Cursor = System.Windows.Forms.Cursors.Default;
+            this.LblTargetHit.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F);
+            this.LblTargetHit.ForeColor = System.Drawing.Color.Aqua;
+            this.LblTargetHit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.LblTargetHit.Location = new System.Drawing.Point(-3, 57);
+            this.LblTargetHit.Name = "LblTargetHit";
+            this.LblTargetHit.Size = new System.Drawing.Size(800, 300);
+            this.LblTargetHit.TabIndex = 1;
+            this.LblTargetHit.Text = "Target Hit";
+            this.LblTargetHit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblTargetHit.Visible = false;
             // 
             // FormGame
             // 
@@ -109,6 +125,7 @@
         private System.Windows.Forms.Timer TmrArtilleryTicks;
         private System.Windows.Forms.Timer TmrShellMove;
         private System.Windows.Forms.Label YouMissedLBL;
+        private System.Windows.Forms.Label LblTargetHit;
     }
 }
 

@@ -13,7 +13,6 @@ namespace SettlersofChaos
 
         public int x, y, width, height;//variables for the rectangle
         public Image artilleryshell;//variable for the planet's image
-        public int rotationAngle;
         Point centre;
         public Rectangle ShellRec;//variable for a rectangle to place our image in
 
@@ -22,9 +21,9 @@ namespace SettlersofChaos
         {
             x = 10;
             y = 10;
-            width = 40;
-            height = 40;
-            artilleryshell = Properties.Resources.shell;
+            width = 60;
+            height = 20;
+            artilleryshell = Properties.Resources.bullet;
             ShellRec = new Rectangle(x, y, width, height);
         }
         //methods

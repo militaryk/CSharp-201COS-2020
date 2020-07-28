@@ -63,9 +63,9 @@ namespace SettlersofChaos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap shell {
+        internal static System.Drawing.Bitmap bullet {
             get {
-                object obj = ResourceManager.GetObject("shell", resourceCulture);
+                object obj = ResourceManager.GetObject("bullet", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

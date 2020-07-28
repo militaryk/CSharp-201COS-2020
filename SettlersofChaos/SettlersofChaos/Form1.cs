@@ -15,7 +15,7 @@ namespace SettlersofChaos
     public partial class FormGame : Form
     {
         private Hexagon[] hexagons = new Hexagon[3];
-        private Artilltery[] redblocks = new Artilltery[50];
+        private Artilltery[] redblocks = new Artilltery[20];
 
         public int speed = 10;
         string shellmove;
@@ -39,7 +39,7 @@ namespace SettlersofChaos
                     Radius = 50,
                 };
             }
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 20; i++) {
                 redblocks[i] = new Artilltery(random);
             }
             }
@@ -71,6 +71,7 @@ namespace SettlersofChaos
             {
                 block.RedPosX -= speed;
             }
+            artilleryTarget.TargetPosX -= speed;
             PnlFight.Invalidate();
         }
 
@@ -86,6 +87,12 @@ namespace SettlersofChaos
             {
                 //reset planet[i] back to top of panel
                 YouMissedLBL.Visible = true;
+                TmrArtilleryTicks.Enabled = false;
+                TmrShellMove.Enabled = false;
+
+            }
+            if (CollidesWithTarget()) {
+                LblTargetHit.Visible = true;
                 TmrArtilleryTicks.Enabled = false;
                 TmrShellMove.Enabled = false;
 
@@ -117,13 +124,27 @@ namespace SettlersofChaos
             return false;
         }
 
+        private bool CollidesWithTarget() 
+        {
+           if (artilleryShell.ShellRec.IntersectsWith(new Rectangle(artilleryTarget.TargetPosition, artilleryTarget.TargetSize)))
+           {
+            return true;
+           }
+            return false;
+        }
+
         private void FormGame_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Up) { left = false; }
-            if (e.KeyData == Keys.Down) { right = false; }
+            if (e.KeyData == Keys.Down) { right = false; ArtilleryGameTriggered(); }
         }
 
-
+        public void ArtilleryGameTriggered()
+        {
+            TmrArtilleryTicks.Enabled = true;
+            TmrShellMove.Enabled = true;
+            PnlFight.Visible = true;
         }
+    }
 }
 
