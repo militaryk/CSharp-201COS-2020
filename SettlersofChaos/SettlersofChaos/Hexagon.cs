@@ -23,7 +23,7 @@ namespace SettlersofChaos
             position.X += centerOfWindow.X;
             position.Y += centerOfWindow.Y;
             // Circumscribed radius
-            float cRadius = Radius * (float)(1 / Math.Cos(Math.PI / NUM_SIDES));
+            float cRadius = Radius * (float)(.8 / Math.Cos(Math.PI / NUM_SIDES));
             PointF[] points = new PointF[NUM_SIDES];
             for (int i = 0; i < NUM_SIDES; i++)
             {
@@ -32,7 +32,8 @@ namespace SettlersofChaos
                 float y = position.Y + cRadius * (float)Math.Sin(angle);
                 points[i] = new PointF(x, y);
             }
-            g.FillPolygon(Brushes.Blue, points);
+            g.FillPolygon(Brushes.Aqua, points);
+            g.DrawPolygon(Pens.Black, points);
         }
     }
 }

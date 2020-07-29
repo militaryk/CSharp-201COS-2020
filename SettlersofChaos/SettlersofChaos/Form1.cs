@@ -14,7 +14,7 @@ namespace SettlersofChaos
 {
     public partial class FormGame : Form
     {
-        private Hexagon[] hexagons = new Hexagon[3];
+        private List<Hexagon> hexagons = new List<Hexagon>();
         private Artilltery[] redblocks = new Artilltery[20];
 
         public int speed = 10;
@@ -30,19 +30,28 @@ namespace SettlersofChaos
             var random = new Random();
             var RedAxis = new Random();
 
-            for (int i = 0; i < 3; i++)
+
+            for (int i = -2; i <= 2; i++)
             {
-                hexagons[i] = new Hexagon
+                for (int j = -3; j <= 3; j++)
                 {
-                    Row = i,
-                    Column = i,
-                    Radius = 50,
-                };
+                    if (j - i <= 2 && i - j <= 2)
+                    {
+                        var hexagon = new Hexagon
+                        {
+                            Row = i,
+                            Column = j,
+                            Radius = 50,
+                        };
+                        hexagons.Add(hexagon);
+                    }
+                }
             }
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 20; i++)
+            {
                 redblocks[i] = new Artilltery(random);
             }
-            }
+        }
 
         private void PnlGame_Paint(object sender, PaintEventArgs e)
         {
@@ -91,7 +100,8 @@ namespace SettlersofChaos
                 TmrShellMove.Enabled = false;
 
             }
-            if (CollidesWithTarget()) {
+            if (CollidesWithTarget())
+            {
                 LblTargetHit.Visible = true;
                 TmrArtilleryTicks.Enabled = false;
                 TmrShellMove.Enabled = false;
@@ -116,20 +126,21 @@ namespace SettlersofChaos
         {
             foreach (var block in redblocks)
             {
-                if (artilleryShell.ShellRec.IntersectsWith(new Rectangle(block.Position, block.Size))){
+                if (artilleryShell.ShellRec.IntersectsWith(new Rectangle(block.Position, block.Size)))
+                {
                     return true;
                 }
-                
+
             }
             return false;
         }
 
-        private bool CollidesWithTarget() 
+        private bool CollidesWithTarget()
         {
-           if (artilleryShell.ShellRec.IntersectsWith(new Rectangle(artilleryTarget.TargetPosition, artilleryTarget.TargetSize)))
-           {
-            return true;
-           }
+            if (artilleryShell.ShellRec.IntersectsWith(new Rectangle(artilleryTarget.TargetPosition, artilleryTarget.TargetSize)))
+            {
+                return true;
+            }
             return false;
         }
 
@@ -145,6 +156,13 @@ namespace SettlersofChaos
             TmrShellMove.Enabled = true;
             PnlFight.Visible = true;
         }
+
+        public void GameBoot()
+        {
+            LblTargetHit.Location = new Point(0, 0);
+            YouMissedLBL.Location = new Point(0, 0);
+        }
+
     }
 }
 
