@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
+using System.Reflection.Emit;
 
 namespace SettlersofChaos
 {
@@ -16,9 +17,10 @@ namespace SettlersofChaos
     {
         private List<Hexagon> hexagons = new List<Hexagon>();
         private Artilltery[] redblocks = new Artilltery[20];
-
         public int speed = 10;
         string shellmove;
+        int MouseX;
+        int MouseY;
         public bool left, right;
         ArtilleryShell artilleryShell = new ArtilleryShell();
         ArtilleryTarget artilleryTarget = new ArtilleryTarget();
@@ -157,11 +159,31 @@ namespace SettlersofChaos
             PnlFight.Visible = true;
         }
 
+        private void PnlGame_MouseDown(object sender, MouseEventArgs e)
+        {
+            MouseX = Cursor.Position.X;
+            MouseY = Cursor.Position.Y;
+            label1.Text = MouseX.ToString();
+            label2.Text = MouseY.ToString();
+
+        }
+
         public void GameBoot()
         {
             LblTargetHit.Location = new Point(0, 0);
             YouMissedLBL.Location = new Point(0, 0);
         }
+
+        public void HexagonSelect() {
+            float[] distances = new float[hexagons.Count];
+            int i;
+            foreach (var hexagon in hexagons)
+            {
+                distances[i] = hexagon.getdistanceto(MouseX, MouseY);
+            }
+        }
+
+
 
     }
 }

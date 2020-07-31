@@ -35,5 +35,10 @@ namespace SettlersofChaos
             g.FillPolygon(Brushes.Aqua, points);
             g.DrawPolygon(Pens.Black, points);
         }
+
+        internal float getdistanceto(int mouseX, int mouseY)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

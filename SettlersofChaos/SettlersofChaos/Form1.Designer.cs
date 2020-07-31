@@ -35,12 +35,16 @@
             this.YouMissedLBL = new System.Windows.Forms.Label();
             this.TmrArtilleryTicks = new System.Windows.Forms.Timer(this.components);
             this.TmrShellMove = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.PnlGame.SuspendLayout();
             this.PnlFight.SuspendLayout();
             this.SuspendLayout();
             // 
             // PnlGame
             // 
+            this.PnlGame.Controls.Add(this.label2);
+            this.PnlGame.Controls.Add(this.label1);
             this.PnlGame.Controls.Add(this.PnlFight);
             this.PnlGame.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PnlGame.Location = new System.Drawing.Point(0, 0);
@@ -48,6 +52,7 @@
             this.PnlGame.Size = new System.Drawing.Size(800, 450);
             this.PnlGame.TabIndex = 0;
             this.PnlGame.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlGame_Paint);
+            this.PnlGame.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PnlGame_MouseDown);
             // 
             // PnlFight
             // 
@@ -101,6 +106,24 @@
             this.TmrShellMove.Interval = 25;
             this.TmrShellMove.Tick += new System.EventHandler(this.TmrShellMove_Tick);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "label1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(55, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "label2";
+            // 
             // FormGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -113,6 +136,7 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormGame_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FormGame_KeyUp);
             this.PnlGame.ResumeLayout(false);
+            this.PnlGame.PerformLayout();
             this.PnlFight.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -126,6 +150,8 @@
         private System.Windows.Forms.Timer TmrShellMove;
         private System.Windows.Forms.Label YouMissedLBL;
         private System.Windows.Forms.Label LblTargetHit;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
 
