@@ -24,6 +24,7 @@ namespace SettlersofChaos
         public bool left, right;
         ArtilleryShell artilleryShell = new ArtilleryShell();
         ArtilleryTarget artilleryTarget = new ArtilleryTarget();
+        Backsplash backsplash = new Backsplash();
         public FormGame()
         {
             InitializeComponent();
@@ -31,7 +32,11 @@ namespace SettlersofChaos
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlFight, new object[] { true });
             var random = new Random();
             var RedAxis = new Random();
-
+            var shapeback = new Backsplash {
+                BackRow = 1,
+                BackColumn = 1,
+                BackRadius = 50,
+            };
 
             for (int i = -2; i <= 2; i++)
             {
@@ -174,12 +179,20 @@ namespace SettlersofChaos
             YouMissedLBL.Location = new Point(0, 0);
         }
 
+        private void PnlMenu_Paint(object sender, PaintEventArgs e)
+        {
+            var g = e.Graphics;
+            var size = PnlMenu.Size;
+            var center = new PointF(size.Width / 2f, size.Height / 2f);
+            backsplash.Draw();
+        }
+
         public void HexagonSelect() {
             float[] distances = new float[hexagons.Count];
             int i;
             foreach (var hexagon in hexagons)
             {
-                distances[i] = hexagon.getdistanceto(MouseX, MouseY);
+                //distances[i] = hexagon.getdistanceto(MouseX, MouseY);
             }
         }
 
