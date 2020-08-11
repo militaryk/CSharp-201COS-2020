@@ -21,6 +21,7 @@ namespace SettlersofChaos
         string shellmove;
         int MouseX;
         int MouseY;
+        bool gamestart = false;
         public bool left, right;
         ArtilleryShell artilleryShell = new ArtilleryShell();
         ArtilleryTarget artilleryTarget = new ArtilleryTarget();
@@ -28,7 +29,7 @@ namespace SettlersofChaos
         public FormGame()
         {
             InitializeComponent();
-            typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlGame, new object[] { true });
+            typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlBackSplash, new object[] { true });
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlFight, new object[] { true });
             var random = new Random();
             var RedAxis = new Random();
@@ -63,10 +64,13 @@ namespace SettlersofChaos
         private void PnlGame_Paint(object sender, PaintEventArgs e)
         {
             var g = e.Graphics;
-            var size = PnlGame.Size;
+            var size = PnlBackSplash.Size;
             var center = new PointF(size.Width / 2f, size.Height / 2f);
-            foreach (var hexagon in hexagons)
-                hexagon.Draw(g, center);
+            if (gamestart == false)
+            {
+                foreach (var hexagon in hexagons)
+                    hexagon.Draw(g, center);
+            }
         }
 
         private void PnlFight_Paint(object sender, PaintEventArgs e)
@@ -184,7 +188,6 @@ namespace SettlersofChaos
             var g = e.Graphics;
             var size = PnlMenu.Size;
             var center = new PointF(size.Width / 2f, size.Height / 2f);
-            backsplash.Draw();
         }
 
         public void HexagonSelect() {
@@ -195,6 +198,20 @@ namespace SettlersofChaos
                 //distances[i] = hexagon.getdistanceto(MouseX, MouseY);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Gamestart();
+        }
+
+        public void Gamestart() {
+            gamestart = true;
+            BtnSettings.Visible = false;
+            BtnStart.Visible = false;
+            BtnTutorial.Visible = false;
+            LblTitle.Visible = false;
+            PnlBackSplash.Invalidate();
+           }
 
 
 

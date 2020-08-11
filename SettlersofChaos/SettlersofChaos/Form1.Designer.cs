@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.PnlGame = new System.Windows.Forms.Panel();
+            this.PnlBackSplash = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.PnlFight = new System.Windows.Forms.Panel();
@@ -37,24 +37,29 @@
             this.YouMissedLBL = new System.Windows.Forms.Label();
             this.TmrArtilleryTicks = new System.Windows.Forms.Timer(this.components);
             this.TmrShellMove = new System.Windows.Forms.Timer(this.components);
+            this.BtnStart = new System.Windows.Forms.Button();
+            this.BtnTutorial = new System.Windows.Forms.Button();
+            this.BtnSettings = new System.Windows.Forms.Button();
+            this.LblTitle = new System.Windows.Forms.Label();
             this.PnlMenu = new System.Windows.Forms.Panel();
-            this.PnlGame.SuspendLayout();
+            this.PnlBackSplash.SuspendLayout();
             this.PnlFight.SuspendLayout();
+            this.PnlMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // PnlGame
+            // PnlBackSplash
             // 
-            this.PnlGame.Controls.Add(this.PnlMenu);
-            this.PnlGame.Controls.Add(this.label2);
-            this.PnlGame.Controls.Add(this.label1);
-            this.PnlGame.Controls.Add(this.PnlFight);
-            this.PnlGame.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PnlGame.Location = new System.Drawing.Point(0, 0);
-            this.PnlGame.Name = "PnlGame";
-            this.PnlGame.Size = new System.Drawing.Size(800, 450);
-            this.PnlGame.TabIndex = 0;
-            this.PnlGame.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlGame_Paint);
-            this.PnlGame.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PnlGame_MouseDown);
+            this.PnlBackSplash.Controls.Add(this.PnlMenu);
+            this.PnlBackSplash.Controls.Add(this.label2);
+            this.PnlBackSplash.Controls.Add(this.label1);
+            this.PnlBackSplash.Controls.Add(this.PnlFight);
+            this.PnlBackSplash.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PnlBackSplash.Location = new System.Drawing.Point(0, 0);
+            this.PnlBackSplash.Name = "PnlBackSplash";
+            this.PnlBackSplash.Size = new System.Drawing.Size(800, 450);
+            this.PnlBackSplash.TabIndex = 0;
+            this.PnlBackSplash.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlGame_Paint);
+            this.PnlBackSplash.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PnlGame_MouseDown);
             // 
             // label2
             // 
@@ -126,10 +131,64 @@
             this.TmrShellMove.Interval = 25;
             this.TmrShellMove.Tick += new System.EventHandler(this.TmrShellMove_Tick);
             // 
+            // BtnStart
+            // 
+            this.BtnStart.BackColor = System.Drawing.Color.White;
+            this.BtnStart.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnStart.ForeColor = System.Drawing.Color.Black;
+            this.BtnStart.Location = new System.Drawing.Point(206, 121);
+            this.BtnStart.Name = "BtnStart";
+            this.BtnStart.Size = new System.Drawing.Size(384, 90);
+            this.BtnStart.TabIndex = 0;
+            this.BtnStart.Text = "Start";
+            this.BtnStart.UseVisualStyleBackColor = false;
+            this.BtnStart.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // BtnTutorial
+            // 
+            this.BtnTutorial.BackColor = System.Drawing.Color.White;
+            this.BtnTutorial.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnTutorial.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnTutorial.ForeColor = System.Drawing.Color.Black;
+            this.BtnTutorial.Location = new System.Drawing.Point(206, 217);
+            this.BtnTutorial.Name = "BtnTutorial";
+            this.BtnTutorial.Size = new System.Drawing.Size(384, 90);
+            this.BtnTutorial.TabIndex = 1;
+            this.BtnTutorial.Text = "Tutorial";
+            this.BtnTutorial.UseVisualStyleBackColor = false;
+            // 
+            // BtnSettings
+            // 
+            this.BtnSettings.BackColor = System.Drawing.Color.White;
+            this.BtnSettings.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSettings.ForeColor = System.Drawing.Color.Black;
+            this.BtnSettings.Location = new System.Drawing.Point(206, 313);
+            this.BtnSettings.Name = "BtnSettings";
+            this.BtnSettings.Size = new System.Drawing.Size(384, 90);
+            this.BtnSettings.TabIndex = 2;
+            this.BtnSettings.Text = "Settings";
+            this.BtnSettings.UseVisualStyleBackColor = false;
+            // 
+            // LblTitle
+            // 
+            this.LblTitle.AutoSize = true;
+            this.LblTitle.Font = new System.Drawing.Font("Rockwell", 50F);
+            this.LblTitle.Location = new System.Drawing.Point(133, 25);
+            this.LblTitle.Name = "LblTitle";
+            this.LblTitle.Size = new System.Drawing.Size(531, 75);
+            this.LblTitle.TabIndex = 3;
+            this.LblTitle.Text = "SettlersOfChaos";
+            // 
             // PnlMenu
             // 
             this.PnlMenu.AutoSize = true;
             this.PnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(14)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.PnlMenu.Controls.Add(this.LblTitle);
+            this.PnlMenu.Controls.Add(this.BtnSettings);
+            this.PnlMenu.Controls.Add(this.BtnTutorial);
+            this.PnlMenu.Controls.Add(this.BtnStart);
             this.PnlMenu.Location = new System.Drawing.Point(0, 0);
             this.PnlMenu.Name = "PnlMenu";
             this.PnlMenu.Size = new System.Drawing.Size(800, 450);
@@ -141,22 +200,27 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.PnlGame);
+            this.ControlBox = false;
+            this.Controls.Add(this.PnlBackSplash);
             this.DoubleBuffered = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormGame";
             this.Text = "SettlersOfChaos";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormGame_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FormGame_KeyUp);
-            this.PnlGame.ResumeLayout(false);
-            this.PnlGame.PerformLayout();
+            this.PnlBackSplash.ResumeLayout(false);
+            this.PnlBackSplash.PerformLayout();
             this.PnlFight.ResumeLayout(false);
+            this.PnlMenu.ResumeLayout(false);
+            this.PnlMenu.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel PnlGame;
+        private System.Windows.Forms.Panel PnlBackSplash;
         private System.Windows.Forms.Panel PnlFight;
         private System.Windows.Forms.Timer TmrArtilleryTicks;
         private System.Windows.Forms.Timer TmrShellMove;
@@ -165,6 +229,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel PnlMenu;
+        private System.Windows.Forms.Label LblTitle;
+        private System.Windows.Forms.Button BtnSettings;
+        private System.Windows.Forms.Button BtnTutorial;
+        private System.Windows.Forms.Button BtnStart;
     }
 }
 
