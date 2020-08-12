@@ -25,6 +25,9 @@ namespace SettlersofChaos
         public bool left, right;
         ArtilleryShell artilleryShell = new ArtilleryShell();
         ArtilleryTarget artilleryTarget = new ArtilleryTarget();
+        GameHotbar gamehotbar = new GameHotbar();
+        PlayerOne plrone = new PlayerOne();
+        PlayerTwo plrtwo = new PlayerTwo();
         Backsplash backsplash = new Backsplash();
         public FormGame()
         {
@@ -158,11 +161,13 @@ namespace SettlersofChaos
         private void FormGame_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Up) { left = false; }
-            if (e.KeyData == Keys.Down) { right = false; ArtilleryGameTriggered(); }
+            if (e.KeyData == Keys.Down) { right = false; }
         }
 
         public void ArtilleryGameTriggered()
         {
+            PnlFight.Location = new Point(-3, 20);
+            GameBoot();
             TmrArtilleryTicks.Enabled = true;
             TmrShellMove.Enabled = true;
             PnlFight.Visible = true;
@@ -172,15 +177,13 @@ namespace SettlersofChaos
         {
             MouseX = Cursor.Position.X;
             MouseY = Cursor.Position.Y;
-            label1.Text = MouseX.ToString();
-            label2.Text = MouseY.ToString();
 
         }
 
         public void GameBoot()
         {
-            LblTargetHit.Location = new Point(0, 0);
-            YouMissedLBL.Location = new Point(0, 0);
+            LblTargetHit.Location = new Point(-3, 20);
+            YouMissedLBL.Location = new Point(-3, 20);
         }
 
         private void PnlMenu_Paint(object sender, PaintEventArgs e)
@@ -192,7 +195,6 @@ namespace SettlersofChaos
 
         public void HexagonSelect() {
             float[] distances = new float[hexagons.Count];
-            int i;
             foreach (var hexagon in hexagons)
             {
                 //distances[i] = hexagon.getdistanceto(MouseX, MouseY);
@@ -204,6 +206,38 @@ namespace SettlersofChaos
             Gamestart();
         }
 
+        private void PnlHome_Paint(object sender, PaintEventArgs e)
+        {
+            var g = e.Graphics;
+            gamehotbar.Draw(g);
+            plrone.Draw(g);
+            plrtwo.Draw(g);
+        }
+
+        private void BtnArtillery_Click(object sender, EventArgs e)
+        {
+            ArtilleryGameTriggered();
+            PnlFight.Visible = true;
+            BtnFortify.Visible = false;
+            BtnHelp.Visible = false;
+            BtnShoot.Visible = false;
+            BtnArtillery.Visible = false;
+            BtnExit.Visible = false;
+        }
+
+        private void BtnExit_Click(object sender, EventArgs e)
+        {
+            GameEnd();
+        }
+
+        public void GameEnd()
+        {
+            gamestart = false;
+            BtnSettings.Visible = true;
+            BtnStart.Visible = true;
+            PnlHome.Visible = false;
+
+        }
         public void Gamestart() {
             gamestart = true;
             BtnSettings.Visible = false;
@@ -211,6 +245,7 @@ namespace SettlersofChaos
             BtnTutorial.Visible = false;
             LblTitle.Visible = false;
             PnlBackSplash.Invalidate();
+            PnlHome.Visible = true;
            }
 
 
