@@ -19,7 +19,9 @@ namespace SettlersofChaos
         {
             Size = new Size(MenuWidth, MenuHeight);
             Position = new Point(MenuPosX, MenuPosY);
-            g.FillRectangle(Brushes.Aqua, new Rectangle(Position, Size));
+            var Brush = new SolidBrush(Color.FromArgb(51, 76, 106));
+            g.FillRectangle(Brush, new Rectangle(Position, Size));
+
 
         }
     }

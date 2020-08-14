@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Reflection;
-using System.Reflection.Emit;
+using System.Windows.Forms;
 
 namespace SettlersofChaos
 {
@@ -21,8 +14,11 @@ namespace SettlersofChaos
         string shellmove;
         int MouseX;
         int MouseY;
+        public int PlayerOneDefense = 0;
+        public int PlayerTwoDefense = 0;
         bool gamestart = false;
         public bool left, right;
+        public int Difficulty = 12;
         ArtilleryShell artilleryShell = new ArtilleryShell();
         ArtilleryTarget artilleryTarget = new ArtilleryTarget();
         GameHotbar gamehotbar = new GameHotbar();
@@ -112,6 +108,7 @@ namespace SettlersofChaos
                 YouMissedLBL.Visible = true;
                 TmrArtilleryTicks.Enabled = false;
                 TmrShellMove.Enabled = false;
+                ArtilleryGameExit();
 
             }
             if (CollidesWithTarget())
@@ -119,6 +116,8 @@ namespace SettlersofChaos
                 LblTargetHit.Visible = true;
                 TmrArtilleryTicks.Enabled = false;
                 TmrShellMove.Enabled = false;
+                PlayerTwoDefense = PlayerTwoDefense -5;
+                ArtilleryGameExit();
 
             }
             else
@@ -171,6 +170,20 @@ namespace SettlersofChaos
             TmrArtilleryTicks.Enabled = true;
             TmrShellMove.Enabled = true;
             PnlFight.Visible = true;
+            PlayerOneDefense = PlayerOneDefense - 3;
+        }
+
+        public void ArtilleryGameExit() {
+            LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
+            LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
+            LblPlayerOne.Visible = true;
+            LblPlayerTwo.Visible = true;
+            BtnHelp.Visible = true;
+            BtnExit.Visible = true;
+            PnlFight.Visible = false;
+            BtnArtillery.Visible = true;
+            BtnShoot.Visible = true;
+            BtnFortify.Visible = true;
         }
 
         private void PnlGame_MouseDown(object sender, MouseEventArgs e)
@@ -223,6 +236,8 @@ namespace SettlersofChaos
             BtnShoot.Visible = false;
             BtnArtillery.Visible = false;
             BtnExit.Visible = false;
+            LblPlayerOne.Visible = false;
+            LblPlayerTwo.Visible = false;
         }
 
         private void BtnExit_Click(object sender, EventArgs e)
@@ -236,8 +251,18 @@ namespace SettlersofChaos
             BtnSettings.Visible = true;
             BtnStart.Visible = true;
             PnlHome.Visible = false;
+            BtnTutorial.Visible = true;
+            LblTitle.Visible = true;
 
         }
+
+        private void BtnShoot_Click(object sender, EventArgs e)
+        {
+            PlayerTwoDefense = -30;
+            LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
+            LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
+        }
+
         public void Gamestart() {
             gamestart = true;
             BtnSettings.Visible = false;
@@ -246,6 +271,10 @@ namespace SettlersofChaos
             LblTitle.Visible = false;
             PnlBackSplash.Invalidate();
             PnlHome.Visible = true;
+            PlayerOneDefense = Difficulty;
+            PlayerTwoDefense = Difficulty;
+            LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
+            LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
            }
 
 
