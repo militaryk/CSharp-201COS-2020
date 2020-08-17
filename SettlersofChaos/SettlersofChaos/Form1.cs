@@ -14,6 +14,7 @@ namespace SettlersofChaos
         string shellmove;
         int MouseX;
         int MouseY;
+        bool ShootTargetDown = true;
         public int PlayerOneDefense = 0;
         public int PlayerTwoDefense = 0;
         bool gamestart = false;
@@ -25,6 +26,7 @@ namespace SettlersofChaos
         PlayerOne plrone = new PlayerOne();
         PlayerTwo plrtwo = new PlayerTwo();
         Backsplash backsplash = new Backsplash();
+        ShootTarget shoottarget = new ShootTarget();
         public FormGame()
         {
             InitializeComponent();
@@ -108,6 +110,7 @@ namespace SettlersofChaos
                 YouMissedLBL.Visible = true;
                 TmrArtilleryTicks.Enabled = false;
                 TmrShellMove.Enabled = false;
+                System.Threading.Thread.Sleep(2300);
                 ArtilleryGameExit();
 
             }
@@ -117,6 +120,7 @@ namespace SettlersofChaos
                 TmrArtilleryTicks.Enabled = false;
                 TmrShellMove.Enabled = false;
                 PlayerTwoDefense = PlayerTwoDefense -5;
+                System.Threading.Thread.Sleep(2300);
                 ArtilleryGameExit();
 
             }
@@ -261,6 +265,26 @@ namespace SettlersofChaos
             PlayerTwoDefense = -30;
             LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
             LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
+        }
+
+        private void PnlShoot_Paint(object sender, PaintEventArgs e)
+        {
+            var g = e.Graphics;
+            shoottarget.Draw(g);
+        }
+
+        private void TmrShoot_Tick(object sender, EventArgs e)
+        {
+            if (shoottarget.ShootTargetPosY > 300)
+            {
+                ShootTargetDown = false;
+                shoottarget.ShootTargetPosY -= 100;
+            }
+            if (shoottarget.ShootTargetPosY < 1) {
+                ShootTargetDown = true;
+                shoottarget.ShootTargetPosY += 100;
+            }
+            PnlShoot.Invalidate();
         }
 
         public void Gamestart() {

@@ -32,12 +32,14 @@
             this.PnlBackSplash = new System.Windows.Forms.Panel();
             this.PnlMenu = new System.Windows.Forms.Panel();
             this.PnlHome = new System.Windows.Forms.Panel();
+            this.LblPlayerTwo = new System.Windows.Forms.Label();
+            this.LblPlayerOne = new System.Windows.Forms.Label();
             this.BtnShoot = new System.Windows.Forms.Button();
             this.BtnArtillery = new System.Windows.Forms.Button();
             this.PnlFight = new System.Windows.Forms.Panel();
             this.YouMissedLBL = new System.Windows.Forms.Label();
-            this.BtnFortify = new System.Windows.Forms.Button();
             this.LblTargetHit = new System.Windows.Forms.Label();
+            this.BtnFortify = new System.Windows.Forms.Button();
             this.BtnHelp = new System.Windows.Forms.Button();
             this.BtnExit = new System.Windows.Forms.Button();
             this.LblTitle = new System.Windows.Forms.Label();
@@ -46,8 +48,8 @@
             this.BtnStart = new System.Windows.Forms.Button();
             this.TmrArtilleryTicks = new System.Windows.Forms.Timer(this.components);
             this.TmrShellMove = new System.Windows.Forms.Timer(this.components);
-            this.LblPlayerOne = new System.Windows.Forms.Label();
-            this.LblPlayerTwo = new System.Windows.Forms.Label();
+            this.PnlShoot = new System.Windows.Forms.Panel();
+            this.TmrShoot = new System.Windows.Forms.Timer(this.components);
             this.PnlBackSplash.SuspendLayout();
             this.PnlMenu.SuspendLayout();
             this.PnlHome.SuspendLayout();
@@ -83,6 +85,7 @@
             // PnlHome
             // 
             this.PnlHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(161)))), ((int)(((byte)(188)))));
+            this.PnlHome.Controls.Add(this.PnlShoot);
             this.PnlHome.Controls.Add(this.LblPlayerTwo);
             this.PnlHome.Controls.Add(this.LblPlayerOne);
             this.PnlHome.Controls.Add(this.BtnShoot);
@@ -97,6 +100,31 @@
             this.PnlHome.TabIndex = 4;
             this.PnlHome.Visible = false;
             this.PnlHome.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlHome_Paint);
+            // 
+            // LblPlayerTwo
+            // 
+            this.LblPlayerTwo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblPlayerTwo.BackColor = System.Drawing.Color.White;
+            this.LblPlayerTwo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LblPlayerTwo.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPlayerTwo.Location = new System.Drawing.Point(570, 200);
+            this.LblPlayerTwo.Name = "LblPlayerTwo";
+            this.LblPlayerTwo.Size = new System.Drawing.Size(160, 50);
+            this.LblPlayerTwo.TabIndex = 6;
+            this.LblPlayerTwo.Text = "label2";
+            this.LblPlayerTwo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LblPlayerOne
+            // 
+            this.LblPlayerOne.BackColor = System.Drawing.Color.White;
+            this.LblPlayerOne.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LblPlayerOne.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPlayerOne.Location = new System.Drawing.Point(70, 200);
+            this.LblPlayerOne.Name = "LblPlayerOne";
+            this.LblPlayerOne.Size = new System.Drawing.Size(160, 50);
+            this.LblPlayerOne.TabIndex = 5;
+            this.LblPlayerOne.Text = "label1";
+            this.LblPlayerOne.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BtnShoot
             // 
@@ -155,20 +183,6 @@
             this.YouMissedLBL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.YouMissedLBL.Visible = false;
             // 
-            // BtnFortify
-            // 
-            this.BtnFortify.BackColor = System.Drawing.Color.White;
-            this.BtnFortify.Font = new System.Drawing.Font("Segoe UI", 20.25F);
-            this.BtnFortify.ForeColor = System.Drawing.Color.Black;
-            this.BtnFortify.Location = new System.Drawing.Point(319, 230);
-            this.BtnFortify.Name = "BtnFortify";
-            this.BtnFortify.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.BtnFortify.Size = new System.Drawing.Size(163, 41);
-            this.BtnFortify.TabIndex = 2;
-            this.BtnFortify.Text = "Fortify";
-            this.BtnFortify.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.BtnFortify.UseVisualStyleBackColor = false;
-            // 
             // LblTargetHit
             // 
             this.LblTargetHit.BackColor = System.Drawing.Color.Transparent;
@@ -183,6 +197,20 @@
             this.LblTargetHit.Text = "Target Hit";
             this.LblTargetHit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LblTargetHit.Visible = false;
+            // 
+            // BtnFortify
+            // 
+            this.BtnFortify.BackColor = System.Drawing.Color.White;
+            this.BtnFortify.Font = new System.Drawing.Font("Segoe UI", 20.25F);
+            this.BtnFortify.ForeColor = System.Drawing.Color.Black;
+            this.BtnFortify.Location = new System.Drawing.Point(319, 230);
+            this.BtnFortify.Name = "BtnFortify";
+            this.BtnFortify.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.BtnFortify.Size = new System.Drawing.Size(163, 41);
+            this.BtnFortify.TabIndex = 2;
+            this.BtnFortify.Text = "Fortify";
+            this.BtnFortify.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.BtnFortify.UseVisualStyleBackColor = false;
             // 
             // BtnHelp
             // 
@@ -273,30 +301,21 @@
             this.TmrShellMove.Interval = 25;
             this.TmrShellMove.Tick += new System.EventHandler(this.TmrShellMove_Tick);
             // 
-            // LblPlayerOne
+            // PnlShoot
             // 
-            this.LblPlayerOne.BackColor = System.Drawing.Color.White;
-            this.LblPlayerOne.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LblPlayerOne.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblPlayerOne.Location = new System.Drawing.Point(70, 200);
-            this.LblPlayerOne.Name = "LblPlayerOne";
-            this.LblPlayerOne.Size = new System.Drawing.Size(160, 50);
-            this.LblPlayerOne.TabIndex = 5;
-            this.LblPlayerOne.Text = "label1";
-            this.LblPlayerOne.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.PnlShoot.BackColor = System.Drawing.Color.Gray;
+            this.PnlShoot.ForeColor = System.Drawing.Color.Black;
+            this.PnlShoot.Location = new System.Drawing.Point(0, 0);
+            this.PnlShoot.Name = "PnlShoot";
+            this.PnlShoot.Size = new System.Drawing.Size(784, 400);
+            this.PnlShoot.TabIndex = 7;
+            this.PnlShoot.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlShoot_Paint);
             // 
-            // LblPlayerTwo
+            // TmrShoot
             // 
-            this.LblPlayerTwo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblPlayerTwo.BackColor = System.Drawing.Color.White;
-            this.LblPlayerTwo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LblPlayerTwo.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblPlayerTwo.Location = new System.Drawing.Point(570, 200);
-            this.LblPlayerTwo.Name = "LblPlayerTwo";
-            this.LblPlayerTwo.Size = new System.Drawing.Size(160, 50);
-            this.LblPlayerTwo.TabIndex = 6;
-            this.LblPlayerTwo.Text = "label2";
-            this.LblPlayerTwo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.TmrShoot.Enabled = true;
+            this.TmrShoot.Interval = 33;
+            this.TmrShoot.Tick += new System.EventHandler(this.TmrShoot_Tick);
             // 
             // FormGame
             // 
@@ -345,6 +364,8 @@
         private System.Windows.Forms.Button BtnArtillery;
         private System.Windows.Forms.Label LblPlayerTwo;
         private System.Windows.Forms.Label LblPlayerOne;
+        private System.Windows.Forms.Panel PnlShoot;
+        private System.Windows.Forms.Timer TmrShoot;
     }
 }
 
