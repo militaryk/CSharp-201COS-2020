@@ -32,6 +32,7 @@
             this.PnlBackSplash = new System.Windows.Forms.Panel();
             this.PnlMenu = new System.Windows.Forms.Panel();
             this.PnlHome = new System.Windows.Forms.Panel();
+            this.PnlShoot = new System.Windows.Forms.Panel();
             this.LblPlayerTwo = new System.Windows.Forms.Label();
             this.LblPlayerOne = new System.Windows.Forms.Label();
             this.BtnShoot = new System.Windows.Forms.Button();
@@ -48,8 +49,9 @@
             this.BtnStart = new System.Windows.Forms.Button();
             this.TmrArtilleryTicks = new System.Windows.Forms.Timer(this.components);
             this.TmrShellMove = new System.Windows.Forms.Timer(this.components);
-            this.PnlShoot = new System.Windows.Forms.Panel();
             this.TmrShoot = new System.Windows.Forms.Timer(this.components);
+            this.DebugX = new System.Windows.Forms.Label();
+            this.DebugY = new System.Windows.Forms.Label();
             this.PnlBackSplash.SuspendLayout();
             this.PnlMenu.SuspendLayout();
             this.PnlHome.SuspendLayout();
@@ -85,6 +87,8 @@
             // PnlHome
             // 
             this.PnlHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(161)))), ((int)(((byte)(188)))));
+            this.PnlHome.Controls.Add(this.DebugY);
+            this.PnlHome.Controls.Add(this.DebugX);
             this.PnlHome.Controls.Add(this.PnlShoot);
             this.PnlHome.Controls.Add(this.LblPlayerTwo);
             this.PnlHome.Controls.Add(this.LblPlayerOne);
@@ -100,6 +104,16 @@
             this.PnlHome.TabIndex = 4;
             this.PnlHome.Visible = false;
             this.PnlHome.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlHome_Paint);
+            // 
+            // PnlShoot
+            // 
+            this.PnlShoot.BackColor = System.Drawing.Color.Gray;
+            this.PnlShoot.ForeColor = System.Drawing.Color.Black;
+            this.PnlShoot.Location = new System.Drawing.Point(0, 0);
+            this.PnlShoot.Name = "PnlShoot";
+            this.PnlShoot.Size = new System.Drawing.Size(784, 400);
+            this.PnlShoot.TabIndex = 7;
+            this.PnlShoot.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlShoot_Paint);
             // 
             // LblPlayerTwo
             // 
@@ -301,21 +315,29 @@
             this.TmrShellMove.Interval = 25;
             this.TmrShellMove.Tick += new System.EventHandler(this.TmrShellMove_Tick);
             // 
-            // PnlShoot
-            // 
-            this.PnlShoot.BackColor = System.Drawing.Color.Gray;
-            this.PnlShoot.ForeColor = System.Drawing.Color.Black;
-            this.PnlShoot.Location = new System.Drawing.Point(0, 0);
-            this.PnlShoot.Name = "PnlShoot";
-            this.PnlShoot.Size = new System.Drawing.Size(784, 400);
-            this.PnlShoot.TabIndex = 7;
-            this.PnlShoot.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlShoot_Paint);
-            // 
             // TmrShoot
             // 
             this.TmrShoot.Enabled = true;
             this.TmrShoot.Interval = 33;
             this.TmrShoot.Tick += new System.EventHandler(this.TmrShoot_Tick);
+            // 
+            // DebugX
+            // 
+            this.DebugX.AutoSize = true;
+            this.DebugX.Location = new System.Drawing.Point(203, 424);
+            this.DebugX.Name = "DebugX";
+            this.DebugX.Size = new System.Drawing.Size(35, 13);
+            this.DebugX.TabIndex = 8;
+            this.DebugX.Text = "label1";
+            // 
+            // DebugY
+            // 
+            this.DebugY.AutoSize = true;
+            this.DebugY.Location = new System.Drawing.Point(244, 424);
+            this.DebugY.Name = "DebugY";
+            this.DebugY.Size = new System.Drawing.Size(35, 13);
+            this.DebugY.TabIndex = 9;
+            this.DebugY.Text = "label2";
             // 
             // FormGame
             // 
@@ -338,6 +360,7 @@
             this.PnlMenu.ResumeLayout(false);
             this.PnlMenu.PerformLayout();
             this.PnlHome.ResumeLayout(false);
+            this.PnlHome.PerformLayout();
             this.PnlFight.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -366,6 +389,8 @@
         private System.Windows.Forms.Label LblPlayerOne;
         private System.Windows.Forms.Panel PnlShoot;
         private System.Windows.Forms.Timer TmrShoot;
+        private System.Windows.Forms.Label DebugY;
+        private System.Windows.Forms.Label DebugX;
     }
 }
 

@@ -17,11 +17,13 @@ namespace SettlersofChaos
         bool ShootTargetDown = true;
         public int PlayerOneDefense = 0;
         public int PlayerTwoDefense = 0;
+        public bool bulletfired = false;
         bool gamestart = false;
         public bool left, right;
         public int Difficulty = 12;
         ArtilleryShell artilleryShell = new ArtilleryShell();
         ArtilleryTarget artilleryTarget = new ArtilleryTarget();
+        Bullet bullet = new Bullet();
         GameHotbar gamehotbar = new GameHotbar();
         PlayerOne plrone = new PlayerOne();
         PlayerTwo plrtwo = new PlayerTwo();
@@ -34,7 +36,8 @@ namespace SettlersofChaos
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlFight, new object[] { true });
             var random = new Random();
             var RedAxis = new Random();
-            var shapeback = new Backsplash {
+            var shapeback = new Backsplash
+            {
                 BackRow = 1,
                 BackColumn = 1,
                 BackRadius = 50,
@@ -100,6 +103,7 @@ namespace SettlersofChaos
         {
             if (e.KeyData == Keys.Up) { left = true; }
             if (e.KeyData == Keys.Down) { right = true; }
+            if (e.KeyData == Keys.Space) { bulletfired = true; }
         }
 
         private void TmrShellMove_Tick(object sender, EventArgs e)
@@ -119,7 +123,7 @@ namespace SettlersofChaos
                 LblTargetHit.Visible = true;
                 TmrArtilleryTicks.Enabled = false;
                 TmrShellMove.Enabled = false;
-                PlayerTwoDefense = PlayerTwoDefense -5;
+                PlayerTwoDefense = PlayerTwoDefense - 5;
                 System.Threading.Thread.Sleep(2300);
                 ArtilleryGameExit();
 
@@ -177,7 +181,8 @@ namespace SettlersofChaos
             PlayerOneDefense = PlayerOneDefense - 3;
         }
 
-        public void ArtilleryGameExit() {
+        public void ArtilleryGameExit()
+        {
             LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
             LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
             LblPlayerOne.Visible = true;
@@ -210,7 +215,8 @@ namespace SettlersofChaos
             var center = new PointF(size.Width / 2f, size.Height / 2f);
         }
 
-        public void HexagonSelect() {
+        public void HexagonSelect()
+        {
             float[] distances = new float[hexagons.Count];
             foreach (var hexagon in hexagons)
             {
@@ -271,23 +277,40 @@ namespace SettlersofChaos
         {
             var g = e.Graphics;
             shoottarget.Draw(g);
+            bullet.DrawBullet(g);
         }
 
         private void TmrShoot_Tick(object sender, EventArgs e)
         {
+            DebugY.Text = Convert.ToString(shoottarget.ShootTargetPosY);
             if (shoottarget.ShootTargetPosY > 300)
             {
                 ShootTargetDown = false;
                 shoottarget.ShootTargetPosY -= 100;
             }
-            if (shoottarget.ShootTargetPosY < 1) {
+            if (shoottarget.ShootTargetPosY < 1)
+            {
                 ShootTargetDown = true;
-                shoottarget.ShootTargetPosY += 100;
+                shoottarget.ShootTargetPosY += 20;
+            }
+            if (ShootTargetDown == true)
+            {
+                shoottarget.ShootTargetPosY += 20;
+            }
+            if (ShootTargetDown == false)
+            {
+                shoottarget.ShootTargetPosY -= 20;
+            }
+            if (bulletfired == true)
+            {
+                bullet.bulletx += 20;
+                bullet.BulletRec.Location = new Point(bullet.bulletx, bullet.y);
             }
             PnlShoot.Invalidate();
         }
 
-        public void Gamestart() {
+        public void Gamestart()
+        {
             gamestart = true;
             BtnSettings.Visible = false;
             BtnStart.Visible = false;
@@ -299,7 +322,7 @@ namespace SettlersofChaos
             PlayerTwoDefense = Difficulty;
             LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
             LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
-           }
+        }
 
 
 
