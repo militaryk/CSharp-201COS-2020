@@ -35,6 +35,8 @@
             this.DebugY = new System.Windows.Forms.Label();
             this.DebugX = new System.Windows.Forms.Label();
             this.PnlShoot = new System.Windows.Forms.Panel();
+            this.LblShootTargetMissed = new System.Windows.Forms.Label();
+            this.LblShootTargetHit = new System.Windows.Forms.Label();
             this.LblPlayerTwo = new System.Windows.Forms.Label();
             this.LblPlayerOne = new System.Windows.Forms.Label();
             this.BtnShoot = new System.Windows.Forms.Button();
@@ -52,8 +54,6 @@
             this.TmrArtilleryTicks = new System.Windows.Forms.Timer(this.components);
             this.TmrShellMove = new System.Windows.Forms.Timer(this.components);
             this.TmrShoot = new System.Windows.Forms.Timer(this.components);
-            this.LblShootTargetHit = new System.Windows.Forms.Label();
-            this.LblShootTargetMissed = new System.Windows.Forms.Label();
             this.PnlBackSplash.SuspendLayout();
             this.PnlMenu.SuspendLayout();
             this.PnlHome.SuspendLayout();
@@ -136,7 +136,32 @@
             this.PnlShoot.Name = "PnlShoot";
             this.PnlShoot.Size = new System.Drawing.Size(784, 400);
             this.PnlShoot.TabIndex = 7;
+            this.PnlShoot.Visible = false;
             this.PnlShoot.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlShoot_Paint);
+            // 
+            // LblShootTargetMissed
+            // 
+            this.LblShootTargetMissed.AutoSize = true;
+            this.LblShootTargetMissed.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblShootTargetMissed.ForeColor = System.Drawing.Color.Firebrick;
+            this.LblShootTargetMissed.Location = new System.Drawing.Point(93, 163);
+            this.LblShootTargetMissed.Name = "LblShootTargetMissed";
+            this.LblShootTargetMissed.Size = new System.Drawing.Size(571, 108);
+            this.LblShootTargetMissed.TabIndex = 1;
+            this.LblShootTargetMissed.Text = "You Missed!";
+            this.LblShootTargetMissed.Visible = false;
+            // 
+            // LblShootTargetHit
+            // 
+            this.LblShootTargetHit.AutoSize = true;
+            this.LblShootTargetHit.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblShootTargetHit.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.LblShootTargetHit.Location = new System.Drawing.Point(135, 150);
+            this.LblShootTargetHit.Name = "LblShootTargetHit";
+            this.LblShootTargetHit.Size = new System.Drawing.Size(529, 108);
+            this.LblShootTargetHit.TabIndex = 0;
+            this.LblShootTargetHit.Text = "Good Shot!";
+            this.LblShootTargetHit.Visible = false;
             // 
             // LblPlayerTwo
             // 
@@ -248,6 +273,7 @@
             this.BtnFortify.Text = "Fortify";
             this.BtnFortify.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.BtnFortify.UseVisualStyleBackColor = false;
+            this.BtnFortify.Click += new System.EventHandler(this.BtnFortify_Click);
             // 
             // BtnHelp
             // 
@@ -341,33 +367,8 @@
             // 
             // TmrShoot
             // 
-            this.TmrShoot.Enabled = true;
             this.TmrShoot.Interval = 33;
             this.TmrShoot.Tick += new System.EventHandler(this.TmrShoot_Tick);
-            // 
-            // LblShootTargetHit
-            // 
-            this.LblShootTargetHit.AutoSize = true;
-            this.LblShootTargetHit.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblShootTargetHit.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.LblShootTargetHit.Location = new System.Drawing.Point(135, 150);
-            this.LblShootTargetHit.Name = "LblShootTargetHit";
-            this.LblShootTargetHit.Size = new System.Drawing.Size(529, 108);
-            this.LblShootTargetHit.TabIndex = 0;
-            this.LblShootTargetHit.Text = "Good Shot!";
-            this.LblShootTargetHit.Visible = false;
-            // 
-            // LblShootTargetMissed
-            // 
-            this.LblShootTargetMissed.AutoSize = true;
-            this.LblShootTargetMissed.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblShootTargetMissed.ForeColor = System.Drawing.Color.Firebrick;
-            this.LblShootTargetMissed.Location = new System.Drawing.Point(93, 163);
-            this.LblShootTargetMissed.Name = "LblShootTargetMissed";
-            this.LblShootTargetMissed.Size = new System.Drawing.Size(571, 108);
-            this.LblShootTargetMissed.TabIndex = 1;
-            this.LblShootTargetMissed.Text = "You Missed!";
-            this.LblShootTargetMissed.Visible = false;
             // 
             // FormGame
             // 

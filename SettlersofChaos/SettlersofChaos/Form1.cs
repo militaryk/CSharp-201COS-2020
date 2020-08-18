@@ -11,11 +11,13 @@ namespace SettlersofChaos
         private List<Hexagon> hexagons = new List<Hexagon>();
         private Artilltery[] redblocks = new Artilltery[20];
         public int speed = 10;
+        public bool BulletTargetMissed = false;
         string shellmove;
         int MouseX;
         int MouseY;
         public bool BulletTargetHit = false;
         bool ShootTargetDown = true;
+        bool ShootGameInuse = false;
         public int PlayerOneDefense = 0;
         public int PlayerTwoDefense = 0;
         public bool bulletfired = false;
@@ -35,6 +37,8 @@ namespace SettlersofChaos
             InitializeComponent();
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlBackSplash, new object[] { true });
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlFight, new object[] { true });
+            typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlShoot, new object[] { true });
+            typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlHome, new object[] { true });
             var random = new Random();
             var RedAxis = new Random();
             var shapeback = new Backsplash
@@ -104,7 +108,7 @@ namespace SettlersofChaos
         {
             if (e.KeyData == Keys.Up) { left = true; }
             if (e.KeyData == Keys.Down) { right = true; }
-            if (e.KeyData == Keys.Space) { bulletfired = true; GameBoot(); }
+            if (e.KeyData == Keys.Space) { if (ShootGameInuse == true) { bulletfired = true; } GameBoot(); }
         }
 
         private void TmrShellMove_Tick(object sender, EventArgs e)
@@ -200,7 +204,6 @@ namespace SettlersofChaos
         {
             MouseX = Cursor.Position.X;
             MouseY = Cursor.Position.Y;
-
         }
 
         public void GameBoot()
@@ -269,9 +272,8 @@ namespace SettlersofChaos
 
         private void BtnShoot_Click(object sender, EventArgs e)
         {
-            PlayerTwoDefense = -30;
-            LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
-            LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
+            ShootGameStart();
+            ShootGameInuse = true;
         }
 
         private void PnlShoot_Paint(object sender, PaintEventArgs e)
@@ -312,10 +314,13 @@ namespace SettlersofChaos
                 if (bullet.BulletRec.IntersectsWith(new Rectangle(shoottarget.ShootPosition, shoottarget.ShootSize)))
                 {
                     LblShootTargetHit.Visible = true;
-                    ShooTargetHit();
+                    ShootTargetHit();
+                }
+                if (bullet.bulletx > 1000) {
+                    LblShootTargetMissed.Visible = true;
+                    ShootTargetMissed();
                 }
             }
-            BulletFiredCheck();
             PnlShoot.Invalidate();
         }
 
@@ -325,36 +330,70 @@ namespace SettlersofChaos
             {
                 if (bulletfired == true)
                 {
-                    System.Threading.Thread.Sleep(1300);
+                    System.Threading.Thread.Sleep(3000);
                     if (bulletfired == true)
                     {
                         if (BulletTargetHit == false)
                         {
-                            Invoke((Action)(() =>
+                            if (BulletTargetMissed == false)
                             {
-                                ShootTargetMissed();
-                                LblShootTargetMissed.Visible = true;
-
-                            }));
+                                Invoke((Action)(() =>
+                                {
+                                    LblShootTargetMissed.Visible = true;
+                                    ShootTargetMissed();
+                                }));
+                            }
                         }
                     }
                 }
             });
         }
 
-        public void ShooTargetHit()
+        public void ShootGameStart() {
+            PnlShoot.Visible = true;
+            TmrShoot.Enabled = true;
+
+        }
+
+        public void ShootGameEnd() {
+            PnlShoot.Visible = false;
+            LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
+            LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
+            ShootGameInuse = false;
+            bulletfired = false;
+            BulletTargetHit = false;
+            BulletTargetMissed = false;
+            LblShootTargetMissed.Visible = false;
+            LblShootTargetHit.Visible = false;
+            bullet.bulletx = 100;
+            bullet.BulletRec.Location = new Point(bullet.bulletx, bullet.y);
+        }
+        public void ShootTargetHit()
         {
             LblTargetHit.Visible = true;
             BulletTargetHit = true;
             TmrShoot.Enabled = false;
+            PlayerTwoDefense -= 2;
+            ShootGameEnd();
         }
 
         public void ShootTargetMissed() {
             TmrShoot.Enabled = false;
+            BulletTargetMissed = true;
+            LblShootTargetMissed.Visible = true;
+            PlayerOneDefense -= 2;
+            ShootGameEnd();
         }
         private void BtnHelp_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void BtnFortify_Click(object sender, EventArgs e)
+        {
+            PlayerOneDefense += 1;
+            LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
+            LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
         }
 
         public void Gamestart()
