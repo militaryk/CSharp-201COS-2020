@@ -324,30 +324,30 @@ namespace SettlersofChaos
             PnlShoot.Invalidate();
         }
 
-        public void BulletFiredCheck()
+     /*   public void bulletfiredcheck()
         {
-            Task.Run(() =>
+            task.run(() =>
             {
                 if (bulletfired == true)
                 {
-                    System.Threading.Thread.Sleep(3000);
+                    system.threading.thread.sleep(3000);
                     if (bulletfired == true)
                     {
-                        if (BulletTargetHit == false)
+                        if (bullettargethit == false)
                         {
-                            if (BulletTargetMissed == false)
+                            if (bullettargetmissed == false)
                             {
-                                Invoke((Action)(() =>
+                                invoke((action)(() =>
                                 {
-                                    LblShootTargetMissed.Visible = true;
-                                    ShootTargetMissed();
+                                    lblshoottargetmissed.visible = true;
+                                    shoottargetmissed();
                                 }));
                             }
                         }
                     }
                 }
             });
-        }
+        } */
 
         public void ShootGameStart() {
             PnlShoot.Visible = true;
