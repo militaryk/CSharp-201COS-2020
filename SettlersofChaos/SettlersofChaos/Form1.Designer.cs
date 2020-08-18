@@ -32,6 +32,8 @@
             this.PnlBackSplash = new System.Windows.Forms.Panel();
             this.PnlMenu = new System.Windows.Forms.Panel();
             this.PnlHome = new System.Windows.Forms.Panel();
+            this.DebugY = new System.Windows.Forms.Label();
+            this.DebugX = new System.Windows.Forms.Label();
             this.PnlShoot = new System.Windows.Forms.Panel();
             this.LblPlayerTwo = new System.Windows.Forms.Label();
             this.LblPlayerOne = new System.Windows.Forms.Label();
@@ -50,11 +52,12 @@
             this.TmrArtilleryTicks = new System.Windows.Forms.Timer(this.components);
             this.TmrShellMove = new System.Windows.Forms.Timer(this.components);
             this.TmrShoot = new System.Windows.Forms.Timer(this.components);
-            this.DebugX = new System.Windows.Forms.Label();
-            this.DebugY = new System.Windows.Forms.Label();
+            this.LblShootTargetHit = new System.Windows.Forms.Label();
+            this.LblShootTargetMissed = new System.Windows.Forms.Label();
             this.PnlBackSplash.SuspendLayout();
             this.PnlMenu.SuspendLayout();
             this.PnlHome.SuspendLayout();
+            this.PnlShoot.SuspendLayout();
             this.PnlFight.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,9 +108,29 @@
             this.PnlHome.Visible = false;
             this.PnlHome.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlHome_Paint);
             // 
+            // DebugY
+            // 
+            this.DebugY.AutoSize = true;
+            this.DebugY.Location = new System.Drawing.Point(244, 424);
+            this.DebugY.Name = "DebugY";
+            this.DebugY.Size = new System.Drawing.Size(35, 13);
+            this.DebugY.TabIndex = 9;
+            this.DebugY.Text = "label2";
+            // 
+            // DebugX
+            // 
+            this.DebugX.AutoSize = true;
+            this.DebugX.Location = new System.Drawing.Point(203, 424);
+            this.DebugX.Name = "DebugX";
+            this.DebugX.Size = new System.Drawing.Size(35, 13);
+            this.DebugX.TabIndex = 8;
+            this.DebugX.Text = "label1";
+            // 
             // PnlShoot
             // 
             this.PnlShoot.BackColor = System.Drawing.Color.Gray;
+            this.PnlShoot.Controls.Add(this.LblShootTargetMissed);
+            this.PnlShoot.Controls.Add(this.LblShootTargetHit);
             this.PnlShoot.ForeColor = System.Drawing.Color.Black;
             this.PnlShoot.Location = new System.Drawing.Point(0, 0);
             this.PnlShoot.Name = "PnlShoot";
@@ -239,6 +262,7 @@
             this.BtnHelp.Text = "Help";
             this.BtnHelp.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.BtnHelp.UseVisualStyleBackColor = false;
+            this.BtnHelp.Click += new System.EventHandler(this.BtnHelp_Click);
             // 
             // BtnExit
             // 
@@ -321,23 +345,29 @@
             this.TmrShoot.Interval = 33;
             this.TmrShoot.Tick += new System.EventHandler(this.TmrShoot_Tick);
             // 
-            // DebugX
+            // LblShootTargetHit
             // 
-            this.DebugX.AutoSize = true;
-            this.DebugX.Location = new System.Drawing.Point(203, 424);
-            this.DebugX.Name = "DebugX";
-            this.DebugX.Size = new System.Drawing.Size(35, 13);
-            this.DebugX.TabIndex = 8;
-            this.DebugX.Text = "label1";
+            this.LblShootTargetHit.AutoSize = true;
+            this.LblShootTargetHit.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblShootTargetHit.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.LblShootTargetHit.Location = new System.Drawing.Point(135, 150);
+            this.LblShootTargetHit.Name = "LblShootTargetHit";
+            this.LblShootTargetHit.Size = new System.Drawing.Size(529, 108);
+            this.LblShootTargetHit.TabIndex = 0;
+            this.LblShootTargetHit.Text = "Good Shot!";
+            this.LblShootTargetHit.Visible = false;
             // 
-            // DebugY
+            // LblShootTargetMissed
             // 
-            this.DebugY.AutoSize = true;
-            this.DebugY.Location = new System.Drawing.Point(244, 424);
-            this.DebugY.Name = "DebugY";
-            this.DebugY.Size = new System.Drawing.Size(35, 13);
-            this.DebugY.TabIndex = 9;
-            this.DebugY.Text = "label2";
+            this.LblShootTargetMissed.AutoSize = true;
+            this.LblShootTargetMissed.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblShootTargetMissed.ForeColor = System.Drawing.Color.Firebrick;
+            this.LblShootTargetMissed.Location = new System.Drawing.Point(93, 163);
+            this.LblShootTargetMissed.Name = "LblShootTargetMissed";
+            this.LblShootTargetMissed.Size = new System.Drawing.Size(571, 108);
+            this.LblShootTargetMissed.TabIndex = 1;
+            this.LblShootTargetMissed.Text = "You Missed!";
+            this.LblShootTargetMissed.Visible = false;
             // 
             // FormGame
             // 
@@ -361,6 +391,8 @@
             this.PnlMenu.PerformLayout();
             this.PnlHome.ResumeLayout(false);
             this.PnlHome.PerformLayout();
+            this.PnlShoot.ResumeLayout(false);
+            this.PnlShoot.PerformLayout();
             this.PnlFight.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -391,6 +423,8 @@
         private System.Windows.Forms.Timer TmrShoot;
         private System.Windows.Forms.Label DebugY;
         private System.Windows.Forms.Label DebugX;
+        private System.Windows.Forms.Label LblShootTargetHit;
+        private System.Windows.Forms.Label LblShootTargetMissed;
     }
 }
 

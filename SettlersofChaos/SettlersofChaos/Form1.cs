@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace SettlersofChaos
 {
     public partial class FormGame : Form
@@ -14,6 +14,7 @@ namespace SettlersofChaos
         string shellmove;
         int MouseX;
         int MouseY;
+        public bool BulletTargetHit = false;
         bool ShootTargetDown = true;
         public int PlayerOneDefense = 0;
         public int PlayerTwoDefense = 0;
@@ -103,7 +104,7 @@ namespace SettlersofChaos
         {
             if (e.KeyData == Keys.Up) { left = true; }
             if (e.KeyData == Keys.Down) { right = true; }
-            if (e.KeyData == Keys.Space) { bulletfired = true; }
+            if (e.KeyData == Keys.Space) { bulletfired = true; GameBoot(); }
         }
 
         private void TmrShellMove_Tick(object sender, EventArgs e)
@@ -303,10 +304,57 @@ namespace SettlersofChaos
             }
             if (bulletfired == true)
             {
-                bullet.bulletx += 20;
+                bullet.bulletx += 50;
                 bullet.BulletRec.Location = new Point(bullet.bulletx, bullet.y);
             }
+            if (bulletfired == true)
+            {
+                if (bullet.BulletRec.IntersectsWith(new Rectangle(shoottarget.ShootPosition, shoottarget.ShootSize)))
+                {
+                    LblShootTargetHit.Visible = true;
+                    ShooTargetHit();
+                }
+            }
+            BulletFiredCheck();
             PnlShoot.Invalidate();
+        }
+
+        public void BulletFiredCheck()
+        {
+            Task.Run(() =>
+            {
+                if (bulletfired == true)
+                {
+                    System.Threading.Thread.Sleep(1300);
+                    if (bulletfired == true)
+                    {
+                        if (BulletTargetHit == false)
+                        {
+                            Invoke((Action)(() =>
+                            {
+                                ShootTargetMissed();
+                                LblShootTargetMissed.Visible = true;
+
+                            }));
+                        }
+                    }
+                }
+            });
+        }
+
+        public void ShooTargetHit()
+        {
+            LblTargetHit.Visible = true;
+            BulletTargetHit = true;
+            TmrShoot.Enabled = false;
+        }
+
+        public void ShootTargetMissed() {
+            TmrShoot.Enabled = false;
+        }
+        private void BtnHelp_Click(object sender, EventArgs e)
+        {
+
         }
 
         public void Gamestart()

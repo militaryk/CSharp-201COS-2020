@@ -8,7 +8,7 @@ namespace SettlersofChaos
 
         public int bulletx, y, width, height;//variables for the rectangle
         public Image bullet;//variable for the planet's image
-        Point centre;
+        public Point bulletcentre;
         public Rectangle BulletRec;//variable for a rectangle to place our image in
 
         //Create a constructor (initialises the values of the fields)
@@ -26,7 +26,7 @@ namespace SettlersofChaos
         {
 
             g.DrawImage(bullet, BulletRec);
-            centre = new Point(BulletRec.X + width / 2, BulletRec.Y + width / 2);
+            bulletcentre = new Point(BulletRec.X + width / 2, BulletRec.Y + width / 2);
 
         }
     }
