@@ -54,6 +54,8 @@
             this.TmrArtilleryTicks = new System.Windows.Forms.Timer(this.components);
             this.TmrShellMove = new System.Windows.Forms.Timer(this.components);
             this.TmrShoot = new System.Windows.Forms.Timer(this.components);
+            this.TmrDelay = new System.Windows.Forms.Timer(this.components);
+            this.LblAction = new System.Windows.Forms.Label();
             this.PnlBackSplash.SuspendLayout();
             this.PnlMenu.SuspendLayout();
             this.PnlHome.SuspendLayout();
@@ -90,6 +92,7 @@
             // PnlHome
             // 
             this.PnlHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(161)))), ((int)(((byte)(188)))));
+            this.PnlHome.Controls.Add(this.LblAction);
             this.PnlHome.Controls.Add(this.DebugY);
             this.PnlHome.Controls.Add(this.DebugX);
             this.PnlHome.Controls.Add(this.PnlShoot);
@@ -370,6 +373,24 @@
             this.TmrShoot.Interval = 33;
             this.TmrShoot.Tick += new System.EventHandler(this.TmrShoot_Tick);
             // 
+            // TmrDelay
+            // 
+            this.TmrDelay.Interval = 2000;
+            this.TmrDelay.Tick += new System.EventHandler(this.TmrDelay_Tick);
+            // 
+            // LblAction
+            // 
+            this.LblAction.BackColor = System.Drawing.Color.MidnightBlue;
+            this.LblAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblAction.ForeColor = System.Drawing.Color.White;
+            this.LblAction.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LblAction.Location = new System.Drawing.Point(0, 0);
+            this.LblAction.Name = "LblAction";
+            this.LblAction.Size = new System.Drawing.Size(784, 27);
+            this.LblAction.TabIndex = 2;
+            this.LblAction.Text = "Player Two Attacks";
+            this.LblAction.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // FormGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -426,6 +447,8 @@
         private System.Windows.Forms.Label DebugX;
         private System.Windows.Forms.Label LblShootTargetHit;
         private System.Windows.Forms.Label LblShootTargetMissed;
+        private System.Windows.Forms.Timer TmrDelay;
+        private System.Windows.Forms.Label LblAction;
     }
 }
 

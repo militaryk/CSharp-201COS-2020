@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AiTurn.cs" />
     <Compile Include="ArtilleryShell.cs" />
     <Compile Include="ArtilleryTarget.cs" />
     <Compile Include="AxialCoords.cs" />

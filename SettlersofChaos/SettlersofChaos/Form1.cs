@@ -23,6 +23,7 @@ namespace SettlersofChaos
         public bool bulletfired = false;
         bool gamestart = false;
         public bool left, right;
+        public bool PlayerOneTurn = true;
         public int Difficulty = 12;
         ArtilleryShell artilleryShell = new ArtilleryShell();
         ArtilleryTarget artilleryTarget = new ArtilleryTarget();
@@ -32,6 +33,7 @@ namespace SettlersofChaos
         PlayerTwo plrtwo = new PlayerTwo();
         Backsplash backsplash = new Backsplash();
         ShootTarget shoottarget = new ShootTarget();
+        AiTurn aiturn = new AiTurn();
         public FormGame()
         {
             InitializeComponent();
@@ -108,7 +110,7 @@ namespace SettlersofChaos
         {
             if (e.KeyData == Keys.Up) { left = true; }
             if (e.KeyData == Keys.Down) { right = true; }
-            if (e.KeyData == Keys.Space) { if (ShootGameInuse == true) { bulletfired = true; } GameBoot(); }
+            if (e.KeyData == Keys.Space) { if (ShootGameInuse == true) { bulletfired = true; } }
         }
 
         private void TmrShellMove_Tick(object sender, EventArgs e)
@@ -243,6 +245,9 @@ namespace SettlersofChaos
 
         private void BtnArtillery_Click(object sender, EventArgs e)
         {
+            BtnExit.Visible = false;
+            BtnHelp.Visible = false;
+            TurnStart();
             ArtilleryGameTriggered();
             PnlFight.Visible = true;
             BtnFortify.Visible = false;
@@ -252,6 +257,7 @@ namespace SettlersofChaos
             BtnExit.Visible = false;
             LblPlayerOne.Visible = false;
             LblPlayerTwo.Visible = false;
+            LblTargetHit.Visible = false;
         }
 
         private void BtnExit_Click(object sender, EventArgs e)
@@ -272,8 +278,11 @@ namespace SettlersofChaos
 
         private void BtnShoot_Click(object sender, EventArgs e)
         {
+            TurnStart();
             ShootGameStart();
             ShootGameInuse = true;
+            BtnExit.Visible = false;
+            BtnHelp.Visible = false;
         }
 
         private void PnlShoot_Paint(object sender, PaintEventArgs e)
@@ -374,7 +383,7 @@ namespace SettlersofChaos
             BulletTargetHit = true;
             TmrShoot.Enabled = false;
             PlayerTwoDefense -= 2;
-            ShootGameEnd();
+            TmrDelay.Enabled = true;
         }
 
         public void ShootTargetMissed() {
@@ -382,7 +391,7 @@ namespace SettlersofChaos
             BulletTargetMissed = true;
             LblShootTargetMissed.Visible = true;
             PlayerOneDefense -= 2;
-            ShootGameEnd();
+            TmrDelay.Enabled = true;
         }
         private void BtnHelp_Click(object sender, EventArgs e)
         {
@@ -391,9 +400,16 @@ namespace SettlersofChaos
 
         private void BtnFortify_Click(object sender, EventArgs e)
         {
+            TurnStart();
             PlayerOneDefense += 1;
             LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
             LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
+        }
+
+        private void TmrDelay_Tick(object sender, EventArgs e)
+        {
+            ShootGameEnd();
+            TmrDelay.Enabled = false;
         }
 
         public void Gamestart()
@@ -411,8 +427,49 @@ namespace SettlersofChaos
             LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
         }
 
+        public void TurnStart() {
+            BtnShoot.Enabled = false;
+            BtnArtillery.Enabled = false;
+            BtnFortify.Enabled = false;
+        }
 
+        public void AiTurn() {
+            if (aiturn.easy == true)
+            {
+                if (aiturn.AIAttack > 60 & aiturn.AIAttack < 100)
+                {
+                    AIFortify();
+                }
+                if (aiturn.AIAttack > 30 & aiturn.AIAttack < 60)
+                {
+                    AIArtillery();
+                }
+                if (aiturn.AIAttack > 0 & aiturn.AIAttack < 30)
+                {
+                    AIShoot();
+                }
+            }
+            if (aiturn.medium == true) 
+            {
+            }
+            if (aiturn.hard == true) 
+            {
+                
+            }
+        }
 
+        public void AIFortify() {
+            PlayerTwoDefense = +1;
+        }
+        public void AIArtillery()
+        {
+
+        }
+
+        public void AIShoot()
+        {
+
+        }
     }
 }
 
