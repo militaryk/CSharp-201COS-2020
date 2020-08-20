@@ -32,6 +32,7 @@
             this.PnlBackSplash = new System.Windows.Forms.Panel();
             this.PnlMenu = new System.Windows.Forms.Panel();
             this.PnlHome = new System.Windows.Forms.Panel();
+            this.LblAIAction = new System.Windows.Forms.Label();
             this.DebugY = new System.Windows.Forms.Label();
             this.DebugX = new System.Windows.Forms.Label();
             this.PnlShoot = new System.Windows.Forms.Panel();
@@ -55,7 +56,6 @@
             this.TmrShellMove = new System.Windows.Forms.Timer(this.components);
             this.TmrShoot = new System.Windows.Forms.Timer(this.components);
             this.TmrDelay = new System.Windows.Forms.Timer(this.components);
-            this.LblAction = new System.Windows.Forms.Label();
             this.PnlBackSplash.SuspendLayout();
             this.PnlMenu.SuspendLayout();
             this.PnlHome.SuspendLayout();
@@ -92,7 +92,7 @@
             // PnlHome
             // 
             this.PnlHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(161)))), ((int)(((byte)(188)))));
-            this.PnlHome.Controls.Add(this.LblAction);
+            this.PnlHome.Controls.Add(this.LblAIAction);
             this.PnlHome.Controls.Add(this.DebugY);
             this.PnlHome.Controls.Add(this.DebugX);
             this.PnlHome.Controls.Add(this.PnlShoot);
@@ -110,6 +110,19 @@
             this.PnlHome.TabIndex = 4;
             this.PnlHome.Visible = false;
             this.PnlHome.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlHome_Paint);
+            // 
+            // LblAIAction
+            // 
+            this.LblAIAction.BackColor = System.Drawing.Color.MidnightBlue;
+            this.LblAIAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblAIAction.ForeColor = System.Drawing.Color.White;
+            this.LblAIAction.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LblAIAction.Location = new System.Drawing.Point(0, 0);
+            this.LblAIAction.Name = "LblAIAction";
+            this.LblAIAction.Size = new System.Drawing.Size(784, 27);
+            this.LblAIAction.TabIndex = 2;
+            this.LblAIAction.Text = "Player Two Attacks";
+            this.LblAIAction.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // DebugY
             // 
@@ -378,19 +391,6 @@
             this.TmrDelay.Interval = 2000;
             this.TmrDelay.Tick += new System.EventHandler(this.TmrDelay_Tick);
             // 
-            // LblAction
-            // 
-            this.LblAction.BackColor = System.Drawing.Color.MidnightBlue;
-            this.LblAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblAction.ForeColor = System.Drawing.Color.White;
-            this.LblAction.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LblAction.Location = new System.Drawing.Point(0, 0);
-            this.LblAction.Name = "LblAction";
-            this.LblAction.Size = new System.Drawing.Size(784, 27);
-            this.LblAction.TabIndex = 2;
-            this.LblAction.Text = "Player Two Attacks";
-            this.LblAction.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // FormGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -448,7 +448,7 @@
         private System.Windows.Forms.Label LblShootTargetHit;
         private System.Windows.Forms.Label LblShootTargetMissed;
         private System.Windows.Forms.Timer TmrDelay;
-        private System.Windows.Forms.Label LblAction;
+        private System.Windows.Forms.Label LblAIAction;
     }
 }
 

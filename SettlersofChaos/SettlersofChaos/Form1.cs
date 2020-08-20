@@ -121,6 +121,7 @@ namespace SettlersofChaos
                 YouMissedLBL.Visible = true;
                 TmrArtilleryTicks.Enabled = false;
                 TmrShellMove.Enabled = false;
+                PlayerOneDefense -= 3;
                 System.Threading.Thread.Sleep(2300);
                 ArtilleryGameExit();
 
@@ -200,6 +201,7 @@ namespace SettlersofChaos
             BtnArtillery.Visible = true;
             BtnShoot.Visible = true;
             BtnFortify.Visible = true;
+            TurnEnd();
         }
 
         private void PnlGame_MouseDown(object sender, MouseEventArgs e)
@@ -273,7 +275,6 @@ namespace SettlersofChaos
             PnlHome.Visible = false;
             BtnTutorial.Visible = true;
             LblTitle.Visible = true;
-
         }
 
         private void BtnShoot_Click(object sender, EventArgs e)
@@ -375,6 +376,7 @@ namespace SettlersofChaos
             LblShootTargetMissed.Visible = false;
             LblShootTargetHit.Visible = false;
             bullet.bulletx = 100;
+            TurnEnd();
             bullet.BulletRec.Location = new Point(bullet.bulletx, bullet.y);
         }
         public void ShootTargetHit()
@@ -404,6 +406,7 @@ namespace SettlersofChaos
             PlayerOneDefense += 1;
             LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
             LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
+            AiTurn();
         }
 
         private void TmrDelay_Tick(object sender, EventArgs e)
@@ -434,41 +437,163 @@ namespace SettlersofChaos
         }
 
         public void AiTurn() {
+
+            string AIResponse;
+            Random rnd = new Random();
+            int AIAttack = rnd.Next(1, 101);  // creates a number between 1 and 100
+            int AIAttackSuccses = rnd.Next(1, 101);   // creates a number between 1 and 100
             if (aiturn.easy == true)
             {
-                if (aiturn.AIAttack > 60 & aiturn.AIAttack < 100)
+                if (AIAttack >= 60 & AIAttack <= 100)
                 {
-                    AIFortify();
+                    AiTurnFortify();
+                    AIResponse = "The AI used Fortify and gained 2HP";
+                    LblAIAction.Text = AIResponse;
+                    AITurnEnd();
                 }
-                if (aiturn.AIAttack > 30 & aiturn.AIAttack < 60)
+                if (AIAttack >= 30 & AIAttack <= 60)
                 {
-                    AIArtillery();
+                    if (AIAttackSuccses >= 0 & AIAttackSuccses <= 66)
+                    {
+                        PlayerOneDefense -= 2;
+                        AIResponse = "The AI successfully used Shoot and dealt 2HP";
+                        LblAIAction.Text = AIResponse;
+                        AITurnEnd();
+                    }
+                    else
+                    {
+                        PlayerTwoDefense -= 2;
+                        AIResponse = "The AI failed to used Shoot and lost 2HP";
+                        LblAIAction.Text = AIResponse;
+                        AITurnEnd();
+                    }
                 }
-                if (aiturn.AIAttack > 0 & aiturn.AIAttack < 30)
+                if (AIAttack >= 0 & AIAttack <= 30)
                 {
-                    AIShoot();
+                    if (AIAttackSuccses >= 0 & AIAttackSuccses <= 45)
+                    {
+                        PlayerOneDefense -= 6;
+                        AIResponse = "The AI successfully used Artillery and dealt 6HP";
+                        LblAIAction.Text = AIResponse;
+                        AITurnEnd();
+                    }
+                    else
+                    {
+                        PlayerTwoDefense -= 3;
+                        AIResponse = "The AI failed to used Artillery and lost 3HP";
+                        LblAIAction.Text = AIResponse;
+                        AITurnEnd();
+                    }
                 }
             }
             if (aiturn.medium == true) 
             {
+                if (AIAttack >= 70 & AIAttack <= 100)
+                {
+                    AiTurnFortify();
+                    AIResponse = "The AI used Fortify and gained 2HP";
+                    LblAIAction.Text = AIResponse;
+                    AITurnEnd();
+                }
+                if (AIAttack >= 40 & AIAttack <= 70)
+                {
+                    if (AIAttackSuccses >= 0 & AIAttackSuccses <= 77)
+                    {
+                        PlayerOneDefense -= 2;
+                        AIResponse = "The AI successfully used Shoot and dealt 2HP";
+                        LblAIAction.Text = AIResponse;
+                        AITurnEnd();
+                    }
+                    else
+                    {
+                        PlayerTwoDefense -= 2;
+                        AIResponse = "The AI failed to used Shoot and lost 2HP";
+                        LblAIAction.Text = AIResponse;
+                        AITurnEnd();
+                    }
+                }
+                if (AIAttack >= 0 & AIAttack <= 40)
+                {
+                    if (AIAttackSuccses >= 0 & AIAttackSuccses <= 55)
+                    {
+                        PlayerOneDefense -= 6;
+                        AIResponse = "The AI successfully used Artillery and dealt 6HP";
+                        LblAIAction.Text = AIResponse;
+                        AITurnEnd();
+                    }
+                    else
+                    {
+                        PlayerTwoDefense -= 3;
+                        AIResponse = "The AI failed to used Artillery and lost 3HP";
+                        LblAIAction.Text = AIResponse;
+                        AITurnEnd();
+                    }
+                }
             }
             if (aiturn.hard == true) 
             {
-                
+                if (AIAttack >= 80 & AIAttack <= 100)
+                {
+                    AiTurnFortify();
+                    AIResponse = "The AI used Fortify and gained 2HP";
+                    LblAIAction.Text = AIResponse;
+                    AITurnEnd();
+                }
+                if (AIAttack >= 40 & AIAttack <= 80)
+                {
+                    if (AIAttackSuccses >= 0 & AIAttackSuccses <= 90)
+                    {
+                        PlayerOneDefense -= 2;
+                        AIResponse = "The AI successfully used Shoot and dealt 2HP";
+                        LblAIAction.Text = AIResponse;
+                        AITurnEnd();
+                    }
+                    else
+                    {
+                        PlayerTwoDefense -= 2;
+                        AIResponse = "The AI failed to used Shoot and lost 2HP";
+                        LblAIAction.Text = AIResponse;
+                        AITurnEnd();
+                    }
+                }
+                if (AIAttack >= 0 & AIAttack <= 40)
+                {
+                    if (AIAttackSuccses >= 0 & AIAttackSuccses <= 70)
+                    {
+                        PlayerOneDefense -= 6;
+                        AIResponse = "The AI successfully used Artillery and dealt 6HP";
+                        LblAIAction.Text = AIResponse;
+                        AITurnEnd();
+                    }
+                    else
+                    {
+                        PlayerTwoDefense -= 3;
+                        AIResponse = "The AI failed to used Artillery and lost 3HP";
+                        LblAIAction.Text = AIResponse;
+                        AITurnEnd();
+                    }
+                }
             }
         }
 
-        public void AIFortify() {
-            PlayerTwoDefense = +1;
-        }
-        public void AIArtillery()
+        private void AiTurnFortify()
         {
-
+            PlayerTwoDefense += 2;
+            AITurnEnd();
         }
 
-        public void AIShoot()
+        public void TurnEnd()
         {
+            AiTurn();
+        }
 
+        public void AITurnEnd()
+        {
+            LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
+            LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
+            BtnShoot.Enabled = true;
+            BtnArtillery.Enabled = true;
+            BtnFortify.Enabled = true;
         }
     }
 }
