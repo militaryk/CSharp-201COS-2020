@@ -7,7 +7,7 @@ namespace SettlersofChaos
         Point Position;
         Size Size;
         int Plr2PosX = 550;
-        int Plr2PosY = 20;
+        int Plr2PosY = 40;
         int Plr2Height = 250;
         int Plr2Width = 200;
         public void Draw(Graphics g)

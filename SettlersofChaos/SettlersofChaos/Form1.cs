@@ -14,6 +14,7 @@ namespace SettlersofChaos
         public bool BulletTargetMissed = false;
         string shellmove;
         int MouseX;
+        public int Turn;
         int MouseY;
         public bool BulletTargetHit = false;
         bool ShootTargetDown = true;
@@ -428,6 +429,7 @@ namespace SettlersofChaos
             PlayerTwoDefense = Difficulty;
             LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
             LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
+            TmrGame.Enabled = true;
         }
 
         public void TurnStart() {
@@ -584,7 +586,30 @@ namespace SettlersofChaos
 
         public void TurnEnd()
         {
+            Turn += 1;
+            LblTurn.Text = Convert.ToString(Turn);
             AiTurn();
+        }
+
+        public void PlrOneLost()
+        {
+            LblPlayerLost.Visible = true;
+            TmrGameEnd.Enabled = true;
+        }
+
+        private void TmrGame_Tick(object sender, EventArgs e)
+        {
+            if (PlayerOneDefense < 1)
+            {
+                PlrOneLost();
+            }
+        }
+
+        private void TmrGameEnd_Tick(object sender, EventArgs e)
+        {
+            TmrGameEnd.Enabled = false;
+            GameEnd();
+
         }
 
         public void AITurnEnd()
