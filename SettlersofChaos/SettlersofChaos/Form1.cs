@@ -13,6 +13,7 @@ namespace SettlersofChaos
         public int speed = 10;
         public bool BulletTargetMissed = false;
         string shellmove;
+        public bool easy = true, medium = false, hard = false;
         int MouseX;
         public int Turn;
         int MouseY;
@@ -21,6 +22,7 @@ namespace SettlersofChaos
         bool ShootGameInuse = false;
         public int PlayerOneDefense = 0;
         public int PlayerTwoDefense = 0;
+        bool ArtilleryHit, ArtilleryMissed;
         public bool bulletfired = false;
         bool gamestart = false;
         public bool left, right;
@@ -34,7 +36,8 @@ namespace SettlersofChaos
         PlayerTwo plrtwo = new PlayerTwo();
         Backsplash backsplash = new Backsplash();
         ShootTarget shoottarget = new ShootTarget();
-        AiTurn aiturn = new AiTurn();
+        private Random random;
+
         public FormGame()
         {
             InitializeComponent();
@@ -42,7 +45,7 @@ namespace SettlersofChaos
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlFight, new object[] { true });
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlShoot, new object[] { true });
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlHome, new object[] { true });
-            var random = new Random();
+            random = new Random();
             var RedAxis = new Random();
             var shapeback = new Backsplash
             {
@@ -119,22 +122,22 @@ namespace SettlersofChaos
             if (CollidesWithRedBlock())
             {
                 //reset planet[i] back to top of panel
+                artilleryShell.x -= 10;
                 YouMissedLBL.Visible = true;
                 TmrArtilleryTicks.Enabled = false;
                 TmrShellMove.Enabled = false;
-                PlayerOneDefense -= 3;
-                System.Threading.Thread.Sleep(2300);
-                ArtilleryGameExit();
+                ArtilleryHit = true;
+                TmrDelay.Enabled = true;
 
             }
             if (CollidesWithTarget())
             {
+                artilleryShell.x -= 10;
                 LblTargetHit.Visible = true;
                 TmrArtilleryTicks.Enabled = false;
                 TmrShellMove.Enabled = false;
-                PlayerTwoDefense = PlayerTwoDefense - 5;
-                System.Threading.Thread.Sleep(2300);
-                ArtilleryGameExit();
+                ArtilleryMissed = true;
+                TmrDelay.Enabled = true;
 
             }
             else
@@ -188,6 +191,12 @@ namespace SettlersofChaos
             TmrShellMove.Enabled = true;
             PnlFight.Visible = true;
             PlayerOneDefense = PlayerOneDefense - 3;
+            for (int i = 0; i < 20; i++)
+            {
+                redblocks[i] = new Artilltery(random);
+            }
+            artilleryTarget.TargetPosX = 5000;
+            YouMissedLBL.Visible = false;
         }
 
         public void ArtilleryGameExit()
@@ -235,6 +244,7 @@ namespace SettlersofChaos
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             Gamestart();
         }
 
@@ -412,8 +422,19 @@ namespace SettlersofChaos
 
         private void TmrDelay_Tick(object sender, EventArgs e)
         {
+            ArtilleryGameExit();
             ShootGameEnd();
             TmrDelay.Enabled = false;
+            if (ArtilleryHit == true)
+            {
+                PlayerTwoDefense -= 6;
+                ArtilleryHit = false;
+            }
+            if (ArtilleryMissed == true)
+            {
+                PlayerOneDefense -= 3;
+                ArtilleryMissed = false;
+            }
         }
 
         public void Gamestart()
@@ -444,7 +465,7 @@ namespace SettlersofChaos
             Random rnd = new Random();
             int AIAttack = rnd.Next(1, 101);  // creates a number between 1 and 100
             int AIAttackSuccses = rnd.Next(1, 101);   // creates a number between 1 and 100
-            if (aiturn.easy == true)
+            if (easy == true)
             {
                 if (AIAttack >= 60 & AIAttack <= 100)
                 {
@@ -488,7 +509,7 @@ namespace SettlersofChaos
                     }
                 }
             }
-            if (aiturn.medium == true) 
+            if (medium == true) 
             {
                 if (AIAttack >= 70 & AIAttack <= 100)
                 {
@@ -532,7 +553,7 @@ namespace SettlersofChaos
                     }
                 }
             }
-            if (aiturn.hard == true) 
+            if (hard == true) 
             {
                 if (AIAttack >= 80 & AIAttack <= 100)
                 {
@@ -603,12 +624,18 @@ namespace SettlersofChaos
             {
                 PlrOneLost();
             }
+            if (PlayerTwoDefense < 1)
+            {
+                PlrTwoLost();
+            }
         }
 
         private void TmrGameEnd_Tick(object sender, EventArgs e)
         {
             TmrGameEnd.Enabled = false;
             GameEnd();
+            LblPlayerLost.Visible = false;
+            TmrGame.Enabled = false;
 
         }
 
@@ -619,6 +646,11 @@ namespace SettlersofChaos
             BtnShoot.Enabled = true;
             BtnArtillery.Enabled = true;
             BtnFortify.Enabled = true;
+        }
+
+        public void PlrTwoLost()
+        {
+            //Lbl
         }
     }
 }

@@ -32,7 +32,10 @@
             this.PnlBackSplash = new System.Windows.Forms.Panel();
             this.PnlMenu = new System.Windows.Forms.Panel();
             this.PnlHome = new System.Windows.Forms.Panel();
+            this.LblTurnName = new System.Windows.Forms.Label();
+            this.LblTurn = new System.Windows.Forms.Label();
             this.LblAIAction = new System.Windows.Forms.Label();
+            this.LblPlayerLost = new System.Windows.Forms.Label();
             this.DebugY = new System.Windows.Forms.Label();
             this.DebugX = new System.Windows.Forms.Label();
             this.PnlShoot = new System.Windows.Forms.Panel();
@@ -56,9 +59,6 @@
             this.TmrShellMove = new System.Windows.Forms.Timer(this.components);
             this.TmrShoot = new System.Windows.Forms.Timer(this.components);
             this.TmrDelay = new System.Windows.Forms.Timer(this.components);
-            this.LblTurn = new System.Windows.Forms.Label();
-            this.LblTurnName = new System.Windows.Forms.Label();
-            this.LblPlayerLost = new System.Windows.Forms.Label();
             this.TmrGame = new System.Windows.Forms.Timer(this.components);
             this.TmrGameEnd = new System.Windows.Forms.Timer(this.components);
             this.PnlBackSplash.SuspendLayout();
@@ -100,6 +100,7 @@
             this.PnlHome.Controls.Add(this.LblTurnName);
             this.PnlHome.Controls.Add(this.LblTurn);
             this.PnlHome.Controls.Add(this.LblAIAction);
+            this.PnlHome.Controls.Add(this.LblPlayerLost);
             this.PnlHome.Controls.Add(this.DebugY);
             this.PnlHome.Controls.Add(this.DebugX);
             this.PnlHome.Controls.Add(this.PnlShoot);
@@ -118,6 +119,28 @@
             this.PnlHome.Visible = false;
             this.PnlHome.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlHome_Paint);
             // 
+            // LblTurnName
+            // 
+            this.LblTurnName.BackColor = System.Drawing.Color.White;
+            this.LblTurnName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblTurnName.Location = new System.Drawing.Point(342, 403);
+            this.LblTurnName.Name = "LblTurnName";
+            this.LblTurnName.Size = new System.Drawing.Size(100, 21);
+            this.LblTurnName.TabIndex = 11;
+            this.LblTurnName.Text = "Turn";
+            this.LblTurnName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // LblTurn
+            // 
+            this.LblTurn.BackColor = System.Drawing.Color.White;
+            this.LblTurn.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblTurn.Location = new System.Drawing.Point(342, 424);
+            this.LblTurn.Name = "LblTurn";
+            this.LblTurn.Size = new System.Drawing.Size(100, 35);
+            this.LblTurn.TabIndex = 10;
+            this.LblTurn.Text = "0";
+            this.LblTurn.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // LblAIAction
             // 
             this.LblAIAction.BackColor = System.Drawing.Color.MidnightBlue;
@@ -130,6 +153,19 @@
             this.LblAIAction.TabIndex = 2;
             this.LblAIAction.Text = "Player Two Attacks";
             this.LblAIAction.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // LblPlayerLost
+            // 
+            this.LblPlayerLost.AutoSize = true;
+            this.LblPlayerLost.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.LblPlayerLost.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPlayerLost.ForeColor = System.Drawing.Color.Red;
+            this.LblPlayerLost.Location = new System.Drawing.Point(153, 150);
+            this.LblPlayerLost.Name = "LblPlayerLost";
+            this.LblPlayerLost.Size = new System.Drawing.Size(451, 110);
+            this.LblPlayerLost.TabIndex = 2;
+            this.LblPlayerLost.Text = "You Lost!";
+            this.LblPlayerLost.Visible = false;
             // 
             // DebugY
             // 
@@ -152,7 +188,6 @@
             // PnlShoot
             // 
             this.PnlShoot.BackColor = System.Drawing.Color.Gray;
-            this.PnlShoot.Controls.Add(this.LblPlayerLost);
             this.PnlShoot.Controls.Add(this.LblShootTargetMissed);
             this.PnlShoot.Controls.Add(this.LblShootTargetHit);
             this.PnlShoot.ForeColor = System.Drawing.Color.Black;
@@ -398,40 +433,6 @@
             // 
             this.TmrDelay.Interval = 2000;
             this.TmrDelay.Tick += new System.EventHandler(this.TmrDelay_Tick);
-            // 
-            // LblTurn
-            // 
-            this.LblTurn.BackColor = System.Drawing.Color.White;
-            this.LblTurn.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblTurn.Location = new System.Drawing.Point(342, 424);
-            this.LblTurn.Name = "LblTurn";
-            this.LblTurn.Size = new System.Drawing.Size(100, 35);
-            this.LblTurn.TabIndex = 10;
-            this.LblTurn.Text = "0";
-            this.LblTurn.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // LblTurnName
-            // 
-            this.LblTurnName.BackColor = System.Drawing.Color.White;
-            this.LblTurnName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblTurnName.Location = new System.Drawing.Point(342, 403);
-            this.LblTurnName.Name = "LblTurnName";
-            this.LblTurnName.Size = new System.Drawing.Size(100, 21);
-            this.LblTurnName.TabIndex = 11;
-            this.LblTurnName.Text = "Turn";
-            this.LblTurnName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // LblPlayerLost
-            // 
-            this.LblPlayerLost.AutoSize = true;
-            this.LblPlayerLost.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblPlayerLost.ForeColor = System.Drawing.Color.Red;
-            this.LblPlayerLost.Location = new System.Drawing.Point(166, 163);
-            this.LblPlayerLost.Name = "LblPlayerLost";
-            this.LblPlayerLost.Size = new System.Drawing.Size(449, 108);
-            this.LblPlayerLost.TabIndex = 2;
-            this.LblPlayerLost.Text = "You Lost!";
-            this.LblPlayerLost.Visible = false;
             // 
             // TmrGame
             // 
