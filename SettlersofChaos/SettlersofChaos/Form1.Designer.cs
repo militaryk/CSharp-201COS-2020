@@ -35,10 +35,20 @@
             this.LblTurnName = new System.Windows.Forms.Label();
             this.LblTurn = new System.Windows.Forms.Label();
             this.LblAIAction = new System.Windows.Forms.Label();
-            this.LblPlayerLost = new System.Windows.Forms.Label();
             this.DebugY = new System.Windows.Forms.Label();
             this.DebugX = new System.Windows.Forms.Label();
             this.PnlShoot = new System.Windows.Forms.Panel();
+            this.PnlSettings = new System.Windows.Forms.Panel();
+            this.BtnThemeDark = new System.Windows.Forms.Button();
+            this.BtnThemePink = new System.Windows.Forms.Button();
+            this.BtnThemeBlue = new System.Windows.Forms.Button();
+            this.BtnTimeLong = new System.Windows.Forms.Button();
+            this.BtnTimeStandard = new System.Windows.Forms.Button();
+            this.BtnTimeQuick = new System.Windows.Forms.Button();
+            this.BtnDiffHard = new System.Windows.Forms.Button();
+            this.BtnDiffMed = new System.Windows.Forms.Button();
+            this.BtnDiffEasy = new System.Windows.Forms.Button();
+            this.LblPlayerLost = new System.Windows.Forms.Label();
             this.LblShootTargetMissed = new System.Windows.Forms.Label();
             this.LblShootTargetHit = new System.Windows.Forms.Label();
             this.LblPlayerTwo = new System.Windows.Forms.Label();
@@ -51,6 +61,7 @@
             this.BtnFortify = new System.Windows.Forms.Button();
             this.BtnHelp = new System.Windows.Forms.Button();
             this.BtnExit = new System.Windows.Forms.Button();
+            this.LblYouWon = new System.Windows.Forms.Label();
             this.LblTitle = new System.Windows.Forms.Label();
             this.BtnSettings = new System.Windows.Forms.Button();
             this.BtnTutorial = new System.Windows.Forms.Button();
@@ -61,10 +72,12 @@
             this.TmrDelay = new System.Windows.Forms.Timer(this.components);
             this.TmrGame = new System.Windows.Forms.Timer(this.components);
             this.TmrGameEnd = new System.Windows.Forms.Timer(this.components);
+            this.BtnReturnMenu = new System.Windows.Forms.Button();
             this.PnlBackSplash.SuspendLayout();
             this.PnlMenu.SuspendLayout();
             this.PnlHome.SuspendLayout();
             this.PnlShoot.SuspendLayout();
+            this.PnlSettings.SuspendLayout();
             this.PnlFight.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,7 +113,6 @@
             this.PnlHome.Controls.Add(this.LblTurnName);
             this.PnlHome.Controls.Add(this.LblTurn);
             this.PnlHome.Controls.Add(this.LblAIAction);
-            this.PnlHome.Controls.Add(this.LblPlayerLost);
             this.PnlHome.Controls.Add(this.DebugY);
             this.PnlHome.Controls.Add(this.DebugX);
             this.PnlHome.Controls.Add(this.PnlShoot);
@@ -112,6 +124,7 @@
             this.PnlHome.Controls.Add(this.BtnFortify);
             this.PnlHome.Controls.Add(this.BtnHelp);
             this.PnlHome.Controls.Add(this.BtnExit);
+            this.PnlHome.Controls.Add(this.LblYouWon);
             this.PnlHome.Location = new System.Drawing.Point(0, 0);
             this.PnlHome.Name = "PnlHome";
             this.PnlHome.Size = new System.Drawing.Size(800, 500);
@@ -154,19 +167,6 @@
             this.LblAIAction.Text = "Player Two Attacks";
             this.LblAIAction.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // LblPlayerLost
-            // 
-            this.LblPlayerLost.AutoSize = true;
-            this.LblPlayerLost.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.LblPlayerLost.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblPlayerLost.ForeColor = System.Drawing.Color.Red;
-            this.LblPlayerLost.Location = new System.Drawing.Point(153, 150);
-            this.LblPlayerLost.Name = "LblPlayerLost";
-            this.LblPlayerLost.Size = new System.Drawing.Size(451, 110);
-            this.LblPlayerLost.TabIndex = 2;
-            this.LblPlayerLost.Text = "You Lost!";
-            this.LblPlayerLost.Visible = false;
-            // 
             // DebugY
             // 
             this.DebugY.AutoSize = true;
@@ -188,6 +188,7 @@
             // PnlShoot
             // 
             this.PnlShoot.BackColor = System.Drawing.Color.Gray;
+            this.PnlShoot.Controls.Add(this.PnlSettings);
             this.PnlShoot.Controls.Add(this.LblShootTargetMissed);
             this.PnlShoot.Controls.Add(this.LblShootTargetHit);
             this.PnlShoot.ForeColor = System.Drawing.Color.Black;
@@ -197,6 +198,144 @@
             this.PnlShoot.TabIndex = 7;
             this.PnlShoot.Visible = false;
             this.PnlShoot.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlShoot_Paint);
+            // 
+            // PnlSettings
+            // 
+            this.PnlSettings.BackColor = System.Drawing.Color.White;
+            this.PnlSettings.Controls.Add(this.BtnReturnMenu);
+            this.PnlSettings.Controls.Add(this.BtnThemeDark);
+            this.PnlSettings.Controls.Add(this.BtnThemePink);
+            this.PnlSettings.Controls.Add(this.BtnThemeBlue);
+            this.PnlSettings.Controls.Add(this.BtnTimeLong);
+            this.PnlSettings.Controls.Add(this.BtnTimeStandard);
+            this.PnlSettings.Controls.Add(this.BtnTimeQuick);
+            this.PnlSettings.Controls.Add(this.BtnDiffHard);
+            this.PnlSettings.Controls.Add(this.BtnDiffMed);
+            this.PnlSettings.Controls.Add(this.BtnDiffEasy);
+            this.PnlSettings.Controls.Add(this.LblPlayerLost);
+            this.PnlSettings.Location = new System.Drawing.Point(0, 0);
+            this.PnlSettings.Name = "PnlSettings";
+            this.PnlSettings.Size = new System.Drawing.Size(784, 461);
+            this.PnlSettings.TabIndex = 99;
+            this.PnlSettings.Visible = false;
+            // 
+            // BtnThemeDark
+            // 
+            this.BtnThemeDark.Location = new System.Drawing.Point(585, 343);
+            this.BtnThemeDark.Name = "BtnThemeDark";
+            this.BtnThemeDark.Size = new System.Drawing.Size(145, 34);
+            this.BtnThemeDark.TabIndex = 9;
+            this.BtnThemeDark.TabStop = false;
+            this.BtnThemeDark.Text = "Dark";
+            this.BtnThemeDark.UseVisualStyleBackColor = true;
+            this.BtnThemeDark.Visible = false;
+            // 
+            // BtnThemePink
+            // 
+            this.BtnThemePink.Location = new System.Drawing.Point(586, 303);
+            this.BtnThemePink.Name = "BtnThemePink";
+            this.BtnThemePink.Size = new System.Drawing.Size(145, 34);
+            this.BtnThemePink.TabIndex = 8;
+            this.BtnThemePink.TabStop = false;
+            this.BtnThemePink.Text = "Pink";
+            this.BtnThemePink.UseVisualStyleBackColor = true;
+            this.BtnThemePink.Visible = false;
+            // 
+            // BtnThemeBlue
+            // 
+            this.BtnThemeBlue.Location = new System.Drawing.Point(585, 263);
+            this.BtnThemeBlue.Name = "BtnThemeBlue";
+            this.BtnThemeBlue.Size = new System.Drawing.Size(145, 34);
+            this.BtnThemeBlue.TabIndex = 7;
+            this.BtnThemeBlue.TabStop = false;
+            this.BtnThemeBlue.Text = "Blue";
+            this.BtnThemeBlue.UseVisualStyleBackColor = true;
+            this.BtnThemeBlue.Visible = false;
+            // 
+            // BtnTimeLong
+            // 
+            this.BtnTimeLong.Location = new System.Drawing.Point(219, 343);
+            this.BtnTimeLong.Name = "BtnTimeLong";
+            this.BtnTimeLong.Size = new System.Drawing.Size(145, 34);
+            this.BtnTimeLong.TabIndex = 6;
+            this.BtnTimeLong.TabStop = false;
+            this.BtnTimeLong.Text = "Long";
+            this.BtnTimeLong.UseVisualStyleBackColor = true;
+            this.BtnTimeLong.Visible = false;
+            this.BtnTimeLong.Click += new System.EventHandler(this.BtnTimeLong_Click);
+            // 
+            // BtnTimeStandard
+            // 
+            this.BtnTimeStandard.Location = new System.Drawing.Point(219, 303);
+            this.BtnTimeStandard.Name = "BtnTimeStandard";
+            this.BtnTimeStandard.Size = new System.Drawing.Size(145, 34);
+            this.BtnTimeStandard.TabIndex = 5;
+            this.BtnTimeStandard.TabStop = false;
+            this.BtnTimeStandard.Text = "Standard";
+            this.BtnTimeStandard.UseVisualStyleBackColor = true;
+            this.BtnTimeStandard.Visible = false;
+            this.BtnTimeStandard.Click += new System.EventHandler(this.BtnTimeStandard_Click);
+            // 
+            // BtnTimeQuick
+            // 
+            this.BtnTimeQuick.Location = new System.Drawing.Point(218, 263);
+            this.BtnTimeQuick.Name = "BtnTimeQuick";
+            this.BtnTimeQuick.Size = new System.Drawing.Size(145, 34);
+            this.BtnTimeQuick.TabIndex = 4;
+            this.BtnTimeQuick.TabStop = false;
+            this.BtnTimeQuick.Text = "Quick";
+            this.BtnTimeQuick.UseVisualStyleBackColor = true;
+            this.BtnTimeQuick.Visible = false;
+            this.BtnTimeQuick.Click += new System.EventHandler(this.BtnTimeQuick_Click);
+            // 
+            // BtnDiffHard
+            // 
+            this.BtnDiffHard.Location = new System.Drawing.Point(30, 343);
+            this.BtnDiffHard.Name = "BtnDiffHard";
+            this.BtnDiffHard.Size = new System.Drawing.Size(145, 34);
+            this.BtnDiffHard.TabIndex = 3;
+            this.BtnDiffHard.TabStop = false;
+            this.BtnDiffHard.Text = "Hard";
+            this.BtnDiffHard.UseVisualStyleBackColor = true;
+            this.BtnDiffHard.Visible = false;
+            this.BtnDiffHard.Click += new System.EventHandler(this.BtnDiffHard_Click);
+            // 
+            // BtnDiffMed
+            // 
+            this.BtnDiffMed.Location = new System.Drawing.Point(30, 303);
+            this.BtnDiffMed.Name = "BtnDiffMed";
+            this.BtnDiffMed.Size = new System.Drawing.Size(145, 34);
+            this.BtnDiffMed.TabIndex = 1;
+            this.BtnDiffMed.TabStop = false;
+            this.BtnDiffMed.Text = "Medium";
+            this.BtnDiffMed.UseVisualStyleBackColor = true;
+            this.BtnDiffMed.Visible = false;
+            this.BtnDiffMed.Click += new System.EventHandler(this.BtnDiffMed_Click);
+            // 
+            // BtnDiffEasy
+            // 
+            this.BtnDiffEasy.Location = new System.Drawing.Point(29, 263);
+            this.BtnDiffEasy.Name = "BtnDiffEasy";
+            this.BtnDiffEasy.Size = new System.Drawing.Size(145, 34);
+            this.BtnDiffEasy.TabIndex = 0;
+            this.BtnDiffEasy.TabStop = false;
+            this.BtnDiffEasy.Text = "Easy";
+            this.BtnDiffEasy.UseVisualStyleBackColor = true;
+            this.BtnDiffEasy.Visible = false;
+            this.BtnDiffEasy.Click += new System.EventHandler(this.BtnDiffEasy_Click);
+            // 
+            // LblPlayerLost
+            // 
+            this.LblPlayerLost.AutoSize = true;
+            this.LblPlayerLost.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.LblPlayerLost.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPlayerLost.ForeColor = System.Drawing.Color.Red;
+            this.LblPlayerLost.Location = new System.Drawing.Point(153, 150);
+            this.LblPlayerLost.Name = "LblPlayerLost";
+            this.LblPlayerLost.Size = new System.Drawing.Size(451, 110);
+            this.LblPlayerLost.TabIndex = 2;
+            this.LblPlayerLost.Text = "You Lost!";
+            this.LblPlayerLost.Visible = false;
             // 
             // LblShootTargetMissed
             // 
@@ -364,6 +503,20 @@
             this.BtnExit.UseVisualStyleBackColor = false;
             this.BtnExit.Click += new System.EventHandler(this.BtnExit_Click);
             // 
+            // LblYouWon
+            // 
+            this.LblYouWon.AutoSize = true;
+            this.LblYouWon.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.LblYouWon.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblYouWon.ForeColor = System.Drawing.Color.Lime;
+            this.LblYouWon.Location = new System.Drawing.Point(146, 150);
+            this.LblYouWon.Name = "LblYouWon";
+            this.LblYouWon.Size = new System.Drawing.Size(467, 110);
+            this.LblYouWon.TabIndex = 12;
+            this.LblYouWon.Text = "You Won!";
+            this.LblYouWon.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.LblYouWon.Visible = false;
+            // 
             // LblTitle
             // 
             this.LblTitle.AutoSize = true;
@@ -386,6 +539,7 @@
             this.BtnSettings.TabIndex = 2;
             this.BtnSettings.Text = "Settings";
             this.BtnSettings.UseVisualStyleBackColor = false;
+            this.BtnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
             // 
             // BtnTutorial
             // 
@@ -443,6 +597,18 @@
             this.TmrGameEnd.Interval = 3000;
             this.TmrGameEnd.Tick += new System.EventHandler(this.TmrGameEnd_Tick);
             // 
+            // BtnReturnMenu
+            // 
+            this.BtnReturnMenu.Location = new System.Drawing.Point(585, 216);
+            this.BtnReturnMenu.Name = "BtnReturnMenu";
+            this.BtnReturnMenu.Size = new System.Drawing.Size(145, 34);
+            this.BtnReturnMenu.TabIndex = 10;
+            this.BtnReturnMenu.TabStop = false;
+            this.BtnReturnMenu.Text = "Back";
+            this.BtnReturnMenu.UseVisualStyleBackColor = true;
+            this.BtnReturnMenu.Visible = false;
+            this.BtnReturnMenu.Click += new System.EventHandler(this.BtnReturnMenu_Click);
+            // 
             // FormGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -467,6 +633,8 @@
             this.PnlHome.PerformLayout();
             this.PnlShoot.ResumeLayout(false);
             this.PnlShoot.PerformLayout();
+            this.PnlSettings.ResumeLayout(false);
+            this.PnlSettings.PerformLayout();
             this.PnlFight.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -506,6 +674,18 @@
         private System.Windows.Forms.Label LblPlayerLost;
         private System.Windows.Forms.Timer TmrGame;
         private System.Windows.Forms.Timer TmrGameEnd;
+        private System.Windows.Forms.Label LblYouWon;
+        private System.Windows.Forms.Panel PnlSettings;
+        private System.Windows.Forms.Button BtnTimeLong;
+        private System.Windows.Forms.Button BtnTimeStandard;
+        private System.Windows.Forms.Button BtnTimeQuick;
+        private System.Windows.Forms.Button BtnDiffHard;
+        private System.Windows.Forms.Button BtnDiffMed;
+        private System.Windows.Forms.Button BtnDiffEasy;
+        private System.Windows.Forms.Button BtnThemeDark;
+        private System.Windows.Forms.Button BtnThemePink;
+        private System.Windows.Forms.Button BtnThemeBlue;
+        private System.Windows.Forms.Button BtnReturnMenu;
     }
 }
 

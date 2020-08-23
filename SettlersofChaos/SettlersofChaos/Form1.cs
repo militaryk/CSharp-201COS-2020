@@ -474,7 +474,7 @@ namespace SettlersofChaos
                     LblAIAction.Text = AIResponse;
                     AITurnEnd();
                 }
-                if (AIAttack >= 30 & AIAttack <= 60)
+                else if (AIAttack >= 30 & AIAttack <= 60)
                 {
                     if (AIAttackSuccses >= 0 & AIAttackSuccses <= 66)
                     {
@@ -491,7 +491,7 @@ namespace SettlersofChaos
                         AITurnEnd();
                     }
                 }
-                if (AIAttack >= 0 & AIAttack <= 30)
+                else if (AIAttack >= 0 & AIAttack <= 30)
                 {
                     if (AIAttackSuccses >= 0 & AIAttackSuccses <= 45)
                     {
@@ -518,7 +518,7 @@ namespace SettlersofChaos
                     LblAIAction.Text = AIResponse;
                     AITurnEnd();
                 }
-                if (AIAttack >= 40 & AIAttack <= 70)
+                else if (AIAttack >= 40 & AIAttack <= 70)
                 {
                     if (AIAttackSuccses >= 0 & AIAttackSuccses <= 77)
                     {
@@ -535,7 +535,7 @@ namespace SettlersofChaos
                         AITurnEnd();
                     }
                 }
-                if (AIAttack >= 0 & AIAttack <= 40)
+                else if (AIAttack >= 0 & AIAttack <= 40)
                 {
                     if (AIAttackSuccses >= 0 & AIAttackSuccses <= 55)
                     {
@@ -562,7 +562,7 @@ namespace SettlersofChaos
                     LblAIAction.Text = AIResponse;
                     AITurnEnd();
                 }
-                if (AIAttack >= 40 & AIAttack <= 80)
+                else if (AIAttack >= 40 & AIAttack <= 80)
                 {
                     if (AIAttackSuccses >= 0 & AIAttackSuccses <= 90)
                     {
@@ -579,7 +579,7 @@ namespace SettlersofChaos
                         AITurnEnd();
                     }
                 }
-                if (AIAttack >= 0 & AIAttack <= 40)
+                else if (AIAttack >= 0 & AIAttack <= 40)
                 {
                     if (AIAttackSuccses >= 0 & AIAttackSuccses <= 70)
                     {
@@ -616,6 +616,73 @@ namespace SettlersofChaos
         {
             LblPlayerLost.Visible = true;
             TmrGameEnd.Enabled = true;
+        }
+
+        private void BtnDiffEasy_Click(object sender, EventArgs e)
+        {
+            easy = true;
+            medium = false;
+            hard = false;
+        }
+
+        private void BtnDiffMed_Click(object sender, EventArgs e)
+        {
+            easy = false;
+            medium = true;
+            hard = false;
+        }
+
+        private void BtnDiffHard_Click(object sender, EventArgs e)
+        {
+            easy = false;
+            medium = false;
+            hard = true;
+        }
+
+        private void BtnTimeLong_Click(object sender, EventArgs e)
+        {
+            Difficulty = 36;
+        }
+
+        private void BtnTimeStandard_Click(object sender, EventArgs e)
+        {
+            Difficulty = 24;
+        }
+
+        private void BtnTimeQuick_Click(object sender, EventArgs e)
+        {
+            Difficulty = 12;
+        }
+
+        private void BtnSettings_Click(object sender, EventArgs e)
+        {
+            PnlBackSplash.Visible = true;
+            PnlMenu.Visible = true;
+            PnlHome.Visible = true;
+            PnlShoot.Visible = true;
+            PnlSettings.Visible = true;
+            BtnDiffEasy.Visible = true;
+            BtnDiffHard.Visible = true;
+            BtnDiffMed.Visible = true;
+            BtnThemePink.Visible = true;
+            BtnThemeDark.Visible = true;
+            BtnThemeBlue.Visible = true;
+            BtnTimeStandard.Visible = true;
+            BtnTimeQuick.Visible = true;
+            BtnTimeLong.Visible = true;
+            BtnReturnMenu.Visible = true;
+            PnlMenu.Invalidate();
+            PnlHome.Invalidate();
+            PnlShoot.Invalidate();
+            PnlBackSplash.Invalidate();
+        }
+
+        private void BtnReturnMenu_Click(object sender, EventArgs e)
+        {
+            PnlBackSplash.Visible = true;
+            PnlMenu.Visible = true;
+            PnlHome.Visible = false;
+            PnlShoot.Visible = false;
         }
 
         private void TmrGame_Tick(object sender, EventArgs e)
