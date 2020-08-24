@@ -448,6 +448,7 @@
             this.BtnThemeDark.Text = "Dark";
             this.BtnThemeDark.UseVisualStyleBackColor = true;
             this.BtnThemeDark.Visible = false;
+            this.BtnThemeDark.Click += new System.EventHandler(this.BtnThemeDark_Click);
             // 
             // BtnThemePink
             // 
@@ -459,6 +460,7 @@
             this.BtnThemePink.Text = "Pink";
             this.BtnThemePink.UseVisualStyleBackColor = true;
             this.BtnThemePink.Visible = false;
+            this.BtnThemePink.Click += new System.EventHandler(this.BtnThemePink_Click);
             // 
             // BtnThemeBlue
             // 
@@ -470,6 +472,7 @@
             this.BtnThemeBlue.Text = "Blue";
             this.BtnThemeBlue.UseVisualStyleBackColor = true;
             this.BtnThemeBlue.Visible = false;
+            this.BtnThemeBlue.Click += new System.EventHandler(this.BtnThemeBlue_Click);
             // 
             // BtnTimeLong
             // 

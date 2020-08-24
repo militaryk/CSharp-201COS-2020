@@ -692,6 +692,52 @@ namespace SettlersofChaos
             BtnSettings.Visible = true;
         }
 
+        private void BtnThemePink_Click(object sender, EventArgs e)
+        {
+            plrone.themepink = true;
+            plrone.themeblue = false;
+            plrone.themedark = false;
+            plrtwo.themepink = true;
+            plrtwo.themeblue = false;
+            plrtwo.themedark = false;
+            gamehotbar.themepink = true;
+            gamehotbar.themeblue = false;
+            gamehotbar.themedark = false;
+            LblAIAction.BackColor = (Color.FromArgb(168, 32, 146));
+            PnlHome.BackColor = (Color.FromArgb(219, 90, 198));
+
+        }
+
+        private void BtnThemeDark_Click(object sender, EventArgs e)
+        {
+            plrone.themedark = true;
+            plrone.themepink = false;
+            plrone.themeblue = false;
+            plrtwo.themedark = true;
+            plrtwo.themepink = false;
+            plrtwo.themeblue = false;
+            gamehotbar.themepink = false;
+            gamehotbar.themeblue = false;
+            gamehotbar.themedark = true;
+            LblAIAction.BackColor = (Color.FromArgb(71, 70, 71));
+            PnlHome.BackColor = (Color.FromArgb(145, 145, 145));
+        }
+
+        private void BtnThemeBlue_Click(object sender, EventArgs e)
+        {
+            plrone.themedark = false;
+            plrone.themepink = false;
+            plrone.themeblue = true;
+            plrtwo.themedark = false;
+            plrtwo.themepink = false;
+            plrtwo.themeblue = true;
+            gamehotbar.themepink = false;
+            gamehotbar.themeblue = true;
+            gamehotbar.themedark = false;
+            LblAIAction.BackColor = (Color.FromArgb(39, 61, 227));
+            PnlHome.BackColor = (Color.FromArgb(150, 182, 250));
+        }
+
         private void TmrGame_Tick(object sender, EventArgs e)
         {
             if (PlayerOneDefense < 1)
