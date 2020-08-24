@@ -738,6 +738,11 @@ namespace SettlersofChaos
             PnlHome.BackColor = (Color.FromArgb(150, 182, 250));
         }
 
+        private void BtnTutorial_Click(object sender, EventArgs e)
+        {
+            PnlTutorial.Visible = true;
+        }
+
         private void TmrGame_Tick(object sender, EventArgs e)
         {
             if (PlayerOneDefense < 1)

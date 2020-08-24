@@ -592,6 +592,7 @@
             this.BtnTutorial.TabIndex = 1;
             this.BtnTutorial.Text = "Tutorial";
             this.BtnTutorial.UseVisualStyleBackColor = false;
+            this.BtnTutorial.Click += new System.EventHandler(this.BtnTutorial_Click);
             // 
             // BtnStart
             // 
