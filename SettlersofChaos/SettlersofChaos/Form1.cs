@@ -439,6 +439,7 @@ namespace SettlersofChaos
 
         public void Gamestart()
         {
+            LblAIAction.Text = "Player One attack to start!";
             gamestart = true;
             BtnSettings.Visible = false;
             BtnStart.Visible = false;
@@ -658,31 +659,37 @@ namespace SettlersofChaos
         {
             PnlBackSplash.Visible = true;
             PnlMenu.Visible = true;
-            PnlHome.Visible = true;
-            PnlShoot.Visible = true;
             PnlSettings.Visible = true;
             BtnDiffEasy.Visible = true;
             BtnDiffHard.Visible = true;
             BtnDiffMed.Visible = true;
             BtnThemePink.Visible = true;
             BtnThemeDark.Visible = true;
+            LblTitle.Visible = true;
             BtnThemeBlue.Visible = true;
             BtnTimeStandard.Visible = true;
             BtnTimeQuick.Visible = true;
             BtnTimeLong.Visible = true;
             BtnReturnMenu.Visible = true;
-            PnlMenu.Invalidate();
-            PnlHome.Invalidate();
-            PnlShoot.Invalidate();
-            PnlBackSplash.Invalidate();
+            BtnSettings.Visible = false;
         }
 
         private void BtnReturnMenu_Click(object sender, EventArgs e)
         {
             PnlBackSplash.Visible = true;
             PnlMenu.Visible = true;
-            PnlHome.Visible = false;
-            PnlShoot.Visible = false;
+            PnlSettings.Visible = false;
+            BtnDiffEasy.Visible = false;
+            BtnDiffHard.Visible = false;
+            BtnDiffMed.Visible = false;
+            BtnThemePink.Visible = false;
+            BtnThemeDark.Visible = false;
+            BtnThemeBlue.Visible = false;
+            BtnTimeStandard.Visible = false;
+            BtnTimeQuick.Visible = false;
+            BtnTimeLong.Visible = false;
+            BtnReturnMenu.Visible = false;
+            BtnSettings.Visible = true;
         }
 
         private void TmrGame_Tick(object sender, EventArgs e)
@@ -717,7 +724,7 @@ namespace SettlersofChaos
 
         public void PlrTwoLost()
         {
-            //Lbl
+            LblYouWon.Visible = true;
         }
     }
 }
