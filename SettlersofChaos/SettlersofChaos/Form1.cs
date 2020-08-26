@@ -30,6 +30,7 @@ namespace SettlersofChaos
         public int Difficulty = 12;
         ArtilleryShell artilleryShell = new ArtilleryShell();
         ArtilleryTarget artilleryTarget = new ArtilleryTarget();
+        TutorialImage tutorialimage = new TutorialImage();
         Bullet bullet = new Bullet();
         GameHotbar gamehotbar = new GameHotbar();
         PlayerOne plrone = new PlayerOne();
@@ -306,7 +307,6 @@ namespace SettlersofChaos
 
         private void TmrShoot_Tick(object sender, EventArgs e)
         {
-            DebugY.Text = Convert.ToString(shoottarget.ShootTargetPosY);
             if (shoottarget.ShootTargetPosY > 300)
             {
                 ShootTargetDown = false;
@@ -408,7 +408,7 @@ namespace SettlersofChaos
         }
         private void BtnHelp_Click(object sender, EventArgs e)
         {
-
+            PnlHelp.Visible = true;
         }
 
         private void BtnFortify_Click(object sender, EventArgs e)
@@ -741,6 +741,28 @@ namespace SettlersofChaos
         private void BtnTutorial_Click(object sender, EventArgs e)
         {
             PnlTutorial.Visible = true;
+        }
+
+        private void PnlTutorial_Paint(object sender, PaintEventArgs e)
+        {
+            var g = e.Graphics;
+            tutorialimage.Draw(g);
+        }
+
+        private void PnlTutorial_Click(object sender, EventArgs e)
+        {
+            tutorialimage.TutorialLevel += 1;
+            PnlTutorial.Invalidate();
+            if (tutorialimage.TutorialLevel == 7)
+            {
+                PnlTutorial.Visible = false;
+                tutorialimage.TutorialLevel = 1;
+            }
+        }
+
+        private void BtnRTG_Click(object sender, EventArgs e)
+        {
+            PnlHelp.Visible = false;
         }
 
         private void TmrGame_Tick(object sender, EventArgs e)

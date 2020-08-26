@@ -35,8 +35,6 @@
             this.LblTurnName = new System.Windows.Forms.Label();
             this.LblTurn = new System.Windows.Forms.Label();
             this.LblAIAction = new System.Windows.Forms.Label();
-            this.DebugY = new System.Windows.Forms.Label();
-            this.DebugX = new System.Windows.Forms.Label();
             this.PnlShoot = new System.Windows.Forms.Panel();
             this.LblShootTargetMissed = new System.Windows.Forms.Label();
             this.LblShootTargetHit = new System.Windows.Forms.Label();
@@ -75,12 +73,19 @@
             this.TmrDelay = new System.Windows.Forms.Timer(this.components);
             this.TmrGame = new System.Windows.Forms.Timer(this.components);
             this.TmrGameEnd = new System.Windows.Forms.Timer(this.components);
+            this.PnlHelp = new System.Windows.Forms.Panel();
+            this.BtnAttacking = new System.Windows.Forms.Button();
+            this.BtnDefense = new System.Windows.Forms.Button();
+            this.BtnHowtoplay = new System.Windows.Forms.Button();
+            this.LblHelp = new System.Windows.Forms.Label();
+            this.BtnRTG = new System.Windows.Forms.Button();
             this.PnlBackSplash.SuspendLayout();
             this.PnlMenu.SuspendLayout();
             this.PnlHome.SuspendLayout();
             this.PnlShoot.SuspendLayout();
             this.PnlFight.SuspendLayout();
             this.PnlSettings.SuspendLayout();
+            this.PnlHelp.SuspendLayout();
             this.SuspendLayout();
             // 
             // PnlBackSplash
@@ -114,11 +119,10 @@
             // PnlHome
             // 
             this.PnlHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(161)))), ((int)(((byte)(188)))));
+            this.PnlHome.Controls.Add(this.PnlHelp);
             this.PnlHome.Controls.Add(this.LblTurnName);
             this.PnlHome.Controls.Add(this.LblTurn);
             this.PnlHome.Controls.Add(this.LblAIAction);
-            this.PnlHome.Controls.Add(this.DebugY);
-            this.PnlHome.Controls.Add(this.DebugX);
             this.PnlHome.Controls.Add(this.PnlShoot);
             this.PnlHome.Controls.Add(this.LblPlayerTwo);
             this.PnlHome.Controls.Add(this.LblPlayerOne);
@@ -170,24 +174,6 @@
             this.LblAIAction.TabIndex = 2;
             this.LblAIAction.Text = "Player Two Attacks";
             this.LblAIAction.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // DebugY
-            // 
-            this.DebugY.AutoSize = true;
-            this.DebugY.Location = new System.Drawing.Point(244, 424);
-            this.DebugY.Name = "DebugY";
-            this.DebugY.Size = new System.Drawing.Size(35, 13);
-            this.DebugY.TabIndex = 9;
-            this.DebugY.Text = "label2";
-            // 
-            // DebugX
-            // 
-            this.DebugX.AutoSize = true;
-            this.DebugX.Location = new System.Drawing.Point(203, 424);
-            this.DebugX.Name = "DebugX";
-            this.DebugX.Size = new System.Drawing.Size(35, 13);
-            this.DebugX.TabIndex = 8;
-            this.DebugX.Text = "label1";
             // 
             // PnlShoot
             // 
@@ -390,6 +376,8 @@
             this.PnlTutorial.Size = new System.Drawing.Size(784, 461);
             this.PnlTutorial.TabIndex = 2;
             this.PnlTutorial.Visible = false;
+            this.PnlTutorial.Click += new System.EventHandler(this.PnlTutorial_Click);
+            this.PnlTutorial.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlTutorial_Paint);
             // 
             // BtnSettings
             // 
@@ -428,9 +416,9 @@
             // 
             // BtnReturnMenu
             // 
-            this.BtnReturnMenu.Location = new System.Drawing.Point(585, 216);
+            this.BtnReturnMenu.Location = new System.Drawing.Point(100, 400);
             this.BtnReturnMenu.Name = "BtnReturnMenu";
-            this.BtnReturnMenu.Size = new System.Drawing.Size(145, 34);
+            this.BtnReturnMenu.Size = new System.Drawing.Size(586, 45);
             this.BtnReturnMenu.TabIndex = 10;
             this.BtnReturnMenu.TabStop = false;
             this.BtnReturnMenu.Text = "Back";
@@ -440,37 +428,42 @@
             // 
             // BtnThemeDark
             // 
+            this.BtnThemeDark.BackColor = System.Drawing.Color.Black;
+            this.BtnThemeDark.ForeColor = System.Drawing.Color.White;
             this.BtnThemeDark.Location = new System.Drawing.Point(585, 343);
             this.BtnThemeDark.Name = "BtnThemeDark";
             this.BtnThemeDark.Size = new System.Drawing.Size(145, 34);
             this.BtnThemeDark.TabIndex = 9;
             this.BtnThemeDark.TabStop = false;
             this.BtnThemeDark.Text = "Dark";
-            this.BtnThemeDark.UseVisualStyleBackColor = true;
+            this.BtnThemeDark.UseVisualStyleBackColor = false;
             this.BtnThemeDark.Visible = false;
             this.BtnThemeDark.Click += new System.EventHandler(this.BtnThemeDark_Click);
             // 
             // BtnThemePink
             // 
+            this.BtnThemePink.BackColor = System.Drawing.Color.Pink;
             this.BtnThemePink.Location = new System.Drawing.Point(586, 303);
             this.BtnThemePink.Name = "BtnThemePink";
             this.BtnThemePink.Size = new System.Drawing.Size(145, 34);
             this.BtnThemePink.TabIndex = 8;
             this.BtnThemePink.TabStop = false;
             this.BtnThemePink.Text = "Pink";
-            this.BtnThemePink.UseVisualStyleBackColor = true;
+            this.BtnThemePink.UseVisualStyleBackColor = false;
             this.BtnThemePink.Visible = false;
             this.BtnThemePink.Click += new System.EventHandler(this.BtnThemePink_Click);
             // 
             // BtnThemeBlue
             // 
+            this.BtnThemeBlue.BackColor = System.Drawing.Color.SkyBlue;
+            this.BtnThemeBlue.ForeColor = System.Drawing.SystemColors.ControlText;
             this.BtnThemeBlue.Location = new System.Drawing.Point(585, 263);
             this.BtnThemeBlue.Name = "BtnThemeBlue";
             this.BtnThemeBlue.Size = new System.Drawing.Size(145, 34);
             this.BtnThemeBlue.TabIndex = 7;
             this.BtnThemeBlue.TabStop = false;
             this.BtnThemeBlue.Text = "Blue";
-            this.BtnThemeBlue.UseVisualStyleBackColor = true;
+            this.BtnThemeBlue.UseVisualStyleBackColor = false;
             this.BtnThemeBlue.Visible = false;
             this.BtnThemeBlue.Click += new System.EventHandler(this.BtnThemeBlue_Click);
             // 
@@ -637,6 +630,72 @@
             this.TmrGameEnd.Interval = 3000;
             this.TmrGameEnd.Tick += new System.EventHandler(this.TmrGameEnd_Tick);
             // 
+            // PnlHelp
+            // 
+            this.PnlHelp.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.PnlHelp.Controls.Add(this.BtnRTG);
+            this.PnlHelp.Controls.Add(this.LblHelp);
+            this.PnlHelp.Controls.Add(this.BtnHowtoplay);
+            this.PnlHelp.Controls.Add(this.BtnDefense);
+            this.PnlHelp.Controls.Add(this.BtnAttacking);
+            this.PnlHelp.Location = new System.Drawing.Point(0, 0);
+            this.PnlHelp.Name = "PnlHelp";
+            this.PnlHelp.Size = new System.Drawing.Size(784, 461);
+            this.PnlHelp.TabIndex = 13;
+            this.PnlHelp.Visible = false;
+            // 
+            // BtnAttacking
+            // 
+            this.BtnAttacking.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAttacking.Location = new System.Drawing.Point(40, 205);
+            this.BtnAttacking.Name = "BtnAttacking";
+            this.BtnAttacking.Size = new System.Drawing.Size(702, 54);
+            this.BtnAttacking.TabIndex = 0;
+            this.BtnAttacking.Text = "Attacking";
+            this.BtnAttacking.UseVisualStyleBackColor = true;
+            // 
+            // BtnDefense
+            // 
+            this.BtnDefense.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnDefense.Location = new System.Drawing.Point(41, 278);
+            this.BtnDefense.Name = "BtnDefense";
+            this.BtnDefense.Size = new System.Drawing.Size(702, 54);
+            this.BtnDefense.TabIndex = 1;
+            this.BtnDefense.Text = "Defense";
+            this.BtnDefense.UseVisualStyleBackColor = true;
+            // 
+            // BtnHowtoplay
+            // 
+            this.BtnHowtoplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnHowtoplay.Location = new System.Drawing.Point(41, 127);
+            this.BtnHowtoplay.Name = "BtnHowtoplay";
+            this.BtnHowtoplay.Size = new System.Drawing.Size(702, 54);
+            this.BtnHowtoplay.TabIndex = 2;
+            this.BtnHowtoplay.Text = "How to play";
+            this.BtnHowtoplay.UseVisualStyleBackColor = true;
+            // 
+            // LblHelp
+            // 
+            this.LblHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblHelp.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.LblHelp.Location = new System.Drawing.Point(40, 9);
+            this.LblHelp.Name = "LblHelp";
+            this.LblHelp.Size = new System.Drawing.Size(702, 115);
+            this.LblHelp.TabIndex = 3;
+            this.LblHelp.Text = "Help";
+            this.LblHelp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // BtnRTG
+            // 
+            this.BtnRTG.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnRTG.Location = new System.Drawing.Point(41, 391);
+            this.BtnRTG.Name = "BtnRTG";
+            this.BtnRTG.Size = new System.Drawing.Size(702, 54);
+            this.BtnRTG.TabIndex = 4;
+            this.BtnRTG.Text = "Return to Game";
+            this.BtnRTG.UseVisualStyleBackColor = true;
+            this.BtnRTG.Click += new System.EventHandler(this.BtnRTG_Click);
+            // 
             // FormGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -664,6 +723,7 @@
             this.PnlFight.ResumeLayout(false);
             this.PnlSettings.ResumeLayout(false);
             this.PnlSettings.PerformLayout();
+            this.PnlHelp.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -691,8 +751,6 @@
         private System.Windows.Forms.Label LblPlayerOne;
         private System.Windows.Forms.Panel PnlShoot;
         private System.Windows.Forms.Timer TmrShoot;
-        private System.Windows.Forms.Label DebugY;
-        private System.Windows.Forms.Label DebugX;
         private System.Windows.Forms.Label LblShootTargetHit;
         private System.Windows.Forms.Label LblShootTargetMissed;
         private System.Windows.Forms.Timer TmrDelay;
@@ -716,6 +774,12 @@
         private System.Windows.Forms.Button BtnReturnMenu;
         private System.Windows.Forms.Panel PnlTutorial;
         private System.Windows.Forms.Label LblSettings;
+        private System.Windows.Forms.Panel PnlHelp;
+        private System.Windows.Forms.Label LblHelp;
+        private System.Windows.Forms.Button BtnHowtoplay;
+        private System.Windows.Forms.Button BtnDefense;
+        private System.Windows.Forms.Button BtnAttacking;
+        private System.Windows.Forms.Button BtnRTG;
     }
 }
 
