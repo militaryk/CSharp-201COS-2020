@@ -6,7 +6,7 @@ namespace SettlersofChaos
     {
         public Point ShootPosition;
         public Size ShootSize;
-        int ShootTargetWidth = 40;
+        int ShootTargetWidth = 100;
         int ShootTargetPosX = 784 - 40;
         public int ShootTargetPosY = 0;
         int ShootTargetHeight = 100;

@@ -15,7 +15,7 @@ namespace SettlersofChaos
             TargetPosX = 5000;
             TargetPosY = 0;
             TargretBlockHeight = 300;
-            TargetBlockWidth = 50;
+            TargetBlockWidth = 1000;
         }
         public void Draw(Graphics g)
         {

@@ -35,10 +35,10 @@ namespace SettlersofChaos
 
             if (move == "up")
             {
-                if (ShellRec.Location.Y > 265)
+                if (ShellRec.Location.Y > 300)
                 {
 
-                    y = 270;
+                    y = 300;
                     ShellRec.Location = new Point(x, y);
                 }
                 else
@@ -50,10 +50,10 @@ namespace SettlersofChaos
             }
             if (move == "down")
             {
-                if (ShellRec.Location.Y < -5)
+                if (ShellRec.Location.Y < 0)
                 {
 
-                    y = -10;
+                    y = 0;
                     ShellRec.Location = new Point(x, y);
                 }
                 else

@@ -13,11 +13,11 @@ namespace SettlersofChaos
         int RedPosXAxis;
         int RedBlockHeight;
         int RedBlockWidth;
-        public Artilltery(Random random)
+        public Artilltery(Random random, int x)
         {
-            RedPosXAxis = random.Next(1, 20);
+            RedPosXAxis = x + 1;
             RedPosAxis = random.Next(0, 3);
-            RedBlockHeight = random.Next(100, 200);
+            RedBlockHeight = random.Next(100, 250);
             RedBlockWidth = random.Next(20, 100);
             RedPosY = RedPosAxis * 100;
             Size = new Size(20, 100);
