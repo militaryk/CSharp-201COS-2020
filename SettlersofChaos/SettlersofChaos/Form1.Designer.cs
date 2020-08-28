@@ -72,6 +72,12 @@
             this.LblPlayerLost = new System.Windows.Forms.Label();
             this.LblTitle = new System.Windows.Forms.Label();
             this.BtnTutorial = new System.Windows.Forms.Button();
+            this.LblPlayerDetails = new System.Windows.Forms.Label();
+            this.LblPlayerName = new System.Windows.Forms.Label();
+            this.LblPlayerIntro = new System.Windows.Forms.Label();
+            this.LblGameTheme = new System.Windows.Forms.Label();
+            this.LblGameLength = new System.Windows.Forms.Label();
+            this.LblGameDifficulty = new System.Windows.Forms.Label();
             this.BtnStart = new System.Windows.Forms.Button();
             this.TmrArtilleryTicks = new System.Windows.Forms.Timer(this.components);
             this.TmrShellMove = new System.Windows.Forms.Timer(this.components);
@@ -109,6 +115,12 @@
             this.PnlMenu.Controls.Add(this.PnlSettings);
             this.PnlMenu.Controls.Add(this.LblTitle);
             this.PnlMenu.Controls.Add(this.BtnTutorial);
+            this.PnlMenu.Controls.Add(this.LblPlayerDetails);
+            this.PnlMenu.Controls.Add(this.LblPlayerName);
+            this.PnlMenu.Controls.Add(this.LblPlayerIntro);
+            this.PnlMenu.Controls.Add(this.LblGameTheme);
+            this.PnlMenu.Controls.Add(this.LblGameLength);
+            this.PnlMenu.Controls.Add(this.LblGameDifficulty);
             this.PnlMenu.Controls.Add(this.BtnStart);
             this.PnlMenu.Location = new System.Drawing.Point(0, 0);
             this.PnlMenu.Name = "PnlMenu";
@@ -653,6 +665,63 @@
             this.BtnTutorial.UseVisualStyleBackColor = false;
             this.BtnTutorial.Click += new System.EventHandler(this.BtnTutorial_Click);
             // 
+            // LblPlayerDetails
+            // 
+            this.LblPlayerDetails.BackColor = System.Drawing.Color.Transparent;
+            this.LblPlayerDetails.Location = new System.Drawing.Point(600, 307);
+            this.LblPlayerDetails.Name = "LblPlayerDetails";
+            this.LblPlayerDetails.Size = new System.Drawing.Size(175, 91);
+            this.LblPlayerDetails.TabIndex = 12;
+            this.LblPlayerDetails.Text = "label1";
+            // 
+            // LblPlayerName
+            // 
+            this.LblPlayerName.BackColor = System.Drawing.Color.Transparent;
+            this.LblPlayerName.Location = new System.Drawing.Point(600, 216);
+            this.LblPlayerName.Name = "LblPlayerName";
+            this.LblPlayerName.Size = new System.Drawing.Size(175, 91);
+            this.LblPlayerName.TabIndex = 11;
+            this.LblPlayerName.Text = "label1";
+            // 
+            // LblPlayerIntro
+            // 
+            this.LblPlayerIntro.BackColor = System.Drawing.Color.Transparent;
+            this.LblPlayerIntro.Location = new System.Drawing.Point(600, 125);
+            this.LblPlayerIntro.Name = "LblPlayerIntro";
+            this.LblPlayerIntro.Size = new System.Drawing.Size(175, 91);
+            this.LblPlayerIntro.TabIndex = 10;
+            this.LblPlayerIntro.Text = "label1";
+            // 
+            // LblGameTheme
+            // 
+            this.LblGameTheme.BackColor = System.Drawing.Color.Transparent;
+            this.LblGameTheme.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
+            this.LblGameTheme.Location = new System.Drawing.Point(20, 307);
+            this.LblGameTheme.Name = "LblGameTheme";
+            this.LblGameTheme.Size = new System.Drawing.Size(175, 91);
+            this.LblGameTheme.TabIndex = 7;
+            this.LblGameTheme.Text = "label1";
+            // 
+            // LblGameLength
+            // 
+            this.LblGameLength.BackColor = System.Drawing.Color.Transparent;
+            this.LblGameLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
+            this.LblGameLength.Location = new System.Drawing.Point(20, 216);
+            this.LblGameLength.Name = "LblGameLength";
+            this.LblGameLength.Size = new System.Drawing.Size(175, 91);
+            this.LblGameLength.TabIndex = 6;
+            this.LblGameLength.Text = "label1";
+            // 
+            // LblGameDifficulty
+            // 
+            this.LblGameDifficulty.BackColor = System.Drawing.Color.Transparent;
+            this.LblGameDifficulty.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblGameDifficulty.Location = new System.Drawing.Point(20, 125);
+            this.LblGameDifficulty.Name = "LblGameDifficulty";
+            this.LblGameDifficulty.Size = new System.Drawing.Size(175, 91);
+            this.LblGameDifficulty.TabIndex = 5;
+            this.LblGameDifficulty.Text = "Your game difficulty is";
+            // 
             // BtnStart
             // 
             this.BtnStart.BackColor = System.Drawing.Color.White;
@@ -701,13 +770,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 461);
-            this.ControlBox = false;
             this.Controls.Add(this.PnlBackSplash);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormGame";
             this.Text = "SettlersOfChaos";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormGame_KeyDown);
@@ -780,6 +849,12 @@
         private System.Windows.Forms.Button BtnDefense;
         private System.Windows.Forms.Button BtnAttacking;
         private System.Windows.Forms.Button BtnRTG;
+        private System.Windows.Forms.Label LblGameDifficulty;
+        private System.Windows.Forms.Label LblPlayerIntro;
+        private System.Windows.Forms.Label LblGameTheme;
+        private System.Windows.Forms.Label LblGameLength;
+        private System.Windows.Forms.Label LblPlayerDetails;
+        private System.Windows.Forms.Label LblPlayerName;
     }
 }
 

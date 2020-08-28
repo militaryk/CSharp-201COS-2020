@@ -13,6 +13,11 @@ namespace SettlersofChaos
         public int speed = 10;
         public bool BulletTargetMissed = false;
         string shellmove;
+        string strlength = " Short";
+        string strdifficulty = " Easy";
+        string strtheme = " Blue";
+        string username = "Underfined";
+        string usersettings = "Default";
         public bool easy = true, medium = false, hard = false;
         int MouseX;
         public int Turn;
@@ -30,6 +35,8 @@ namespace SettlersofChaos
         public bool PlayerOneTurn = true;
         public int Difficulty = 12;
         ArtilleryShell artilleryShell = new ArtilleryShell();
+        MenuGameInfo menugameinfo = new MenuGameInfo();
+        MenuPlayerInfo menuplayerinfo = new MenuPlayerInfo();
         ArtilleryTarget artilleryTarget = new ArtilleryTarget();
         TutorialImage tutorialimage = new TutorialImage();
         Bullet bullet = new Bullet();
@@ -236,6 +243,11 @@ namespace SettlersofChaos
             var g = e.Graphics;
             var size = PnlMenu.Size;
             var center = new PointF(size.Width / 2f, size.Height / 2f);
+            LblGameDifficulty.Text = ("Your game difficulty is" + strdifficulty);
+            LblGameLength.Text = ("Your game length is" + strlength);
+            LblGameTheme.Text = ("Your game theme is" + strtheme);
+            menugameinfo.Draw(g);
+            menuplayerinfo.Draw(g);
         }
 
         public void HexagonSelect()
@@ -642,6 +654,7 @@ namespace SettlersofChaos
 
         private void BtnDiffEasy_Click(object sender, EventArgs e)
         {
+            strdifficulty = " Easy";
             easy = true;
             medium = false;
             hard = false;
@@ -649,6 +662,7 @@ namespace SettlersofChaos
 
         private void BtnDiffMed_Click(object sender, EventArgs e)
         {
+            strdifficulty = " Medium";
             easy = false;
             medium = true;
             hard = false;
@@ -656,6 +670,7 @@ namespace SettlersofChaos
 
         private void BtnDiffHard_Click(object sender, EventArgs e)
         {
+            strdifficulty = " Hard";
             easy = false;
             medium = false;
             hard = true;
@@ -663,16 +678,19 @@ namespace SettlersofChaos
 
         private void BtnTimeLong_Click(object sender, EventArgs e)
         {
+            strlength = " Long";
             Difficulty = 36;
         }
 
         private void BtnTimeStandard_Click(object sender, EventArgs e)
         {
+            strlength = " Standard";
             Difficulty = 24;
         }
 
         private void BtnTimeQuick_Click(object sender, EventArgs e)
         {
+            strlength = " Quick";
             Difficulty = 12;
         }
 
@@ -715,6 +733,7 @@ namespace SettlersofChaos
 
         private void BtnThemePink_Click(object sender, EventArgs e)
         {
+            strtheme = " Pink";
             plrone.themepink = true;
             plrone.themeblue = false;
             plrone.themedark = false;
@@ -731,6 +750,7 @@ namespace SettlersofChaos
 
         private void BtnThemeDark_Click(object sender, EventArgs e)
         {
+            strtheme = " Dark";
             plrone.themedark = true;
             plrone.themepink = false;
             plrone.themeblue = false;
@@ -746,6 +766,7 @@ namespace SettlersofChaos
 
         private void BtnThemeBlue_Click(object sender, EventArgs e)
         {
+            strtheme = " Blue";
             plrone.themedark = false;
             plrone.themepink = false;
             plrone.themeblue = true;

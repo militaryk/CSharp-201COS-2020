@@ -60,6 +60,8 @@
     </Compile>
     <Compile Include="GameHotbar.cs" />
     <Compile Include="Hexagon.cs" />
+    <Compile Include="MenuPlayerInfo.cs" />
+    <Compile Include="MenuGameInfo.cs" />
     <Compile Include="PlayerTwo.cs" />
     <Compile Include="PlayerOne.cs" />
     <Compile Include="Program.cs" />
