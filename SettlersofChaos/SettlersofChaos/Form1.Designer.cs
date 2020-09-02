@@ -41,6 +41,8 @@
             this.LblTurnName = new System.Windows.Forms.Label();
             this.LblTurn = new System.Windows.Forms.Label();
             this.LblAIAction = new System.Windows.Forms.Label();
+            this.PBPlayerTwo = new System.Windows.Forms.PictureBox();
+            this.PBPlayerOne = new System.Windows.Forms.PictureBox();
             this.PnlShoot = new System.Windows.Forms.Panel();
             this.LblShootTargetMissed = new System.Windows.Forms.Label();
             this.LblShootTargetHit = new System.Windows.Forms.Label();
@@ -56,6 +58,7 @@
             this.BtnExit = new System.Windows.Forms.Button();
             this.LblYouWon = new System.Windows.Forms.Label();
             this.PnlTutorial = new System.Windows.Forms.Panel();
+            this.TbUsername = new System.Windows.Forms.TextBox();
             this.BtnSettings = new System.Windows.Forms.Button();
             this.PnlSettings = new System.Windows.Forms.Panel();
             this.BtnReturnMenu = new System.Windows.Forms.Button();
@@ -89,6 +92,8 @@
             this.PnlMenu.SuspendLayout();
             this.PnlHome.SuspendLayout();
             this.PnlHelp.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBPlayerTwo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBPlayerOne)).BeginInit();
             this.PnlShoot.SuspendLayout();
             this.PnlFight.SuspendLayout();
             this.PnlSettings.SuspendLayout();
@@ -111,6 +116,7 @@
             this.PnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(14)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
             this.PnlMenu.Controls.Add(this.PnlHome);
             this.PnlMenu.Controls.Add(this.PnlTutorial);
+            this.PnlMenu.Controls.Add(this.TbUsername);
             this.PnlMenu.Controls.Add(this.BtnSettings);
             this.PnlMenu.Controls.Add(this.PnlSettings);
             this.PnlMenu.Controls.Add(this.LblTitle);
@@ -135,6 +141,8 @@
             this.PnlHome.Controls.Add(this.LblTurnName);
             this.PnlHome.Controls.Add(this.LblTurn);
             this.PnlHome.Controls.Add(this.LblAIAction);
+            this.PnlHome.Controls.Add(this.PBPlayerTwo);
+            this.PnlHome.Controls.Add(this.PBPlayerOne);
             this.PnlHome.Controls.Add(this.PnlShoot);
             this.PnlHome.Controls.Add(this.LblPlayerTwo);
             this.PnlHome.Controls.Add(this.LblPlayerOne);
@@ -252,6 +260,31 @@
             this.LblAIAction.TabIndex = 2;
             this.LblAIAction.Text = "Player Two Attacks";
             this.LblAIAction.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // PBPlayerTwo
+            // 
+            this.PBPlayerTwo.BackColor = System.Drawing.Color.Transparent;
+            this.PBPlayerTwo.BackgroundImage = global::SettlersofChaos.Properties.Resources.DefaultProfile;
+            this.PBPlayerTwo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PBPlayerTwo.InitialImage = null;
+            this.PBPlayerTwo.Location = new System.Drawing.Point(570, 60);
+            this.PBPlayerTwo.Name = "PBPlayerTwo";
+            this.PBPlayerTwo.Size = new System.Drawing.Size(160, 130);
+            this.PBPlayerTwo.TabIndex = 6;
+            this.PBPlayerTwo.TabStop = false;
+            // 
+            // PBPlayerOne
+            // 
+            this.PBPlayerOne.BackColor = System.Drawing.Color.White;
+            this.PBPlayerOne.BackgroundImage = global::SettlersofChaos.Properties.Resources.DefaultProfile;
+            this.PBPlayerOne.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PBPlayerOne.InitialImage = null;
+            this.PBPlayerOne.Location = new System.Drawing.Point(70, 60);
+            this.PBPlayerOne.Name = "PBPlayerOne";
+            this.PBPlayerOne.Size = new System.Drawing.Size(160, 130);
+            this.PBPlayerOne.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PBPlayerOne.TabIndex = 5;
+            this.PBPlayerOne.TabStop = false;
             // 
             // PnlShoot
             // 
@@ -456,6 +489,15 @@
             this.PnlTutorial.Visible = false;
             this.PnlTutorial.Click += new System.EventHandler(this.PnlTutorial_Click);
             this.PnlTutorial.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlTutorial_Paint);
+            // 
+            // TbUsername
+            // 
+            this.TbUsername.Location = new System.Drawing.Point(603, 190);
+            this.TbUsername.MaxLength = 14;
+            this.TbUsername.Name = "TbUsername";
+            this.TbUsername.Size = new System.Drawing.Size(160, 20);
+            this.TbUsername.TabIndex = 5;
+            this.TbUsername.TextChanged += new System.EventHandler(this.TbUsername_TextChanged);
             // 
             // BtnSettings
             // 
@@ -668,29 +710,32 @@
             // LblPlayerDetails
             // 
             this.LblPlayerDetails.BackColor = System.Drawing.Color.Transparent;
-            this.LblPlayerDetails.Location = new System.Drawing.Point(600, 307);
+            this.LblPlayerDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPlayerDetails.Location = new System.Drawing.Point(600, 216);
             this.LblPlayerDetails.Name = "LblPlayerDetails";
-            this.LblPlayerDetails.Size = new System.Drawing.Size(175, 91);
+            this.LblPlayerDetails.Size = new System.Drawing.Size(175, 20);
             this.LblPlayerDetails.TabIndex = 12;
-            this.LblPlayerDetails.Text = "label1";
+            this.LblPlayerDetails.Text = "Welcome";
             // 
             // LblPlayerName
             // 
             this.LblPlayerName.BackColor = System.Drawing.Color.Transparent;
-            this.LblPlayerName.Location = new System.Drawing.Point(600, 216);
+            this.LblPlayerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPlayerName.ForeColor = System.Drawing.Color.White;
+            this.LblPlayerName.Location = new System.Drawing.Point(600, 236);
             this.LblPlayerName.Name = "LblPlayerName";
             this.LblPlayerName.Size = new System.Drawing.Size(175, 91);
             this.LblPlayerName.TabIndex = 11;
-            this.LblPlayerName.Text = "label1";
             // 
             // LblPlayerIntro
             // 
             this.LblPlayerIntro.BackColor = System.Drawing.Color.Transparent;
+            this.LblPlayerIntro.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblPlayerIntro.Location = new System.Drawing.Point(600, 125);
             this.LblPlayerIntro.Name = "LblPlayerIntro";
             this.LblPlayerIntro.Size = new System.Drawing.Size(175, 91);
             this.LblPlayerIntro.TabIndex = 10;
-            this.LblPlayerIntro.Text = "label1";
+            this.LblPlayerIntro.Text = "Plase enter your prefered Username bellow";
             // 
             // LblGameTheme
             // 
@@ -788,6 +833,8 @@
             this.PnlHome.ResumeLayout(false);
             this.PnlHome.PerformLayout();
             this.PnlHelp.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PBPlayerTwo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBPlayerOne)).EndInit();
             this.PnlShoot.ResumeLayout(false);
             this.PnlShoot.PerformLayout();
             this.PnlFight.ResumeLayout(false);
@@ -855,6 +902,9 @@
         private System.Windows.Forms.Label LblGameLength;
         private System.Windows.Forms.Label LblPlayerDetails;
         private System.Windows.Forms.Label LblPlayerName;
+        private System.Windows.Forms.TextBox TbUsername;
+        private System.Windows.Forms.PictureBox PBPlayerTwo;
+        private System.Windows.Forms.PictureBox PBPlayerOne;
     }
 }
 

@@ -125,5 +125,11 @@
   <ItemGroup>
     <None Include="Resources\TutorialChapterSix.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10-108039_clipart-person-icon-cliparts-transparent-background-person-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10-108039_clipart-person-icon-.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,7 +9,7 @@ namespace SettlersofChaos
         public bool themeblue = true, themepink = false, themedark = false;
         int MenuRecX = 600;
         int MenuRecY = 125;
-        int MenuRecHeight = 275;
+        int MenuRecHeight = 200;
         int MenuRecWidth = 170;
         public void Draw(Graphics g)
         {

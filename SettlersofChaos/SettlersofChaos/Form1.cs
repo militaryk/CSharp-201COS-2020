@@ -807,6 +807,12 @@ namespace SettlersofChaos
             PnlHelp.Visible = false;
         }
 
+        private void TbUsername_TextChanged(object sender, EventArgs e)
+        {
+            username = TbUsername.Text;
+            LblPlayerName.Text = username;
+        }
+
         private void TmrGame_Tick(object sender, EventArgs e)
         {
             if (PlayerOneDefense < 1)

@@ -73,6 +73,16 @@ namespace SettlersofChaos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DefaultProfile {
+            get {
+                object obj = ResourceManager.GetObject("DefaultProfile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap shootbullet {
             get {
                 object obj = ResourceManager.GetObject("shootbullet", resourceCulture);
