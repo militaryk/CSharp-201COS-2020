@@ -1,0 +1,74 @@
+name: Create Submission Bundle
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: microsoft/setup-msbuild@v1
+      - uses: NuGet/setup-nuget@v1
+
+      - name: Restore dependencies
+        run: nuget restore SettlersofChaos.sln
+        working-directory: ./SettlersofChaos/
+
+      - name: Build the solution
+        run: msbuild SettlersofChaos.sln
+        working-directory: ./SettlersofChaos/
+
+      - name: Checkout the wiki
+        uses: actions/checkout@v2
+        with:
+          repository: militaryk/CSharp-201COS-2020.wiki.git
+          ref: master
+          path: ./wiki/
+      
+      - name: Install pandoc
+        uses: crazy-max/ghaction-chocolatey@v1
+        with:
+          args: install -r pandoc
+
+      - name: Compile the wiki
+        run: |
+          ForEach ($file in Get-ChildItem -name *.md) {
+            $name = $file.substring(0, $file.length - 3)
+            pandoc $file -o $name`.html -H ../style.html -M title:$name
+          }
+        working-directory: ./wiki/
+
+      - name: Get the short commit hash
+        id: short_sha
+        run: '"::set-output name=sha8::{0}" -f "${{ github.sha }}".substring(0, 8)'
+
+      - name: Release!
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.short_sha.outputs.sha8 }}
+          release_name: Release ${{ github.sha }}
+          body: Automated release bundle
+          draft: false
+          prerelease: false
+
+      - name: Compress the files
+        run: |
+          Remove-Item ./DodgeDemo/ -Recurse
+          Compress-Archive ./ ./bundle.zip
+
+      - name: Upload the files
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./bundle.zip
+          asset_name: bundle.zip
+          asset_content_type: application/zip
