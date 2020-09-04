@@ -9,7 +9,7 @@ namespace SettlersofChaos
         public bool themeblue = true, themepink = false, themedark = false;
         int Plr1PosX = 50;
         int Plr1PosY = 40;
-        int Plr1Height = 250;
+        int Plr1Height = 300;
         int Plr1Width = 200;
         public void Draw(Graphics g)
         {

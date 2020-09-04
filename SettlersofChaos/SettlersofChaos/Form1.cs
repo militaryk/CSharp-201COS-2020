@@ -16,7 +16,7 @@ namespace SettlersofChaos
         string strlength = " Short";
         string strdifficulty = " Easy";
         string strtheme = " Blue";
-        string username = "Underfined";
+        string username = "PlayerOne";
         string usersettings = "Default";
         public bool easy = true, medium = false, hard = false;
         int MouseX;
@@ -200,7 +200,11 @@ namespace SettlersofChaos
             GameBoot();
             TmrArtilleryTicks.Enabled = true;
             TmrShellMove.Enabled = true;
+            LblPlayerOneName.Visible = false;
+            LblPlayerTwoName.Visible = false;
             PnlFight.Visible = true;
+            PBPlayerOne.Visible = false;
+            PBPlayerTwo.Visible = false;
             for (int i = 0; i < 17; i++)
             {
                 redblocks[i] = new Artilltery(random, i);
@@ -214,11 +218,14 @@ namespace SettlersofChaos
         {
             LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
             LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
+            LblPlayerOneName.Visible = true;
+            LblPlayerTwoName.Visible = true;
             LblPlayerOne.Visible = true;
             LblPlayerTwo.Visible = true;
-            BtnHelp.Visible = true;
             BtnExit.Visible = true;
             PnlFight.Visible = false;
+            PBPlayerOne.Visible = true;
+            PBPlayerTwo.Visible = true;
             BtnArtillery.Visible = true;
             BtnShoot.Visible = true;
             BtnFortify.Visible = true;
@@ -263,6 +270,11 @@ namespace SettlersofChaos
         {
 
             Gamestart();
+            LblPlayerOneName.Text = username;
+            if (username == "")
+            {
+                LblPlayerOneName.Text = "PlayerOne";
+            }
         }
 
         private void PnlHome_Paint(object sender, PaintEventArgs e)
@@ -276,12 +288,10 @@ namespace SettlersofChaos
         private void BtnArtillery_Click(object sender, EventArgs e)
         {
             BtnExit.Visible = false;
-            BtnHelp.Visible = false;
             TurnStart();
             ArtilleryGameTriggered();
             PnlFight.Visible = true;
             BtnFortify.Visible = false;
-            BtnHelp.Visible = false;
             BtnShoot.Visible = false;
             BtnArtillery.Visible = false;
             BtnExit.Visible = false;
@@ -309,9 +319,10 @@ namespace SettlersofChaos
         {
             TurnStart();
             ShootGameStart();
+            PBPlayerTwo.Visible = false;
+            PBPlayerOne.Visible = false;
             ShootGameInuse = true;
             BtnExit.Visible = false;
-            BtnHelp.Visible = false;
         }
 
         private void PnlShoot_Paint(object sender, PaintEventArgs e)
@@ -396,6 +407,10 @@ namespace SettlersofChaos
             PnlShoot.Visible = false;
             LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
             LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
+            PBPlayerTwo.Visible = true;
+            PBPlayerOne.Visible = true;
+            LblPlayerOneName.Visible = true;
+            LblPlayerTwoName.Visible = true;
             ShootGameInuse = false;
             bulletfired = false;
             BulletTargetHit = false;
@@ -422,11 +437,6 @@ namespace SettlersofChaos
             PlayerOneDefense -= 2;
             TmrDelay.Enabled = true;
         }
-        private void BtnHelp_Click(object sender, EventArgs e)
-        {
-            PnlHelp.Visible = true;
-        }
-
         private void BtnFortify_Click(object sender, EventArgs e)
         {
             TurnStart();
@@ -658,6 +668,9 @@ namespace SettlersofChaos
             easy = true;
             medium = false;
             hard = false;
+            LblGameDiffSettings.Text = ("Your game difficulty is" + strdifficulty);
+            LblGameLengthSettings.Text = ("Your game length is" + strlength);
+            LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
         }
 
         private void BtnDiffMed_Click(object sender, EventArgs e)
@@ -666,6 +679,9 @@ namespace SettlersofChaos
             easy = false;
             medium = true;
             hard = false;
+            LblGameDiffSettings.Text = ("Your game difficulty is" + strdifficulty);
+            LblGameLengthSettings.Text = ("Your game length is" + strlength);
+            LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
         }
 
         private void BtnDiffHard_Click(object sender, EventArgs e)
@@ -674,30 +690,46 @@ namespace SettlersofChaos
             easy = false;
             medium = false;
             hard = true;
+            LblGameDiffSettings.Text = ("Your game difficulty is" + strdifficulty);
+            LblGameLengthSettings.Text = ("Your game length is" + strlength);
+            LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
         }
 
         private void BtnTimeLong_Click(object sender, EventArgs e)
         {
             strlength = " Long";
             Difficulty = 36;
+            LblGameDiffSettings.Text = ("Your game difficulty is" + strdifficulty);
+            LblGameLengthSettings.Text = ("Your game length is" + strlength);
+            LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
         }
 
         private void BtnTimeStandard_Click(object sender, EventArgs e)
         {
             strlength = " Standard";
             Difficulty = 24;
+            LblGameDiffSettings.Text = ("Your game difficulty is" + strdifficulty);
+            LblGameLengthSettings.Text = ("Your game length is" + strlength);
+            LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
         }
 
         private void BtnTimeQuick_Click(object sender, EventArgs e)
         {
             strlength = " Quick";
             Difficulty = 12;
+            LblGameDiffSettings.Text = ("Your game difficulty is" + strdifficulty);
+            LblGameLengthSettings.Text = ("Your game length is" + strlength);
+            LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
         }
 
         private void BtnSettings_Click(object sender, EventArgs e)
         {
             PnlBackSplash.Visible = true;
-            PnlMenu.Visible = true;
+            LblGameDifficulty.Visible = true;
+            LblGameLength.Visible = true;
+            LblGameTheme.Visible = true;
+            menuplayerinfo.settingsvissible = true;
+            menugameinfo.settingsvissible = true;
             PnlSettings.Visible = true;
             BtnDiffEasy.Visible = true;
             BtnDiffHard.Visible = true;
@@ -717,6 +749,8 @@ namespace SettlersofChaos
         {
             PnlBackSplash.Visible = true;
             PnlMenu.Visible = true;
+            menuplayerinfo.settingsvissible = false;
+            menugameinfo.settingsvissible = false;
             PnlSettings.Visible = false;
             BtnDiffEasy.Visible = false;
             BtnDiffHard.Visible = false;
@@ -743,8 +777,18 @@ namespace SettlersofChaos
             gamehotbar.themepink = true;
             gamehotbar.themeblue = false;
             gamehotbar.themedark = false;
+            menugameinfo.themepink = true;
+            menugameinfo.themeblue = false;
+            menugameinfo.themedark = false;
+            menuplayerinfo.themepink = true;
+            menuplayerinfo.themeblue = false;
+            menuplayerinfo.themedark = false;
             LblAIAction.BackColor = (Color.FromArgb(168, 32, 146));
             PnlHome.BackColor = (Color.FromArgb(219, 90, 198));
+            LblGameDiffSettings.Text = ("Your game difficulty is" + strdifficulty);
+            LblGameLengthSettings.Text = ("Your game length is" + strlength);
+            LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
+            PnlSettings.Invalidate();
 
         }
 
@@ -760,8 +804,18 @@ namespace SettlersofChaos
             gamehotbar.themepink = false;
             gamehotbar.themeblue = false;
             gamehotbar.themedark = true;
+            menugameinfo.themepink = true;
+            menugameinfo.themeblue = false;
+            menugameinfo.themedark = true;
+            menuplayerinfo.themepink = false;
+            menuplayerinfo.themeblue = false;
+            menuplayerinfo.themedark = true;
             LblAIAction.BackColor = (Color.FromArgb(71, 70, 71));
             PnlHome.BackColor = (Color.FromArgb(145, 145, 145));
+            LblGameDiffSettings.Text = ("Your game difficulty is" + strdifficulty);
+            LblGameLengthSettings.Text = ("Your game length is" + strlength);
+            LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
+            PnlSettings.Invalidate();
         }
 
         private void BtnThemeBlue_Click(object sender, EventArgs e)
@@ -776,8 +830,18 @@ namespace SettlersofChaos
             gamehotbar.themepink = false;
             gamehotbar.themeblue = true;
             gamehotbar.themedark = false;
+            menugameinfo.themepink = false;
+            menugameinfo.themeblue = true;
+            menugameinfo.themedark = false;
+            menuplayerinfo.themepink = false;
+            menuplayerinfo.themeblue = true;
+            menuplayerinfo.themedark = false;
             LblAIAction.BackColor = (Color.FromArgb(39, 61, 227));
             PnlHome.BackColor = (Color.FromArgb(150, 182, 250));
+            LblGameDiffSettings.Text = ("Your game difficulty is" + strdifficulty);
+            LblGameLengthSettings.Text = ("Your game length is" + strlength);
+            LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
+            PnlSettings.Invalidate();
         }
 
         private void BtnTutorial_Click(object sender, EventArgs e)
@@ -802,24 +866,26 @@ namespace SettlersofChaos
             }
         }
 
-        private void BtnRTG_Click(object sender, EventArgs e)
-        {
-            PnlHelp.Visible = false;
-        }
-
         private void TbUsername_TextChanged(object sender, EventArgs e)
         {
             username = TbUsername.Text;
             LblPlayerName.Text = username;
         }
 
+        private void PnlSettings_Paint(object sender, PaintEventArgs e)
+        {
+            LblGameDiffSettings.Text = ("Your game difficulty is" + strdifficulty);
+            LblGameLengthSettings.Text = ("Your game length is" + strlength);
+            LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
+        }
+
         private void TmrGame_Tick(object sender, EventArgs e)
         {
-            if (PlayerOneDefense < 1)
+            if (PlayerOneDefense <= 1)
             {
                 PlrOneLost();
             }
-            if (PlayerTwoDefense < 1)
+            if (PlayerTwoDefense <= 1)
             {
                 PlrTwoLost();
             }
@@ -846,6 +912,7 @@ namespace SettlersofChaos
         public void PlrTwoLost()
         {
             LblYouWon.Visible = true;
+            GameEnd();
         }
     }
 }
