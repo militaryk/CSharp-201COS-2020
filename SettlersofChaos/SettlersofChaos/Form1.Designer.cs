@@ -776,7 +776,7 @@
             // 
             // TmrGameEnd
             // 
-            this.TmrGameEnd.Interval = 3000;
+            this.TmrGameEnd.Interval = 13000;
             this.TmrGameEnd.Tick += new System.EventHandler(this.TmrGameEnd_Tick);
             // 
             // FormGame

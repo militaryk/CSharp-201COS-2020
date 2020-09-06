@@ -130,6 +130,7 @@ namespace SettlersofChaos
         {
             if (CollidesWithRedBlock())
             {
+                Console.WriteLine("Shell collided with Redblock and dealt 3 damage to Player One");
                 //reset planet[i] back to top of panel
                 PlayerOneDefense = PlayerOneDefense - 3;
                 artilleryShell.x -= 10;
@@ -138,10 +139,12 @@ namespace SettlersofChaos
                 TmrShellMove.Enabled = false;
                 ArtilleryHit = true;
                 TmrDelay.Enabled = true;
+                Console.WriteLine(PlayerTwoDefense);
 
             }
             if (CollidesWithTarget())
             {
+                Console.WriteLine("Shell collided Target and dealt 6 damage to Player Two");
                 PlayerTwoDefense -= 6;
                 artilleryShell.x -= 10;
                 LblTargetHit.Visible = true;
@@ -149,6 +152,7 @@ namespace SettlersofChaos
                 TmrShellMove.Enabled = false;
                 ArtilleryMissed = true;
                 TmrDelay.Enabled = true;
+                Console.WriteLine(PlayerTwoDefense);
 
             }
             else
@@ -284,6 +288,7 @@ namespace SettlersofChaos
             plrone.Draw(g);
             plrtwo.Draw(g);
         }
+
 
         private void BtnArtillery_Click(object sender, EventArgs e)
         {
@@ -497,28 +502,33 @@ namespace SettlersofChaos
             {
                 if (AIAttack >= 61 & AIAttack <= 100)
                 {
-                    AiTurnFortify();
+                    PlayerTwoDefense += 2;
                     AIResponse = "The AI used Fortify and gained 2HP";
                     Console.WriteLine("The AI used Fortify and gained 2HP");
                     LblAIAction.Text = AIResponse;
                     AITurnEnd();
+                    Console.WriteLine(PlayerTwoDefense + "(Fortify)");
                 }
                 else if (AIAttack >= 30 & AIAttack <= 60)
                 {
                     if (AIAttackSuccses >= 0 & AIAttackSuccses <= 66)
                     {
-                        PlayerOneDefense -= 2;
                         AIResponse = "The AI successfully used Shoot and dealt 2HP";
                         Console.WriteLine("The AI successfully used Shoot and dealt 2HP");
+                        Console.WriteLine(PlayerTwoDefense + "(Shoot Suc)");
                         LblAIAction.Text = AIResponse;
+                        PlayerOneDefense -= 2;
+                        Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
                     }
                     else
                     {
-                        PlayerTwoDefense -= 2;
                         AIResponse = "The AI failed to used Shoot and lost 2HP";
                         Console.WriteLine("The AI failed to used Shoot and lost 2HP");
+                        Console.WriteLine(PlayerTwoDefense + "(Shoot Fail)");
                         LblAIAction.Text = AIResponse;
+                        PlayerTwoDefense -= 2;
+                        Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
                     }
                 }
@@ -526,18 +536,22 @@ namespace SettlersofChaos
                 {
                     if (AIAttackSuccses >= 0 & AIAttackSuccses <= 45)
                     {
-                        PlayerOneDefense -= 6;
                         AIResponse = "The AI successfully used Artillery and dealt 6HP";
                         Console.WriteLine("The AI successfully used Artillery and dealt 6HP");
+                        Console.WriteLine(PlayerTwoDefense + "(Artillery Suc)");
                         LblAIAction.Text = AIResponse;
+                        PlayerOneDefense -= 6;
+                        Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
                     }
                     else
                     {
-                        PlayerTwoDefense -= 3;
                         AIResponse = "The AI failed to used Artillery and lost 3HP";
                         Console.WriteLine("The AI failed to used Artillery and lost 3HP");
+                        Console.WriteLine(PlayerTwoDefense + "(Artillery Fail)");
                         LblAIAction.Text = AIResponse;
+                        PlayerTwoDefense -= 3;
+                        Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
                     }
                 }
@@ -546,10 +560,11 @@ namespace SettlersofChaos
             {
                 if (AIAttack >= 70 & AIAttack <= 100)
                 {
-                    AiTurnFortify();
+                    PlayerTwoDefense += 2;
                     AIResponse = "The AI used Fortify and gained 2HP";
                     Console.WriteLine("The AI used Fortify and gained 2HP");
                     LblAIAction.Text = AIResponse;
+                    Console.WriteLine(PlayerTwoDefense);
                     AITurnEnd();
                 }
                 else if (AIAttack >= 40 & AIAttack <= 70)
@@ -559,6 +574,7 @@ namespace SettlersofChaos
                         PlayerOneDefense -= 2;
                         AIResponse = "The AI successfully used Shoot and dealt 2HP";
                         Console.WriteLine("The AI successfully used Shoot and dealt 2HP");
+                        Console.WriteLine(PlayerTwoDefense);
                         LblAIAction.Text = AIResponse;
                         AITurnEnd();
                     }
@@ -568,6 +584,7 @@ namespace SettlersofChaos
                         AIResponse = "The AI failed to used Shoot and lost 2HP";
                         Console.WriteLine("The AI failed to used Shoot and lost 2HP");
                         LblAIAction.Text = AIResponse;
+                        Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
                     }
                 }
@@ -578,6 +595,7 @@ namespace SettlersofChaos
                         PlayerOneDefense -= 6;
                         AIResponse = "The AI successfully used Artillery and dealt 6HP";
                         LblAIAction.Text = AIResponse;
+                        Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
                     }
                     else
@@ -585,6 +603,7 @@ namespace SettlersofChaos
                         PlayerTwoDefense -= 3;
                         AIResponse = "The AI failed to used Artillery and lost 3HP";
                         LblAIAction.Text = AIResponse;
+                        Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
                     }
                 }
@@ -593,10 +612,11 @@ namespace SettlersofChaos
             {
                 if (AIAttack >= 80 & AIAttack <= 100)
                 {
-                    AiTurnFortify();
+                    PlayerTwoDefense += 2;
                     AIResponse = "The AI used Fortify and gained 2HP";
                     Console.WriteLine("The AI used Fortify and gained 2HP");
                     LblAIAction.Text = AIResponse;
+                    Console.WriteLine(PlayerTwoDefense);
                     AITurnEnd();
                 }
                 else if (AIAttack >= 40 & AIAttack <= 80)
@@ -607,6 +627,7 @@ namespace SettlersofChaos
                         AIResponse = "The AI successfully used Shoot and dealt 2HP";
                         Console.WriteLine("The AI successfully used Shoot and dealt 2HP");
                         LblAIAction.Text = AIResponse;
+                        Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
                     }
                     else
@@ -615,6 +636,7 @@ namespace SettlersofChaos
                         AIResponse = "The AI failed to used Shoot and lost 2HP";
                         Console.WriteLine("The AI failed to used Shoot and lost 2HP");
                         LblAIAction.Text = AIResponse;
+                        Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
                     }
                 }
@@ -625,6 +647,7 @@ namespace SettlersofChaos
                         PlayerOneDefense -= 6;
                         AIResponse = "The AI successfully used Artillery and dealt 6HP";
                         LblAIAction.Text = AIResponse;
+                        Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
                     }
                     else
@@ -632,6 +655,7 @@ namespace SettlersofChaos
                         PlayerTwoDefense -= 3;
                         AIResponse = "The AI failed to used Artillery and lost 3HP";
                         LblAIAction.Text = AIResponse;
+                        Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
                     }
                 }
@@ -881,23 +905,46 @@ namespace SettlersofChaos
 
         private void TmrGame_Tick(object sender, EventArgs e)
         {
-            if (PlayerOneDefense <= 1)
+            if (PlayerOneDefense < 1)
             {
+                Console.WriteLine("PlayerOneLost");
+                Console.WriteLine(PlayerOneDefense);
                 PlrOneLost();
+                LblPlayerLost.Visible = false;
+                LblPlayerOne.Visible = false;
+                LblPlayerTwo.Visible = false;
+                BtnArtillery.Visible = false;
+                BtnFortify.Visible = false;
+                BtnShoot.Visible = false;
+                PBPlayerOne.Visible = false;
+                PBPlayerTwo.Visible = false;
+                PlayerOneDefense = Difficulty;
             }
-            if (PlayerTwoDefense <= 1)
+            if (PlayerTwoDefense < 1)
             {
+                Console.WriteLine("PlayerTwoLost");
                 PlrTwoLost();
+                Console.WriteLine(PlayerTwoDefense);
+                PlayerTwoDefense = Difficulty;
             }
         }
 
         private void TmrGameEnd_Tick(object sender, EventArgs e)
         {
+            Console.WriteLine("Game Ended");
             TmrGameEnd.Enabled = false;
             GameEnd();
             LblPlayerLost.Visible = false;
             TmrGame.Enabled = false;
-
+            LblYouWon.Visible = false;
+            LblPlayerLost.Visible = true;
+            LblPlayerOne.Visible = true;
+            LblPlayerTwo.Visible = true;
+            BtnArtillery.Visible = true;
+            BtnFortify.Visible = true;
+            BtnShoot.Visible = true;
+            PBPlayerOne.Visible = true;
+            PBPlayerTwo.Visible = true;
         }
 
         public void AITurnEnd()
@@ -912,7 +959,15 @@ namespace SettlersofChaos
         public void PlrTwoLost()
         {
             LblYouWon.Visible = true;
-            GameEnd();
+            TmrGameEnd.Enabled = true;
+            LblPlayerLost.Visible = false;
+            LblPlayerOne.Visible = false;
+            LblPlayerTwo.Visible = false;
+            BtnArtillery.Visible = false;
+            BtnFortify.Visible = false;
+            BtnShoot.Visible = false;
+            PBPlayerOne.Visible = false;
+            PBPlayerTwo.Visible = false;
         }
     }
 }
