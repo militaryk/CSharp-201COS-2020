@@ -31,34 +31,51 @@ namespace SettlersofChaos
         }
         public void MoveShell(string move)
         {
+            
             ShellRec.Location = new Point(x, y);
+            if (ShellRec.Location.Y < 20)
+            {
+
+                y = 20;
+                ShellRec.Location = new Point(x, y);
+            }
+            if (ShellRec.Location.Y > 260)
+            {
+                y = 260;
+                ShellRec.Location = new Point(x, y);
+            }
+            if (ShellRec.Location.X < 10)
+            {
+                x = 10;
+                ShellRec.Location = new Point(x, y);
+            }
 
             if (move == "up")
             {
-                if (ShellRec.Location.Y > 300)
+                if (ShellRec.Location.Y > 275)
                 {
 
-                    y = 300;
+                    y = 275;
                     ShellRec.Location = new Point(x, y);
                 }
                 else
                 {
-                    y += 15;
+                    y += 20;
                     ShellRec.Location = new Point(x, y);
                 }
 
             }
             if (move == "down")
             {
-                if (ShellRec.Location.Y < 0)
+                if (ShellRec.Location.Y < 5)
                 {
 
-                    y = 0;
+                    y = 5;
                     ShellRec.Location = new Point(x, y);
                 }
                 else
                 {
-                    y -= 15;
+                    y -= 20;
                     ShellRec.Location = new Point(x, y);
                 }
 

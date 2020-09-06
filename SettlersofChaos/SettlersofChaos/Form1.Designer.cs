@@ -35,8 +35,6 @@
             this.LblTurnName = new System.Windows.Forms.Label();
             this.LblTurn = new System.Windows.Forms.Label();
             this.LblAIAction = new System.Windows.Forms.Label();
-            this.PBPlayerTwo = new System.Windows.Forms.PictureBox();
-            this.PBPlayerOne = new System.Windows.Forms.PictureBox();
             this.PnlShoot = new System.Windows.Forms.Panel();
             this.LblShootTargetMissed = new System.Windows.Forms.Label();
             this.LblShootTargetHit = new System.Windows.Forms.Label();
@@ -86,14 +84,17 @@
             this.TmrDelay = new System.Windows.Forms.Timer(this.components);
             this.TmrGame = new System.Windows.Forms.Timer(this.components);
             this.TmrGameEnd = new System.Windows.Forms.Timer(this.components);
+            this.PBPlayerTwo = new System.Windows.Forms.PictureBox();
+            this.PBPlayerOne = new System.Windows.Forms.PictureBox();
+            this.LblDebug = new System.Windows.Forms.Label();
             this.PnlBackSplash.SuspendLayout();
             this.PnlMenu.SuspendLayout();
             this.PnlHome.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PBPlayerTwo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PBPlayerOne)).BeginInit();
             this.PnlShoot.SuspendLayout();
             this.PnlFight.SuspendLayout();
             this.PnlSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBPlayerTwo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBPlayerOne)).BeginInit();
             this.SuspendLayout();
             // 
             // PnlBackSplash
@@ -134,9 +135,11 @@
             // PnlHome
             // 
             this.PnlHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(161)))), ((int)(((byte)(188)))));
+            this.PnlHome.Controls.Add(this.LblDebug);
             this.PnlHome.Controls.Add(this.LblTurnName);
             this.PnlHome.Controls.Add(this.LblTurn);
             this.PnlHome.Controls.Add(this.LblAIAction);
+            this.PnlHome.Controls.Add(this.LblPlayerLost);
             this.PnlHome.Controls.Add(this.PBPlayerTwo);
             this.PnlHome.Controls.Add(this.PBPlayerOne);
             this.PnlHome.Controls.Add(this.PnlShoot);
@@ -191,31 +194,6 @@
             this.LblAIAction.TabIndex = 2;
             this.LblAIAction.Text = "Player Two Attacks";
             this.LblAIAction.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // PBPlayerTwo
-            // 
-            this.PBPlayerTwo.BackColor = System.Drawing.Color.Transparent;
-            this.PBPlayerTwo.BackgroundImage = global::SettlersofChaos.Properties.Resources.DefaultProfile;
-            this.PBPlayerTwo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PBPlayerTwo.InitialImage = null;
-            this.PBPlayerTwo.Location = new System.Drawing.Point(570, 60);
-            this.PBPlayerTwo.Name = "PBPlayerTwo";
-            this.PBPlayerTwo.Size = new System.Drawing.Size(160, 130);
-            this.PBPlayerTwo.TabIndex = 6;
-            this.PBPlayerTwo.TabStop = false;
-            // 
-            // PBPlayerOne
-            // 
-            this.PBPlayerOne.BackColor = System.Drawing.Color.White;
-            this.PBPlayerOne.BackgroundImage = global::SettlersofChaos.Properties.Resources.DefaultProfile;
-            this.PBPlayerOne.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PBPlayerOne.InitialImage = null;
-            this.PBPlayerOne.Location = new System.Drawing.Point(70, 60);
-            this.PBPlayerOne.Name = "PBPlayerOne";
-            this.PBPlayerOne.Size = new System.Drawing.Size(160, 130);
-            this.PBPlayerOne.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PBPlayerOne.TabIndex = 5;
-            this.PBPlayerOne.TabStop = false;
             // 
             // PnlShoot
             // 
@@ -779,6 +757,42 @@
             this.TmrGameEnd.Interval = 13000;
             this.TmrGameEnd.Tick += new System.EventHandler(this.TmrGameEnd_Tick);
             // 
+            // PBPlayerTwo
+            // 
+            this.PBPlayerTwo.BackColor = System.Drawing.Color.Transparent;
+            this.PBPlayerTwo.BackgroundImage = global::SettlersofChaos.Properties.Resources.DefaultProfile;
+            this.PBPlayerTwo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PBPlayerTwo.InitialImage = null;
+            this.PBPlayerTwo.Location = new System.Drawing.Point(570, 60);
+            this.PBPlayerTwo.Name = "PBPlayerTwo";
+            this.PBPlayerTwo.Size = new System.Drawing.Size(160, 130);
+            this.PBPlayerTwo.TabIndex = 6;
+            this.PBPlayerTwo.TabStop = false;
+            // 
+            // PBPlayerOne
+            // 
+            this.PBPlayerOne.BackColor = System.Drawing.Color.White;
+            this.PBPlayerOne.BackgroundImage = global::SettlersofChaos.Properties.Resources.DefaultProfile;
+            this.PBPlayerOne.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PBPlayerOne.InitialImage = null;
+            this.PBPlayerOne.Location = new System.Drawing.Point(70, 60);
+            this.PBPlayerOne.Name = "PBPlayerOne";
+            this.PBPlayerOne.Size = new System.Drawing.Size(160, 130);
+            this.PBPlayerOne.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PBPlayerOne.TabIndex = 5;
+            this.PBPlayerOne.TabStop = false;
+            // 
+            // LblDebug
+            // 
+            this.LblDebug.AutoSize = true;
+            this.LblDebug.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.LblDebug.Location = new System.Drawing.Point(467, 424);
+            this.LblDebug.Name = "LblDebug";
+            this.LblDebug.Size = new System.Drawing.Size(13, 13);
+            this.LblDebug.TabIndex = 13;
+            this.LblDebug.Text = "0";
+            this.LblDebug.Visible = false;
+            // 
             // FormGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -801,12 +815,12 @@
             this.PnlMenu.PerformLayout();
             this.PnlHome.ResumeLayout(false);
             this.PnlHome.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PBPlayerTwo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PBPlayerOne)).EndInit();
             this.PnlShoot.ResumeLayout(false);
             this.PnlShoot.PerformLayout();
             this.PnlFight.ResumeLayout(false);
             this.PnlSettings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PBPlayerTwo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBPlayerOne)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -870,6 +884,7 @@
         private System.Windows.Forms.Label LblGameThemeSettings;
         private System.Windows.Forms.Label LblPlayerTwoName;
         private System.Windows.Forms.Label LblPlayerOneName;
+        private System.Windows.Forms.Label LblDebug;
     }
 }
 

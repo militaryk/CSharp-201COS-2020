@@ -121,6 +121,7 @@ namespace SettlersofChaos
 
         private void FormGame_KeyDown(object sender, KeyEventArgs e)
         {
+            LblDebug.Text = Convert.ToString(artilleryShell.ShellRec.Y);
             if (e.KeyData == Keys.Up) { left = true; }
             if (e.KeyData == Keys.Down) { right = true; }
             if (e.KeyData == Keys.Space) { if (ShootGameInuse == true) { bulletfired = true; } }
@@ -292,6 +293,7 @@ namespace SettlersofChaos
 
         private void BtnArtillery_Click(object sender, EventArgs e)
         {
+            artilleryShell.ShellRec.X = 10;
             BtnExit.Visible = false;
             TurnStart();
             ArtilleryGameTriggered();
