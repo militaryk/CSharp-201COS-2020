@@ -474,6 +474,8 @@ namespace SettlersofChaos
         {
             LblAIAction.Text = "Player One attack to start!";
             gamestart = true;
+            LblPlayerLost.Visible = false;
+            Turn = 0;
             BtnSettings.Visible = false;
             BtnStart.Visible = false;
             BtnTutorial.Visible = false;
@@ -678,6 +680,7 @@ namespace SettlersofChaos
             if (AiTurnFinished == true)
             {
                 AiTurnFinished = false;
+                Turn -= 1;
                 AiTurn();
             }
         }
@@ -769,6 +772,7 @@ namespace SettlersofChaos
             BtnTimeLong.Visible = true;
             BtnReturnMenu.Visible = true;
             BtnSettings.Visible = false;
+            TbUsername.Visible = false;
         }
 
         private void BtnReturnMenu_Click(object sender, EventArgs e)
@@ -789,6 +793,7 @@ namespace SettlersofChaos
             BtnTimeLong.Visible = false;
             BtnReturnMenu.Visible = false;
             BtnSettings.Visible = true;
+            TbUsername.Visible = true;
         }
 
         private void BtnThemePink_Click(object sender, EventArgs e)
