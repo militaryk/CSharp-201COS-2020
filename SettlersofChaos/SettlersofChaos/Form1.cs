@@ -13,6 +13,7 @@ namespace SettlersofChaos
         public int speed = 10;
         public bool BulletTargetMissed = false;
         string shellmove;
+        int Fortifyin = 0;
         string strlength = " Short";
         string strdifficulty = " Easy";
         string strtheme = " Blue";
@@ -21,6 +22,7 @@ namespace SettlersofChaos
         public bool easy = true, medium = false, hard = false;
         int MouseX;
         public int Turn;
+        int Fortifies = 1;
         int MouseY;
         public bool BulletTargetHit = false;
         public bool AiTurnFinished = true;
@@ -133,12 +135,13 @@ namespace SettlersofChaos
             {
                 Console.WriteLine("Shell collided with Redblock and dealt 3 damage to Player One");
                 //reset planet[i] back to top of panel
-                PlayerOneDefense = PlayerOneDefense - 3;
+                PlayerOneDefense -= 3;
                 artilleryShell.x -= 10;
                 YouMissedLBL.Visible = true;
                 TmrArtilleryTicks.Enabled = false;
                 TmrShellMove.Enabled = false;
-                ArtilleryHit = true;
+                ArtilleryHit = false;
+                ArtilleryMissed = true;
                 TmrDelay.Enabled = true;
                 Console.WriteLine(PlayerTwoDefense);
 
@@ -151,7 +154,8 @@ namespace SettlersofChaos
                 LblTargetHit.Visible = true;
                 TmrArtilleryTicks.Enabled = false;
                 TmrShellMove.Enabled = false;
-                ArtilleryMissed = true;
+                ArtilleryMissed = false;
+                ArtilleryHit = true;
                 TmrDelay.Enabled = true;
                 Console.WriteLine(PlayerTwoDefense);
 
@@ -446,8 +450,13 @@ namespace SettlersofChaos
         }
         private void BtnFortify_Click(object sender, EventArgs e)
         {
+            BtnFortify.Enabled = false;
             TurnStart();
-            PlayerOneDefense += 1;
+            PlayerOneDefense += 2;
+            Turn += 1;
+            Fortifyin = 3;
+            Fortifies -= 1;
+            LblTurn.Text = Convert.ToString(Turn);
             LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
             LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
             AiTurn();
@@ -460,12 +469,10 @@ namespace SettlersofChaos
             TmrDelay.Enabled = false;
             if (ArtilleryHit == true)
             {
-                PlayerTwoDefense -= 6;
                 ArtilleryHit = false;
             }
             if (ArtilleryMissed == true)
             {
-                PlayerOneDefense -= 3;
                 ArtilleryMissed = false;
             }
         }
@@ -477,11 +484,22 @@ namespace SettlersofChaos
             LblPlayerLost.Visible = false;
             Turn = 0;
             BtnSettings.Visible = false;
+            BtnExit.Enabled = true;
             BtnStart.Visible = false;
+            Fortifies = 1;
+            Fortifyin = 3;
+            LblFortify.Text = "You have " + Fortifies + " fortifies avalible and " + Fortifyin + " turns till your next";
             BtnTutorial.Visible = false;
             LblTitle.Visible = false;
             PnlBackSplash.Invalidate();
             PnlHome.Visible = true;
+            LblPlayerLost.Enabled = true;
+            LblPlayerOne.Enabled = true;
+            LblPlayerTwo.Enabled = true;
+            BtnArtillery.Enabled = true;
+            BtnShoot.Enabled = true;
+            PBPlayerOne.Enabled = true;
+            PBPlayerTwo.Enabled = true;
             PlayerOneDefense = Difficulty;
             PlayerTwoDefense = Difficulty;
             LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
@@ -497,17 +515,95 @@ namespace SettlersofChaos
         }
 
         public void AiTurn() {
-
+            Console.WriteLine(Fortifyin);
+            Console.WriteLine(Fortifies);
+            if (Fortifyin > 0)
+            {
+                BtnFortify.Enabled = false; 
+                Fortifyin -= 1;
+            }
+            if (Fortifyin <= 0)
+            {
+                Fortifies += 1;
+                Fortifyin = 3;
+            }
+            if (Fortifies >= 1)
+            {
+                BtnFortify.Enabled = true;
+            }
+            if (Fortifyin > 0) {
+                if (Fortifies == 0)
+                {
+                    LblFortify.Text = "You have" + Fortifyin + "Turns till your next Fortify";
+                }
+            }
+            if (Fortifyin > 0 && Fortifies > 0)
+            {
+                LblFortify.Text = "You have" + Fortifies + "Avalible and" + Fortifyin + "Till your next";
+            }
             string AIResponse;
             Random rnd = new Random();
             int AIAttack = rnd.Next(1, 101);  // creates a number between 1 and 100
             int AIAttackSuccses = rnd.Next(1, 101);   // creates a number between 1 and 100
+            if (PlayerOneDefense <= 0)
+            {
+                Console.WriteLine("PlayerOneLost");
+                Console.WriteLine(PlayerOneDefense);
+                PlrOneLost();
+                LblPlayerLost.Visible = true;
+                LblPlayerOne.Visible = false;
+                LblPlayerTwo.Visible = false;
+                BtnArtillery.Visible = false;
+                BtnFortify.Visible = false;
+                BtnShoot.Visible = false;
+                PBPlayerOne.Visible = false;
+                PBPlayerTwo.Visible = false;
+                LblPlayerLost.Enabled = false;
+                LblPlayerOne.Enabled = false;
+                LblPlayerTwo.Enabled = false;
+                BtnArtillery.Enabled = false;
+                BtnFortify.Enabled = false;
+                BtnShoot.Enabled = false;
+                PBPlayerOne.Enabled = false;
+                PBPlayerTwo.Enabled = false;
+                TmrGame.Enabled = false;
+                BtnExit.Enabled = false;
+                BtnExit.Visible = false;
+                PlayerOneDefense = Difficulty;
+            }
+            if (PlayerTwoDefense <= 0)
+            {
+                Console.WriteLine("PlayerTwoLost");
+                PlrTwoLost();
+                TmrGame.Enabled = false;
+                LblYouWon.Visible = true;
+                Console.WriteLine(PlayerTwoDefense);
+                PlayerTwoDefense = Difficulty;
+                LblPlayerLost.Visible = false;
+                LblPlayerOne.Visible = false;
+                LblPlayerTwo.Visible = false;
+                BtnArtillery.Visible = false;
+                BtnFortify.Visible = false;
+                BtnShoot.Visible = false;
+                PBPlayerOne.Visible = false;
+                PBPlayerTwo.Visible = false;
+                LblPlayerLost.Enabled = false;
+                LblPlayerOne.Enabled = false;
+                LblPlayerTwo.Enabled = false;
+                BtnArtillery.Enabled = false;
+                BtnFortify.Enabled = false;
+                BtnShoot.Enabled = false;
+                PBPlayerOne.Enabled = false;
+                PBPlayerTwo.Enabled = false;
+                BtnExit.Enabled = false;
+                BtnExit.Visible = false;
+            }
             if (easy == true)
             {
                 if (AIAttack >= 61 & AIAttack <= 100)
                 {
                     PlayerTwoDefense += 2;
-                    AIResponse = "The AI used Fortify and gained 2HP";
+                    AIResponse = "The AI used Fortify and gained 2HP" + "   (" + "Turn:" + Turn + ")";
                     Console.WriteLine("The AI used Fortify and gained 2HP");
                     LblAIAction.Text = AIResponse;
                     AITurnEnd();
@@ -517,7 +613,7 @@ namespace SettlersofChaos
                 {
                     if (AIAttackSuccses >= 0 & AIAttackSuccses <= 66)
                     {
-                        AIResponse = "The AI successfully used Shoot and dealt 2HP";
+                        AIResponse = "The AI successfully used Shoot and dealt 2HP" + " (" + "Turn:" + Turn + ")";
                         Console.WriteLine("The AI successfully used Shoot and dealt 2HP");
                         Console.WriteLine(PlayerTwoDefense + "(Shoot Suc)");
                         LblAIAction.Text = AIResponse;
@@ -527,7 +623,7 @@ namespace SettlersofChaos
                     }
                     else
                     {
-                        AIResponse = "The AI failed to used Shoot and lost 2HP";
+                        AIResponse = "The AI failed to used Shoot and lost 2HP" + " (" + "Turn:" + Turn + ")";
                         Console.WriteLine("The AI failed to used Shoot and lost 2HP");
                         Console.WriteLine(PlayerTwoDefense + "(Shoot Fail)");
                         LblAIAction.Text = AIResponse;
@@ -540,17 +636,17 @@ namespace SettlersofChaos
                 {
                     if (AIAttackSuccses >= 0 & AIAttackSuccses <= 45)
                     {
-                        AIResponse = "The AI successfully used Artillery and dealt 6HP";
+                        AIResponse = "The AI successfully used Artillery and dealt 6HP" + " (" + "Turn:" + Turn + ")";
                         Console.WriteLine("The AI successfully used Artillery and dealt 6HP");
                         Console.WriteLine(PlayerTwoDefense + "(Artillery Suc)");
                         LblAIAction.Text = AIResponse;
-                        PlayerOneDefense -= 6;
+                        PlayerOneDefense -= 3;
                         Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
                     }
                     else
                     {
-                        AIResponse = "The AI failed to used Artillery and lost 3HP";
+                        AIResponse = "The AI failed to used Artillery and lost 3HP" + " (" + "Turn:" + Turn + ")";
                         Console.WriteLine("The AI failed to used Artillery and lost 3HP");
                         Console.WriteLine(PlayerTwoDefense + "(Artillery Fail)");
                         LblAIAction.Text = AIResponse;
@@ -565,7 +661,7 @@ namespace SettlersofChaos
                 if (AIAttack >= 70 & AIAttack <= 100)
                 {
                     PlayerTwoDefense += 2;
-                    AIResponse = "The AI used Fortify and gained 2HP";
+                    AIResponse = "The AI used Fortify and gained 2HP" + "   (" + "Turn:" + Turn + ")";
                     Console.WriteLine("The AI used Fortify and gained 2HP");
                     LblAIAction.Text = AIResponse;
                     Console.WriteLine(PlayerTwoDefense);
@@ -576,7 +672,7 @@ namespace SettlersofChaos
                     if (AIAttackSuccses >= 0 & AIAttackSuccses <= 77)
                     {
                         PlayerOneDefense -= 2;
-                        AIResponse = "The AI successfully used Shoot and dealt 2HP";
+                        AIResponse = "The AI successfully used Shoot and dealt 2HP" + " (" + "Turn:" + Turn + ")";
                         Console.WriteLine("The AI successfully used Shoot and dealt 2HP");
                         Console.WriteLine(PlayerTwoDefense);
                         LblAIAction.Text = AIResponse;
@@ -585,7 +681,7 @@ namespace SettlersofChaos
                     else
                     {
                         PlayerTwoDefense -= 2;
-                        AIResponse = "The AI failed to used Shoot and lost 2HP";
+                        AIResponse = "The AI failed to used Shoot and lost 2HP" + " (" + "Turn:" + Turn + ")";
                         Console.WriteLine("The AI failed to used Shoot and lost 2HP");
                         LblAIAction.Text = AIResponse;
                         Console.WriteLine(PlayerTwoDefense);
@@ -596,8 +692,8 @@ namespace SettlersofChaos
                 {
                     if (AIAttackSuccses >= 0 & AIAttackSuccses <= 55)
                     {
-                        PlayerOneDefense -= 6;
-                        AIResponse = "The AI successfully used Artillery and dealt 6HP";
+                        PlayerOneDefense -= 3;
+                        AIResponse = "The AI successfully used Artillery and dealt 6HP" + " (" + "Turn:" + Turn + ")";
                         LblAIAction.Text = AIResponse;
                         Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
@@ -605,7 +701,7 @@ namespace SettlersofChaos
                     else
                     {
                         PlayerTwoDefense -= 3;
-                        AIResponse = "The AI failed to used Artillery and lost 3HP";
+                        AIResponse = "The AI failed to used Artillery and lost 3HP" + " (" + "Turn:" + Turn + ")";
                         LblAIAction.Text = AIResponse;
                         Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
@@ -617,7 +713,7 @@ namespace SettlersofChaos
                 if (AIAttack >= 80 & AIAttack <= 100)
                 {
                     PlayerTwoDefense += 2;
-                    AIResponse = "The AI used Fortify and gained 2HP";
+                    AIResponse = "The AI used Fortify and gained 2HP" + "   (" + "Turn:" + Turn + ")";
                     Console.WriteLine("The AI used Fortify and gained 2HP");
                     LblAIAction.Text = AIResponse;
                     Console.WriteLine(PlayerTwoDefense);
@@ -628,7 +724,7 @@ namespace SettlersofChaos
                     if (AIAttackSuccses >= 0 & AIAttackSuccses <= 90)
                     {
                         PlayerOneDefense -= 2;
-                        AIResponse = "The AI successfully used Shoot and dealt 2HP";
+                        AIResponse = "The AI successfully used Shoot and dealt 2HP" + " (" + "Turn:" + Turn + ")";
                         Console.WriteLine("The AI successfully used Shoot and dealt 2HP");
                         LblAIAction.Text = AIResponse;
                         Console.WriteLine(PlayerTwoDefense);
@@ -637,8 +733,8 @@ namespace SettlersofChaos
                     else
                     {
                         PlayerTwoDefense -= 2;
-                        AIResponse = "The AI failed to used Shoot and lost 2HP";
-                        Console.WriteLine("The AI failed to used Shoot and lost 2HP");
+                        AIResponse = "The AI failed to used Shoot and lost 2HP" + " (" + "Turn:" + Turn + ")";
+                        Console.WriteLine("The AI failed to used Shoot and lost 2HP" );
                         LblAIAction.Text = AIResponse;
                         Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
@@ -648,8 +744,8 @@ namespace SettlersofChaos
                 {
                     if (AIAttackSuccses >= 0 & AIAttackSuccses <= 70)
                     {
-                        PlayerOneDefense -= 6;
-                        AIResponse = "The AI successfully used Artillery and dealt 6HP";
+                        PlayerOneDefense -= 3;
+                        AIResponse = "The AI successfully used Artillery and dealt 6HP" + " (" + "Turn:" + Turn + ")";
                         LblAIAction.Text = AIResponse;
                         Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
@@ -657,7 +753,7 @@ namespace SettlersofChaos
                     else
                     {
                         PlayerTwoDefense -= 3;
-                        AIResponse = "The AI failed to used Artillery and lost 3HP";
+                        AIResponse = "The AI failed to used Artillery and lost 3HP" + " (" + "Turn:" + Turn + ")";
                         LblAIAction.Text = AIResponse;
                         Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
@@ -688,7 +784,27 @@ namespace SettlersofChaos
         public void PlrOneLost()
         {
             LblPlayerLost.Visible = true;
+            LblYouWon.Visible = false;
             TmrGameEnd.Enabled = true;
+            LblYouWon.Visible = false;
+            LblPlayerLost.Visible = true;
+            LblPlayerOne.Visible = false;
+            LblPlayerTwo.Visible = false;
+            BtnArtillery.Visible = false;
+            BtnFortify.Visible = false;
+            BtnShoot.Visible = false;
+            PBPlayerOne.Visible = false;
+            PBPlayerTwo.Visible = false;
+            LblPlayerLost.Enabled = false;
+            LblPlayerOne.Enabled = false;
+            LblPlayerTwo.Enabled = false;
+            BtnArtillery.Enabled = false;
+            BtnFortify.Enabled = false;
+            BtnShoot.Enabled = false;
+            PBPlayerOne.Enabled = false;
+            PBPlayerTwo.Enabled = false;
+            BtnExit.Enabled = false;
+            BtnExit.Visible = false;
         }
 
         private void BtnDiffEasy_Click(object sender, EventArgs e)
@@ -910,6 +1026,11 @@ namespace SettlersofChaos
             LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
         }
 
+        private void LblPlayerTwo_TextChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine(PlayerTwoDefense);
+        }
+
         private void TmrGame_Tick(object sender, EventArgs e)
         {
             if (PlayerOneDefense < 1)
@@ -917,22 +1038,14 @@ namespace SettlersofChaos
                 Console.WriteLine("PlayerOneLost");
                 Console.WriteLine(PlayerOneDefense);
                 PlrOneLost();
-                LblPlayerLost.Visible = false;
-                LblPlayerOne.Visible = false;
-                LblPlayerTwo.Visible = false;
-                BtnArtillery.Visible = false;
-                BtnFortify.Visible = false;
-                BtnShoot.Visible = false;
-                PBPlayerOne.Visible = false;
-                PBPlayerTwo.Visible = false;
                 PlayerOneDefense = Difficulty;
             }
             if (PlayerTwoDefense < 1)
             {
                 Console.WriteLine("PlayerTwoLost");
                 PlrTwoLost();
+                LblYouWon.Visible = true;
                 Console.WriteLine(PlayerTwoDefense);
-                PlayerTwoDefense = Difficulty;
             }
         }
 
@@ -960,13 +1073,12 @@ namespace SettlersofChaos
             LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
             BtnShoot.Enabled = true;
             BtnArtillery.Enabled = true;
-            BtnFortify.Enabled = true;
         }
 
         public void PlrTwoLost()
         {
-            LblYouWon.Visible = true;
             TmrGameEnd.Enabled = true;
+            LblYouWon.Visible = true;
             LblPlayerLost.Visible = false;
             LblPlayerOne.Visible = false;
             LblPlayerTwo.Visible = false;
@@ -975,6 +1087,25 @@ namespace SettlersofChaos
             BtnShoot.Visible = false;
             PBPlayerOne.Visible = false;
             PBPlayerTwo.Visible = false;
+            PlayerTwoDefense = Difficulty;
+            LblPlayerLost.Visible = false;
+            LblPlayerOne.Visible = false;
+            LblPlayerTwo.Visible = false;
+            BtnArtillery.Visible = false;
+            BtnFortify.Visible = false;
+            BtnShoot.Visible = false;
+            PBPlayerOne.Visible = false;
+            PBPlayerTwo.Visible = false;
+            LblPlayerLost.Enabled = false;
+            LblPlayerOne.Enabled = false;
+            LblPlayerTwo.Enabled = false;
+            BtnArtillery.Enabled = false;
+            BtnFortify.Enabled = false;
+            BtnShoot.Enabled = false;
+            PBPlayerOne.Enabled = false;
+            PBPlayerTwo.Enabled = false;
+            BtnExit.Enabled = false;
+            BtnExit.Visible = false;
         }
     }
 }
