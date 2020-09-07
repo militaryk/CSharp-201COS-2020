@@ -6,12 +6,10 @@ namespace SettlersofChaos
     {
         // declare fields to use in the class
 
-        public int x, y, width, height;//variables for the rectangle
-        public Image artilleryshell;//variable for the planet's image
+        public int x, y, width, height;
+        public Image artilleryshell;
         Point centre;
-        public Rectangle ShellRec;//variable for a rectangle to place our image in
-
-        //Create a constructor (initialises the values of the fields)
+        public Rectangle ShellRec;
         public ArtilleryShell()
         {
             x = 10;
@@ -21,7 +19,7 @@ namespace SettlersofChaos
             artilleryshell = Properties.Resources.bullet;
             ShellRec = new Rectangle(x, y, width, height);
         }
-        //methods
+        //methods to draw the artillery shell
         public void DrawShell(Graphics g)
         {
 
@@ -29,6 +27,7 @@ namespace SettlersofChaos
             centre = new Point(ShellRec.X + width / 2, ShellRec.Y + width / 2);
 
         }
+        //Controls the Artillery shells movement throughout the Artillery Game
         public void MoveShell(string move)
         {
             

@@ -4,6 +4,7 @@ namespace SettlersofChaos
 {
     class GameHotbar
     {
+        //Generates the rectangle for the hotbar of the main game class
         Point Position;
         Size Size;
         public bool themeblue = true, themepink = false, themedark = false;

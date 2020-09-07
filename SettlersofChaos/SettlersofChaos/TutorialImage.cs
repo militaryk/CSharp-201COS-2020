@@ -9,13 +9,13 @@ namespace SettlersofChaos
 {
     class TutorialImage
     {
-        public int x, y, width, height;//variables for the rectangle
-        public Image tutorialimage;//variable for the planet's image
+        //Define used variables
+        public int x, y, width, height;
+        public Image tutorialimage;
         Point centre;
-        public Rectangle TutorialRec;//variable for a rectangle to place our image in
+        public Rectangle TutorialRec;
         public int TutorialLevel = 1;
 
-        //Create a constructor (initialises the values of the fields)
         public TutorialImage()
         {
             x = 0;
@@ -25,7 +25,7 @@ namespace SettlersofChaos
 
             TutorialRec = new Rectangle(x, y, width, height);
         }
-        //methods
+        //methods to control what image is rendered into the back of the Tutorial
         public void Draw(Graphics g)
         {
             if (TutorialLevel == 1)

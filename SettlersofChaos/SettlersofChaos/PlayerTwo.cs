@@ -4,6 +4,7 @@ namespace SettlersofChaos
 {
     class PlayerTwo
     {
+        //Draws the rectangle for the PLayerOne to display as a background piece
         Point Position;
         Size Size;
         int Plr2PosX = 550;

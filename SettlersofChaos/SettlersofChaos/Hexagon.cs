@@ -5,6 +5,7 @@ namespace SettlersofChaos
 {
     class Hexagon
     {
+        // Controls and renders aswell as doing the caluclations for the Game background in the main menu, was supposed to be used for the main game however later was made redundent
         // Inscribed radius
         public float Radius;
         //Axial Coordinate

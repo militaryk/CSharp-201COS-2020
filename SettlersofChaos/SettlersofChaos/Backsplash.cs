@@ -5,6 +5,7 @@ namespace SettlersofChaos
 {
     class Backsplash
     {
+        //Backsplash for the main menu generation and drawing
         // Inscribed radius
         public float BackRadius;
         //Axial Coordinate

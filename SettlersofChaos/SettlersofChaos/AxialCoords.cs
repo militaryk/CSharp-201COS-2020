@@ -5,6 +5,7 @@ namespace SettlersofChaos
 {
     static class AxialCoords
     {
+        //Generates the hexagons using a Hexaganal coordiante system used in the background of the menu
         public static PointF ToScreenCoords(int row, int column, float radius)
         {
             double h = 1.6 * radius;

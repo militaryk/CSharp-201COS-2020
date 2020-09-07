@@ -106,7 +106,6 @@
             this.PnlBackSplash.Size = new System.Drawing.Size(784, 461);
             this.PnlBackSplash.TabIndex = 1;
             this.PnlBackSplash.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlGame_Paint);
-            this.PnlBackSplash.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PnlGame_MouseDown);
             // 
             // PnlMenu
             // 

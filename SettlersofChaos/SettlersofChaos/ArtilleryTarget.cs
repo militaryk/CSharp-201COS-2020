@@ -2,6 +2,7 @@
 
 namespace SettlersofChaos
 {
+    //Class to draw and render the artillery target rectangle that the player is trying to colide with
     class ArtilleryTarget
     {
         public Point TargetPosition;

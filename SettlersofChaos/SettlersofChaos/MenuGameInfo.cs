@@ -4,6 +4,7 @@ namespace SettlersofChaos
 {
     class MenuGameInfo
     {
+        //Draws the menu in the main menu for displaying the game info
         Point Position;
         Size Size;
         public bool themeblue = true, themepink = false, themedark = false;

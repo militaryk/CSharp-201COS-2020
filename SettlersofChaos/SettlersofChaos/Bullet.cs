@@ -4,12 +4,13 @@ namespace SettlersofChaos
 {
     class Bullet
     {
+        //Draws and selects the iamge for the Bullet used in ShootGame
         // declare fields to use in the class
 
-        public int bulletx, y, width, height;//variables for the rectangle
-        public Image bullet;//variable for the planet's image
+        public int bulletx, y, width, height;
+        public Image bullet;
         public Point bulletcentre;
-        public Rectangle BulletRec;//variable for a rectangle to place our image in
+        public Rectangle BulletRec;
 
         //Create a constructor (initialises the values of the fields)
         public Bullet()

@@ -1,6 +1,0 @@
-﻿namespace SettlersofChaos
-{
-    class shellmove
-    {
-    }
-}

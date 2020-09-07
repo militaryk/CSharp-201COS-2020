@@ -5,6 +5,7 @@ namespace SettlersofChaos
 {
     class Artilltery
     {
+        //Controls the generation of the Redblocks for the ArtilleryGame
         public Point Position;
         public Size Size;
         public int RedPosX;

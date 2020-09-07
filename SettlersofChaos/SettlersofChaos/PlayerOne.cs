@@ -4,6 +4,7 @@ namespace SettlersofChaos
 {
     class PlayerOne
     {
+        //Draws the rectangle for the PLayerOne to display as a background piece
         Point Position;
         Size Size;
         public bool themeblue = true, themepink = false, themedark = false;

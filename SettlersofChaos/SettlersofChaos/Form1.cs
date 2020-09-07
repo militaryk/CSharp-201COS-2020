@@ -8,6 +8,7 @@ namespace SettlersofChaos
 {
     public partial class FormGame : Form
     {
+        //Declare all of the variables used by the program
         private List<Hexagon> hexagons = new List<Hexagon>();
         private Artilltery[] redblocks = new Artilltery[17];
         public int speed = 10;
@@ -52,6 +53,7 @@ namespace SettlersofChaos
         public FormGame()
         {
             InitializeComponent();
+            //Declare Doublebuffering for all Highmovment pannels
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlBackSplash, new object[] { true });
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlFight, new object[] { true });
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlShoot, new object[] { true });
@@ -59,13 +61,14 @@ namespace SettlersofChaos
             random = new Random();
             var RedAxis = new Random();
             ThemeBlue();
+            // Declare all columns, radius and row variables for the hexagonal backsplash
             var shapeback = new Backsplash
             {
                 BackRow = 1,
                 BackColumn = 1,
                 BackRadius = 50,
             };
-
+            // Generate hexagons that are in the ranges specified for the backsplash
             for (int i = -2; i <= 2; i++)
             {
                 for (int j = -3; j <= 3; j++)
@@ -82,12 +85,14 @@ namespace SettlersofChaos
                     }
                 }
             }
+
+            // Rangomly generate the Artillery redblocks position
             for (int i = 0; i < 17; i++)
             {
                 redblocks[i] = new Artilltery(random, i);
             }
         }
-
+        //Paint Panel Game
         private void PnlGame_Paint(object sender, PaintEventArgs e)
         {
             var g = e.Graphics;
@@ -99,7 +104,7 @@ namespace SettlersofChaos
                     hexagon.Draw(g, center);
             }
         }
-
+        //Paint Panel Fight
         private void PnlFight_Paint(object sender, PaintEventArgs e)
         {
             var g = e.Graphics;
@@ -111,7 +116,7 @@ namespace SettlersofChaos
             artilleryTarget.Draw(g);
 
         }
-
+        //Controls movement of RedBlocks for the Artillery Game inside of the main game
         public void ArtilleryTicks_Tick(object sender, EventArgs e)
         {
             foreach (var block in redblocks)
@@ -121,20 +126,20 @@ namespace SettlersofChaos
             artilleryTarget.TargetPosX -= speed;
             PnlFight.Invalidate();
         }
-
+        //Keydown detection event for the Up, Down and Space keys
         private void FormGame_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Up) { left = true; }
             if (e.KeyData == Keys.Down) { right = true; }
             if (e.KeyData == Keys.Space) { if (ShootGameInuse == true) { bulletfired = true; } }
         }
-
+        //Timer that has full control over the Artillery Shell.
         private void TmrShellMove_Tick(object sender, EventArgs e)
         {
+            //If the Artillery shell collides with the Redblock do this
             if (CollidesWithRedBlock())
             {
                 Console.WriteLine("Shell collided with Redblock and dealt 3 damage to Player One");
-                //reset planet[i] back to top of panel
                 PlayerOneDefense -= 3;
                 artilleryShell.x -= 10;
                 YouMissedLBL.Visible = true;
@@ -146,6 +151,7 @@ namespace SettlersofChaos
                 Console.WriteLine(PlayerTwoDefense);
 
             }
+            //If the Artillery shell collides with the intended target do this
             if (CollidesWithTarget())
             {
                 Console.WriteLine("Shell collided Target and dealt 6 damage to Player Two");
@@ -160,6 +166,7 @@ namespace SettlersofChaos
                 Console.WriteLine(PlayerTwoDefense);
 
             }
+            //Controls if the shell is moving up or down
             else
             {
                 if (right) // if right arrow key pressed
@@ -174,7 +181,7 @@ namespace SettlersofChaos
                 }
             }
         }
-
+        //Detection for the redblock and Artillery Shell
         private bool CollidesWithRedBlock()
         {
             foreach (var block in redblocks)
@@ -187,7 +194,7 @@ namespace SettlersofChaos
             }
             return false;
         }
-
+        //Detection for the Artillery Target
         private bool CollidesWithTarget()
         {
             if (artilleryShell.ShellRec.IntersectsWith(new Rectangle(artilleryTarget.TargetPosition, artilleryTarget.TargetSize)))
@@ -196,13 +203,13 @@ namespace SettlersofChaos
             }
             return false;
         }
-
+        //Detects if a key has been released only aplicable for UP and Down keys
         private void FormGame_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Up) { left = false; }
             if (e.KeyData == Keys.Down) { right = false; }
         }
-
+        //Method for when the Artillery game is Triggered
         public void ArtilleryGameTriggered()
         {
             LblFortify.Visible = false;
@@ -223,7 +230,7 @@ namespace SettlersofChaos
             artilleryTarget.TargetPosX = 5000;
             YouMissedLBL.Visible = false;
         }
-
+        //Method for when the player exits the Artillery Game
         public void ArtilleryGameExit()
         {
             LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
@@ -243,19 +250,13 @@ namespace SettlersofChaos
             Console.WriteLine("ArtilelryGame Exited");
             TurnEnd();
         }
-
-        private void PnlGame_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseX = Cursor.Position.X;
-            MouseY = Cursor.Position.Y;
-        }
-
+        //Sets the locations of key labels when the Game is booted
         public void GameBoot()
         {
             LblTargetHit.Location = new Point(-3, 20);
             YouMissedLBL.Location = new Point(-3, 20);
         }
-
+        //Paint method for Panel Menu, Also sets the label text and draws the info boxes
         private void PnlMenu_Paint(object sender, PaintEventArgs e)
         {
             var g = e.Graphics;
@@ -267,16 +268,7 @@ namespace SettlersofChaos
             menugameinfo.Draw(g);
             menuplayerinfo.Draw(g);
         }
-
-        public void HexagonSelect()
-        {
-            float[] distances = new float[hexagons.Count];
-            foreach (var hexagon in hexagons)
-            {
-                //distances[i] = hexagon.getdistanceto(MouseX, MouseY);
-            }
-        }
-
+        //BtnStart if clicked it will start the game and update the labels for the player defenses to match the difficulty set
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -285,12 +277,13 @@ namespace SettlersofChaos
             LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
             LblPlayerOneName.Text = username;
             BtnExit.Visible = true;
+            //Username entry
             if (username == "")
             {
                 LblPlayerOneName.Text = "PlayerOne";
             }
         }
-
+        //Paint event for the Panel Home
         private void PnlHome_Paint(object sender, PaintEventArgs e)
         {
             var g = e.Graphics;
@@ -299,7 +292,7 @@ namespace SettlersofChaos
             plrtwo.Draw(g);
         }
 
-
+        //BTnArtillery event, sets certain Pnls, Btns and Labels to on and off depending if they are needed or not
         private void BtnArtillery_Click(object sender, EventArgs e)
         {
             artilleryShell.ShellRec.X = 10;
@@ -315,12 +308,12 @@ namespace SettlersofChaos
             LblPlayerTwo.Visible = false;
             LblTargetHit.Visible = false;
         }
-
+        //BtnExit for if the player needs o exit the game calls the GameEnd Method;
         private void BtnExit_Click(object sender, EventArgs e)
         {
             GameEnd();
         }
-
+        //For when the player ends the game or the game it ends it will call this method to show and hide what properties are needed
         public void GameEnd()
         {
             gamestart = false;
@@ -330,7 +323,7 @@ namespace SettlersofChaos
             BtnTutorial.Visible = true;
             LblTitle.Visible = true;
         }
-
+        //If BtnShoot is clicked it will run multiple methods and control certain properties
         private void BtnShoot_Click(object sender, EventArgs e)
         {
             TurnStart();
@@ -340,14 +333,14 @@ namespace SettlersofChaos
             ShootGameInuse = true;
             BtnExit.Visible = false;
         }
-
+        //Paint event for the Panel Shoot
         private void PnlShoot_Paint(object sender, PaintEventArgs e)
         {
             var g = e.Graphics;
             shoottarget.Draw(g);
             bullet.DrawBullet(g);
         }
-
+        //Timer event controls the Shoot target aswell as the bullet firing for the Shoot minigame
         private void TmrShoot_Tick(object sender, EventArgs e)
         {
             if (shoottarget.ShootTargetPosY > 300)
@@ -373,6 +366,7 @@ namespace SettlersofChaos
                 bullet.bulletx += 50;
                 bullet.BulletRec.Location = new Point(bullet.bulletx, bullet.y);
             }
+            //Detection for the Shootgame intersection
             if (bulletfired == true)
             {
                 if (bullet.BulletRec.IntersectsWith(new Rectangle(shoottarget.ShootPosition, shoottarget.ShootSize)))
@@ -387,38 +381,13 @@ namespace SettlersofChaos
             }
             PnlShoot.Invalidate();
         }
-
-     /*   public void bulletfiredcheck()
-        {
-            task.run(() =>
-            {
-                if (bulletfired == true)
-                {
-                    system.threading.thread.sleep(3000);
-                    if (bulletfired == true)
-                    {
-                        if (bullettargethit == false)
-                        {
-                            if (bullettargetmissed == false)
-                            {
-                                invoke((action)(() =>
-                                {
-                                    lblshoottargetmissed.visible = true;
-                                    shoottargetmissed();
-                                }));
-                            }
-                        }
-                    }
-                }
-            });
-        } */
-
+        //Shoot Game start method controls the Panel and Timer activation
         public void ShootGameStart() {
             PnlShoot.Visible = true;
             TmrShoot.Enabled = true;
 
         }
-
+        //Sets the labels and what properties need to be reenabled for the game to continue
         public void ShootGameEnd() {
             PnlShoot.Visible = false;
             LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
@@ -437,6 +406,7 @@ namespace SettlersofChaos
             TurnEnd();
             bullet.BulletRec.Location = new Point(bullet.bulletx, bullet.y);
         }
+        //Runs this method for if the player succsesfully hits the target
         public void ShootTargetHit()
         {
             LblTargetHit.Visible = true;
@@ -445,7 +415,7 @@ namespace SettlersofChaos
             PlayerTwoDefense -= 2;
             TmrDelay.Enabled = true;
         }
-
+        //If the player misses the target it will do what actions are necersary such as Dealing the damage to the player
         public void ShootTargetMissed() {
             TmrShoot.Enabled = false;
             BulletTargetMissed = true;
@@ -453,6 +423,8 @@ namespace SettlersofChaos
             PlayerOneDefense -= 2;
             TmrDelay.Enabled = true;
         }
+
+        //BtnFortify event for when the player wishes to fortify and gain helth and skip their turn
         private void BtnFortify_Click(object sender, EventArgs e)
         {
             BtnFortify.Enabled = false;
@@ -466,7 +438,7 @@ namespace SettlersofChaos
             LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
             AiTurn();
         }
-
+        //Timer that controls the delay after either the ArtilleryGame or Shootgame and ended
         private void TmrDelay_Tick(object sender, EventArgs e)
         {
             ArtilleryGameExit();
@@ -482,6 +454,7 @@ namespace SettlersofChaos
             }
         }
 
+        //If the player starts the game their needs to be certain elements renabled and disabled
         public void Gamestart()
         {
             LblFortify.Visible = true;
@@ -513,6 +486,7 @@ namespace SettlersofChaos
             TmrGame.Enabled = true;
         }
 
+        //When the player starts their turn, their is multiple turns in each game
         public void TurnStart() {
             AiTurnFinished = true;
             BtnShoot.Enabled = false;
@@ -520,6 +494,7 @@ namespace SettlersofChaos
             BtnFortify.Enabled = false;
         }
 
+        //The major method that runs at the end of each players turn that controls the AI players response, It takes a randomly generated set of numbers and comes up with its response. It has a chance of failure or succeding just like the player to ensure their is fairness in the game. Each difficulty of AI has a even Higher chance of completing succsesfully the more difficult attakcs. This mehtod also controls one of the two victory checks and checks for if the player has the ablility to fortify or not.
         public void AiTurn() {
             Console.WriteLine(Fortifyin);
             Console.WriteLine(Fortifies);
@@ -743,13 +718,7 @@ namespace SettlersofChaos
                 }
             }
         }
-
-        private void AiTurnFortify()
-        {
-            PlayerTwoDefense += 2;
-            AITurnEnd();
-        }
-
+        //Method to run at the End of the players turn that triggers the AI response
         public void TurnEnd()
         {
             Turn += 1;
@@ -762,7 +731,7 @@ namespace SettlersofChaos
                 AiTurn();
             }
         }
-
+        //Method to run if the player one loses the game
         public void PlrOneLost()
         {
             LblFortify.Visible = false;
@@ -791,6 +760,7 @@ namespace SettlersofChaos
             GameEnded = true;
         }
 
+        //Button for if the player selects the Easy difficulty setting
         private void BtnDiffEasy_Click(object sender, EventArgs e)
         {
             strdifficulty = " Easy";
@@ -801,7 +771,7 @@ namespace SettlersofChaos
             LblGameLengthSettings.Text = ("Your game length is" + strlength);
             LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
         }
-
+        //Button for if the player selects the Medium difficulty setting
         private void BtnDiffMed_Click(object sender, EventArgs e)
         {
             strdifficulty = " Medium";
@@ -812,7 +782,7 @@ namespace SettlersofChaos
             LblGameLengthSettings.Text = ("Your game length is" + strlength);
             LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
         }
-
+        //Button for if the player selects the Hard difficulty setting
         private void BtnDiffHard_Click(object sender, EventArgs e)
         {
             strdifficulty = " Hard";
@@ -823,7 +793,7 @@ namespace SettlersofChaos
             LblGameLengthSettings.Text = ("Your game length is" + strlength);
             LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
         }
-
+        //Button for if the player selects the Long length of time, long being the amount of defense each player has significantly increasing the games length
         private void BtnTimeLong_Click(object sender, EventArgs e)
         {
             strlength = " Long";
@@ -832,7 +802,7 @@ namespace SettlersofChaos
             LblGameLengthSettings.Text = ("Your game length is" + strlength);
             LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
         }
-
+        //Button for if the player selects the standard length of time, standard being the amount of defense each player has significantly increasing the games length
         private void BtnTimeStandard_Click(object sender, EventArgs e)
         {
             strlength = " Standard";
@@ -841,7 +811,7 @@ namespace SettlersofChaos
             LblGameLengthSettings.Text = ("Your game length is" + strlength);
             LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
         }
-
+        //Button for if the player selects the quick length of time, quick being the amount of defense each player has significantly increasing the games length
         private void BtnTimeQuick_Click(object sender, EventArgs e)
         {
             strlength = " Quick";
@@ -850,7 +820,7 @@ namespace SettlersofChaos
             LblGameLengthSettings.Text = ("Your game length is" + strlength);
             LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
         }
-
+        //Button to take the player to the settings menu
         private void BtnSettings_Click(object sender, EventArgs e)
         {
             PnlBackSplash.Visible = true;
@@ -874,7 +844,7 @@ namespace SettlersofChaos
             BtnSettings.Visible = false;
             TbUsername.Visible = false;
         }
-
+        //Button to return the player from the settings menu
         private void BtnReturnMenu_Click(object sender, EventArgs e)
         {
             PnlBackSplash.Visible = true;
@@ -895,7 +865,7 @@ namespace SettlersofChaos
             BtnSettings.Visible = true;
             TbUsername.Visible = true;
         }
-
+        //Button to change the theme colour to a pinky theme
         private void BtnThemePink_Click(object sender, EventArgs e)
         {
             strtheme = " Pink";
@@ -922,7 +892,7 @@ namespace SettlersofChaos
             PnlSettings.Invalidate();
 
         }
-
+        //Button to change the theme to a colour of Dark grey ish
         private void BtnThemeDark_Click(object sender, EventArgs e)
         {
             strtheme = " Dark";
@@ -948,7 +918,7 @@ namespace SettlersofChaos
             LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
             PnlSettings.Invalidate();
         }
-
+        //Button to change the theme to a blueish colour for the whole game
         private void BtnThemeBlue_Click(object sender, EventArgs e)
         {
             strtheme = " Blue";
@@ -974,18 +944,18 @@ namespace SettlersofChaos
             LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
             PnlSettings.Invalidate();
         }
-
+        //Starts the Tutorial for the player to click through
         private void BtnTutorial_Click(object sender, EventArgs e)
         {
             PnlTutorial.Visible = true;
         }
-
+        //Paints the Panel tutorial images
         private void PnlTutorial_Paint(object sender, PaintEventArgs e)
         {
             var g = e.Graphics;
             tutorialimage.Draw(g);
         }
-
+        //The event that controls the player moving through the Tutorial
         private void PnlTutorial_Click(object sender, EventArgs e)
         {
             tutorialimage.TutorialLevel += 1;
@@ -996,25 +966,25 @@ namespace SettlersofChaos
                 tutorialimage.TutorialLevel = 1;
             }
         }
-
+        //Changes the username string when the player edits the Text box
         private void TbUsername_TextChanged(object sender, EventArgs e)
         {
             username = TbUsername.Text;
             LblPlayerName.Text = username;
         }
-
+        //Paints the PnlSettings chaging the Labels to what they need to be
         private void PnlSettings_Paint(object sender, PaintEventArgs e)
         {
             LblGameDiffSettings.Text = ("Your game difficulty is" + strdifficulty);
             LblGameLengthSettings.Text = ("Your game length is" + strlength);
             LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
         }
-
+        //Debug to console log the PlayerTwo's defense for debuging purposes
         private void LblPlayerTwo_TextChanged(object sender, EventArgs e)
         {
             Console.WriteLine(PlayerTwoDefense);
         }
-
+        //Timer that runs throughout the whole game and controls wether the game is completed and who has won. One of two events that do this
         private void TmrGame_Tick(object sender, EventArgs e)
         {
             if (PlayerOneDefense < 1)
@@ -1046,7 +1016,7 @@ namespace SettlersofChaos
                 PBPlayerTwo.Visible = false;
             }
         }
-
+        //Timer that controls the delay at the end of game for the purpose of showing the victory or defeat purpose
         private void TmrGameEnd_Tick(object sender, EventArgs e)
         {
             Console.WriteLine("Game Ended");
@@ -1064,7 +1034,7 @@ namespace SettlersofChaos
             PBPlayerOne.Visible = true;
             PBPlayerTwo.Visible = true;
         }
-
+        //Method to run when the AI finishes their turn and renables buttons for the player to continue
         public void AITurnEnd()
         {
             LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
@@ -1073,6 +1043,7 @@ namespace SettlersofChaos
             BtnArtillery.Enabled = true;
         }
 
+        //method for if PlrTwo loses. If PlrTwo loses then the main player or the Human wins the game
         public void PlrTwoLost()
         {
             LblFortify.Visible = false;
@@ -1107,6 +1078,7 @@ namespace SettlersofChaos
             BtnExit.Visible = false;
             GameEnded = true;
         }
+        //Theme for the background of the game as defualt
         private void ThemeBlue()
         {
             strtheme = " Blue";
