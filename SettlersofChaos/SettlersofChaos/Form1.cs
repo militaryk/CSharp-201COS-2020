@@ -16,6 +16,7 @@ namespace SettlersofChaos
         int Fortifyin = 0;
         string strlength = " Short";
         string strdifficulty = " Easy";
+        bool GameEnded = false;
         string strtheme = " Blue";
         string username = "PlayerOne";
         string usersettings = "Default";
@@ -48,7 +49,6 @@ namespace SettlersofChaos
         Backsplash backsplash = new Backsplash();
         ShootTarget shoottarget = new ShootTarget();
         private Random random;
-
         public FormGame()
         {
             InitializeComponent();
@@ -58,6 +58,7 @@ namespace SettlersofChaos
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlHome, new object[] { true });
             random = new Random();
             var RedAxis = new Random();
+            ThemeBlue();
             var shapeback = new Backsplash
             {
                 BackRow = 1,
@@ -123,7 +124,6 @@ namespace SettlersofChaos
 
         private void FormGame_KeyDown(object sender, KeyEventArgs e)
         {
-            LblDebug.Text = Convert.ToString(artilleryShell.ShellRec.Y);
             if (e.KeyData == Keys.Up) { left = true; }
             if (e.KeyData == Keys.Down) { right = true; }
             if (e.KeyData == Keys.Space) { if (ShootGameInuse == true) { bulletfired = true; } }
@@ -205,6 +205,7 @@ namespace SettlersofChaos
 
         public void ArtilleryGameTriggered()
         {
+            LblFortify.Visible = false;
             PnlFight.Location = new Point(0, 60);
             GameBoot();
             TmrArtilleryTicks.Enabled = true;
@@ -228,6 +229,7 @@ namespace SettlersofChaos
             LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
             LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
             LblPlayerOneName.Visible = true;
+            LblFortify.Visible = true;
             LblPlayerTwoName.Visible = true;
             LblPlayerOne.Visible = true;
             LblPlayerTwo.Visible = true;
@@ -279,7 +281,10 @@ namespace SettlersofChaos
         {
 
             Gamestart();
+            LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
+            LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
             LblPlayerOneName.Text = username;
+            BtnExit.Visible = true;
             if (username == "")
             {
                 LblPlayerOneName.Text = "PlayerOne";
@@ -479,10 +484,13 @@ namespace SettlersofChaos
 
         public void Gamestart()
         {
+            LblFortify.Visible = true;
+            BtnFortify.Enabled = true;
             LblAIAction.Text = "Player One attack to start!";
             gamestart = true;
             LblPlayerLost.Visible = false;
             Turn = 0;
+            GameEnded = false;
             BtnSettings.Visible = false;
             BtnExit.Enabled = true;
             BtnStart.Visible = false;
@@ -502,8 +510,6 @@ namespace SettlersofChaos
             PBPlayerTwo.Enabled = true;
             PlayerOneDefense = Difficulty;
             PlayerTwoDefense = Difficulty;
-            LblPlayerOne.Text = Convert.ToString(PlayerOneDefense);
-            LblPlayerTwo.Text = Convert.ToString(PlayerTwoDefense);
             TmrGame.Enabled = true;
         }
 
@@ -534,229 +540,205 @@ namespace SettlersofChaos
             if (Fortifyin > 0) {
                 if (Fortifies == 0)
                 {
-                    LblFortify.Text = "You have" + Fortifyin + "Turns till your next Fortify";
+                    LblFortify.Text = "You have " + Fortifyin + " turns till your next fortify";
                 }
             }
             if (Fortifyin > 0 && Fortifies > 0)
             {
-                LblFortify.Text = "You have" + Fortifies + "Avalible and" + Fortifyin + "Till your next";
+                LblFortify.Text = "You have " + Fortifies + " fortifies avalible and " + Fortifyin + " turns till your next";
+            }
+            if (PlayerOneDefense < 1)
+            {
+                Console.WriteLine("PlayerOneLost");
+                Console.WriteLine(PlayerOneDefense);
+                PlrOneLost();
+                BtnFortify.Visible = false;
+                BtnArtillery.Visible = false;
+                BtnExit.Visible = false;
+                BtnShoot.Visible = false;
+                PBPlayerOne.Visible = false;
+                PBPlayerTwo.Visible = false;
+                PlayerOneDefense = Difficulty;
+            }
+            if (PlayerTwoDefense < 1)
+            {
+                Console.WriteLine("PlayerTwoLost");
+                PlrTwoLost();
+                LblYouWon.Visible = true;
+                BtnFortify.Visible = false;
+                BtnArtillery.Visible = false;
+                BtnExit.Visible = false;
+                BtnShoot.Visible = false;
+                PBPlayerOne.Visible = false;
+                PBPlayerTwo.Visible = false;
+                Console.WriteLine(PlayerTwoDefense);
             }
             string AIResponse;
             Random rnd = new Random();
             int AIAttack = rnd.Next(1, 101);  // creates a number between 1 and 100
             int AIAttackSuccses = rnd.Next(1, 101);   // creates a number between 1 and 100
-            if (PlayerOneDefense <= 0)
+            if (GameEnded == false)
             {
-                Console.WriteLine("PlayerOneLost");
-                Console.WriteLine(PlayerOneDefense);
-                PlrOneLost();
-                LblPlayerLost.Visible = true;
-                LblPlayerOne.Visible = false;
-                LblPlayerTwo.Visible = false;
-                BtnArtillery.Visible = false;
-                BtnFortify.Visible = false;
-                BtnShoot.Visible = false;
-                PBPlayerOne.Visible = false;
-                PBPlayerTwo.Visible = false;
-                LblPlayerLost.Enabled = false;
-                LblPlayerOne.Enabled = false;
-                LblPlayerTwo.Enabled = false;
-                BtnArtillery.Enabled = false;
-                BtnFortify.Enabled = false;
-                BtnShoot.Enabled = false;
-                PBPlayerOne.Enabled = false;
-                PBPlayerTwo.Enabled = false;
-                TmrGame.Enabled = false;
-                BtnExit.Enabled = false;
-                BtnExit.Visible = false;
-                PlayerOneDefense = Difficulty;
-            }
-            if (PlayerTwoDefense <= 0)
-            {
-                Console.WriteLine("PlayerTwoLost");
-                PlrTwoLost();
-                TmrGame.Enabled = false;
-                LblYouWon.Visible = true;
-                Console.WriteLine(PlayerTwoDefense);
-                PlayerTwoDefense = Difficulty;
-                LblPlayerLost.Visible = false;
-                LblPlayerOne.Visible = false;
-                LblPlayerTwo.Visible = false;
-                BtnArtillery.Visible = false;
-                BtnFortify.Visible = false;
-                BtnShoot.Visible = false;
-                PBPlayerOne.Visible = false;
-                PBPlayerTwo.Visible = false;
-                LblPlayerLost.Enabled = false;
-                LblPlayerOne.Enabled = false;
-                LblPlayerTwo.Enabled = false;
-                BtnArtillery.Enabled = false;
-                BtnFortify.Enabled = false;
-                BtnShoot.Enabled = false;
-                PBPlayerOne.Enabled = false;
-                PBPlayerTwo.Enabled = false;
-                BtnExit.Enabled = false;
-                BtnExit.Visible = false;
-            }
-            if (easy == true)
-            {
-                if (AIAttack >= 61 & AIAttack <= 100)
+                if (easy == true)
                 {
-                    PlayerTwoDefense += 2;
-                    AIResponse = "The AI used Fortify and gained 2HP" + "   (" + "Turn:" + Turn + ")";
-                    Console.WriteLine("The AI used Fortify and gained 2HP");
-                    LblAIAction.Text = AIResponse;
-                    AITurnEnd();
-                    Console.WriteLine(PlayerTwoDefense + "(Fortify)");
-                }
-                else if (AIAttack >= 30 & AIAttack <= 60)
-                {
-                    if (AIAttackSuccses >= 0 & AIAttackSuccses <= 66)
+                    if (AIAttack >= 61 & AIAttack <= 100)
                     {
-                        AIResponse = "The AI successfully used Shoot and dealt 2HP" + " (" + "Turn:" + Turn + ")";
-                        Console.WriteLine("The AI successfully used Shoot and dealt 2HP");
-                        Console.WriteLine(PlayerTwoDefense + "(Shoot Suc)");
+                        PlayerTwoDefense += 2;
+                        AIResponse = "The AI used Fortify and gained 2HP" + "   (" + "Turn:" + Turn + ")";
+                        Console.WriteLine("The AI used Fortify and gained 2HP");
                         LblAIAction.Text = AIResponse;
-                        PlayerOneDefense -= 2;
-                        Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
+                        Console.WriteLine(PlayerTwoDefense + "(Fortify)");
                     }
-                    else
+                    else if (AIAttack >= 30 & AIAttack <= 60)
                     {
-                        AIResponse = "The AI failed to used Shoot and lost 2HP" + " (" + "Turn:" + Turn + ")";
-                        Console.WriteLine("The AI failed to used Shoot and lost 2HP");
-                        Console.WriteLine(PlayerTwoDefense + "(Shoot Fail)");
-                        LblAIAction.Text = AIResponse;
-                        PlayerTwoDefense -= 2;
-                        Console.WriteLine(PlayerTwoDefense);
-                        AITurnEnd();
+                        if (AIAttackSuccses >= 0 & AIAttackSuccses <= 66)
+                        {
+                            AIResponse = "The AI successfully used Shoot and dealt 2HP" + " (" + "Turn:" + Turn + ")";
+                            Console.WriteLine("The AI successfully used Shoot and dealt 2HP");
+                            Console.WriteLine(PlayerTwoDefense + "(Shoot Suc)");
+                            LblAIAction.Text = AIResponse;
+                            PlayerOneDefense -= 2;
+                            Console.WriteLine(PlayerTwoDefense);
+                            AITurnEnd();
+                        }
+                        else
+                        {
+                            AIResponse = "The AI failed to used Shoot and lost 2HP" + " (" + "Turn:" + Turn + ")";
+                            Console.WriteLine("The AI failed to used Shoot and lost 2HP");
+                            Console.WriteLine(PlayerTwoDefense + "(Shoot Fail)");
+                            LblAIAction.Text = AIResponse;
+                            PlayerTwoDefense -= 2;
+                            Console.WriteLine(PlayerTwoDefense);
+                            AITurnEnd();
+                        }
+                    }
+                    else if (AIAttack >= 0 & AIAttack <= 29)
+                    {
+                        if (AIAttackSuccses >= 0 & AIAttackSuccses <= 45)
+                        {
+                            AIResponse = "The AI successfully used Artillery and dealt 6HP" + " (" + "Turn:" + Turn + ")";
+                            Console.WriteLine("The AI successfully used Artillery and dealt 6HP");
+                            Console.WriteLine(PlayerTwoDefense + "(Artillery Suc)");
+                            LblAIAction.Text = AIResponse;
+                            PlayerOneDefense -= 3;
+                            Console.WriteLine(PlayerTwoDefense);
+                            AITurnEnd();
+                        }
+                        else
+                        {
+                            AIResponse = "The AI failed to used Artillery and lost 3HP" + " (" + "Turn:" + Turn + ")";
+                            Console.WriteLine("The AI failed to used Artillery and lost 3HP");
+                            Console.WriteLine(PlayerTwoDefense + "(Artillery Fail)");
+                            LblAIAction.Text = AIResponse;
+                            PlayerTwoDefense -= 3;
+                            Console.WriteLine(PlayerTwoDefense);
+                            AITurnEnd();
+                        }
                     }
                 }
-                else if (AIAttack >= 0 & AIAttack <= 29)
+                if (medium == true)
                 {
-                    if (AIAttackSuccses >= 0 & AIAttackSuccses <= 45)
+                    if (AIAttack >= 70 & AIAttack <= 100)
                     {
-                        AIResponse = "The AI successfully used Artillery and dealt 6HP" + " (" + "Turn:" + Turn + ")";
-                        Console.WriteLine("The AI successfully used Artillery and dealt 6HP");
-                        Console.WriteLine(PlayerTwoDefense + "(Artillery Suc)");
+                        PlayerTwoDefense += 2;
+                        AIResponse = "The AI used Fortify and gained 2HP" + "   (" + "Turn:" + Turn + ")";
+                        Console.WriteLine("The AI used Fortify and gained 2HP");
                         LblAIAction.Text = AIResponse;
-                        PlayerOneDefense -= 3;
                         Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
                     }
-                    else
+                    else if (AIAttack >= 40 & AIAttack <= 70)
                     {
-                        AIResponse = "The AI failed to used Artillery and lost 3HP" + " (" + "Turn:" + Turn + ")";
-                        Console.WriteLine("The AI failed to used Artillery and lost 3HP");
-                        Console.WriteLine(PlayerTwoDefense + "(Artillery Fail)");
-                        LblAIAction.Text = AIResponse;
-                        PlayerTwoDefense -= 3;
-                        Console.WriteLine(PlayerTwoDefense);
-                        AITurnEnd();
+                        if (AIAttackSuccses >= 0 & AIAttackSuccses <= 77)
+                        {
+                            PlayerOneDefense -= 2;
+                            AIResponse = "The AI successfully used Shoot and dealt 2HP" + " (" + "Turn:" + Turn + ")";
+                            Console.WriteLine("The AI successfully used Shoot and dealt 2HP");
+                            Console.WriteLine(PlayerTwoDefense);
+                            LblAIAction.Text = AIResponse;
+                            AITurnEnd();
+                        }
+                        else
+                        {
+                            PlayerTwoDefense -= 2;
+                            AIResponse = "The AI failed to used Shoot and lost 2HP" + " (" + "Turn:" + Turn + ")";
+                            Console.WriteLine("The AI failed to used Shoot and lost 2HP");
+                            LblAIAction.Text = AIResponse;
+                            Console.WriteLine(PlayerTwoDefense);
+                            AITurnEnd();
+                        }
+                    }
+                    else if (AIAttack >= 0 & AIAttack <= 40)
+                    {
+                        if (AIAttackSuccses >= 0 & AIAttackSuccses <= 55)
+                        {
+                            PlayerOneDefense -= 3;
+                            AIResponse = "The AI successfully used Artillery and dealt 6HP" + " (" + "Turn:" + Turn + ")";
+                            LblAIAction.Text = AIResponse;
+                            Console.WriteLine(PlayerTwoDefense);
+                            AITurnEnd();
+                        }
+                        else
+                        {
+                            PlayerTwoDefense -= 3;
+                            AIResponse = "The AI failed to used Artillery and lost 3HP" + " (" + "Turn:" + Turn + ")";
+                            LblAIAction.Text = AIResponse;
+                            Console.WriteLine(PlayerTwoDefense);
+                            AITurnEnd();
+                        }
                     }
                 }
-            }
-            if (medium == true) 
-            {
-                if (AIAttack >= 70 & AIAttack <= 100)
+                if (hard == true)
                 {
-                    PlayerTwoDefense += 2;
-                    AIResponse = "The AI used Fortify and gained 2HP" + "   (" + "Turn:" + Turn + ")";
-                    Console.WriteLine("The AI used Fortify and gained 2HP");
-                    LblAIAction.Text = AIResponse;
-                    Console.WriteLine(PlayerTwoDefense);
-                    AITurnEnd();
-                }
-                else if (AIAttack >= 40 & AIAttack <= 70)
-                {
-                    if (AIAttackSuccses >= 0 & AIAttackSuccses <= 77)
+                    if (AIAttack >= 80 & AIAttack <= 100)
                     {
-                        PlayerOneDefense -= 2;
-                        AIResponse = "The AI successfully used Shoot and dealt 2HP" + " (" + "Turn:" + Turn + ")";
-                        Console.WriteLine("The AI successfully used Shoot and dealt 2HP");
-                        Console.WriteLine(PlayerTwoDefense);
-                        LblAIAction.Text = AIResponse;
-                        AITurnEnd();
-                    }
-                    else
-                    {
-                        PlayerTwoDefense -= 2;
-                        AIResponse = "The AI failed to used Shoot and lost 2HP" + " (" + "Turn:" + Turn + ")";
-                        Console.WriteLine("The AI failed to used Shoot and lost 2HP");
+                        PlayerTwoDefense += 2;
+                        AIResponse = "The AI used Fortify and gained 2HP" + "   (" + "Turn:" + Turn + ")";
+                        Console.WriteLine("The AI used Fortify and gained 2HP");
                         LblAIAction.Text = AIResponse;
                         Console.WriteLine(PlayerTwoDefense);
                         AITurnEnd();
                     }
-                }
-                else if (AIAttack >= 0 & AIAttack <= 40)
-                {
-                    if (AIAttackSuccses >= 0 & AIAttackSuccses <= 55)
+                    else if (AIAttack >= 40 & AIAttack <= 80)
                     {
-                        PlayerOneDefense -= 3;
-                        AIResponse = "The AI successfully used Artillery and dealt 6HP" + " (" + "Turn:" + Turn + ")";
-                        LblAIAction.Text = AIResponse;
-                        Console.WriteLine(PlayerTwoDefense);
-                        AITurnEnd();
+                        if (AIAttackSuccses >= 0 & AIAttackSuccses <= 90)
+                        {
+                            PlayerOneDefense -= 2;
+                            AIResponse = "The AI successfully used Shoot and dealt 2HP" + " (" + "Turn:" + Turn + ")";
+                            Console.WriteLine("The AI successfully used Shoot and dealt 2HP");
+                            LblAIAction.Text = AIResponse;
+                            Console.WriteLine(PlayerTwoDefense);
+                            AITurnEnd();
+                        }
+                        else
+                        {
+                            PlayerTwoDefense -= 2;
+                            AIResponse = "The AI failed to used Shoot and lost 2HP" + " (" + "Turn:" + Turn + ")";
+                            Console.WriteLine("The AI failed to used Shoot and lost 2HP");
+                            LblAIAction.Text = AIResponse;
+                            Console.WriteLine(PlayerTwoDefense);
+                            AITurnEnd();
+                        }
                     }
-                    else
+                    else if (AIAttack >= 0 & AIAttack <= 40)
                     {
-                        PlayerTwoDefense -= 3;
-                        AIResponse = "The AI failed to used Artillery and lost 3HP" + " (" + "Turn:" + Turn + ")";
-                        LblAIAction.Text = AIResponse;
-                        Console.WriteLine(PlayerTwoDefense);
-                        AITurnEnd();
-                    }
-                }
-            }
-            if (hard == true) 
-            {
-                if (AIAttack >= 80 & AIAttack <= 100)
-                {
-                    PlayerTwoDefense += 2;
-                    AIResponse = "The AI used Fortify and gained 2HP" + "   (" + "Turn:" + Turn + ")";
-                    Console.WriteLine("The AI used Fortify and gained 2HP");
-                    LblAIAction.Text = AIResponse;
-                    Console.WriteLine(PlayerTwoDefense);
-                    AITurnEnd();
-                }
-                else if (AIAttack >= 40 & AIAttack <= 80)
-                {
-                    if (AIAttackSuccses >= 0 & AIAttackSuccses <= 90)
-                    {
-                        PlayerOneDefense -= 2;
-                        AIResponse = "The AI successfully used Shoot and dealt 2HP" + " (" + "Turn:" + Turn + ")";
-                        Console.WriteLine("The AI successfully used Shoot and dealt 2HP");
-                        LblAIAction.Text = AIResponse;
-                        Console.WriteLine(PlayerTwoDefense);
-                        AITurnEnd();
-                    }
-                    else
-                    {
-                        PlayerTwoDefense -= 2;
-                        AIResponse = "The AI failed to used Shoot and lost 2HP" + " (" + "Turn:" + Turn + ")";
-                        Console.WriteLine("The AI failed to used Shoot and lost 2HP" );
-                        LblAIAction.Text = AIResponse;
-                        Console.WriteLine(PlayerTwoDefense);
-                        AITurnEnd();
-                    }
-                }
-                else if (AIAttack >= 0 & AIAttack <= 40)
-                {
-                    if (AIAttackSuccses >= 0 & AIAttackSuccses <= 70)
-                    {
-                        PlayerOneDefense -= 3;
-                        AIResponse = "The AI successfully used Artillery and dealt 6HP" + " (" + "Turn:" + Turn + ")";
-                        LblAIAction.Text = AIResponse;
-                        Console.WriteLine(PlayerTwoDefense);
-                        AITurnEnd();
-                    }
-                    else
-                    {
-                        PlayerTwoDefense -= 3;
-                        AIResponse = "The AI failed to used Artillery and lost 3HP" + " (" + "Turn:" + Turn + ")";
-                        LblAIAction.Text = AIResponse;
-                        Console.WriteLine(PlayerTwoDefense);
-                        AITurnEnd();
+                        if (AIAttackSuccses >= 0 & AIAttackSuccses <= 70)
+                        {
+                            PlayerOneDefense -= 3;
+                            AIResponse = "The AI successfully used Artillery and dealt 6HP" + " (" + "Turn:" + Turn + ")";
+                            LblAIAction.Text = AIResponse;
+                            Console.WriteLine(PlayerTwoDefense);
+                            AITurnEnd();
+                        }
+                        else
+                        {
+                            PlayerTwoDefense -= 3;
+                            AIResponse = "The AI failed to used Artillery and lost 3HP" + " (" + "Turn:" + Turn + ")";
+                            LblAIAction.Text = AIResponse;
+                            Console.WriteLine(PlayerTwoDefense);
+                            AITurnEnd();
+                        }
                     }
                 }
             }
@@ -783,6 +765,7 @@ namespace SettlersofChaos
 
         public void PlrOneLost()
         {
+            LblFortify.Visible = false;
             LblPlayerLost.Visible = true;
             LblYouWon.Visible = false;
             TmrGameEnd.Enabled = true;
@@ -805,6 +788,7 @@ namespace SettlersofChaos
             PBPlayerTwo.Enabled = false;
             BtnExit.Enabled = false;
             BtnExit.Visible = false;
+            GameEnded = true;
         }
 
         private void BtnDiffEasy_Click(object sender, EventArgs e)
@@ -1039,6 +1023,14 @@ namespace SettlersofChaos
                 Console.WriteLine(PlayerOneDefense);
                 PlrOneLost();
                 PlayerOneDefense = Difficulty;
+                BtnFortify.Visible = false;
+                BtnArtillery.Visible = false;
+                BtnExit.Visible = false;
+                BtnShoot.Visible = false;
+                PBPlayerOne.Visible = false;
+                PBPlayerTwo.Visible = false;
+                BtnFortify.Enabled = false;
+                BtnExit.Enabled = false;
             }
             if (PlayerTwoDefense < 1)
             {
@@ -1046,6 +1038,12 @@ namespace SettlersofChaos
                 PlrTwoLost();
                 LblYouWon.Visible = true;
                 Console.WriteLine(PlayerTwoDefense);
+                BtnFortify.Visible = false;
+                BtnArtillery.Visible = false;
+                BtnExit.Visible = false;
+                BtnShoot.Visible = false;
+                PBPlayerOne.Visible = false;
+                PBPlayerTwo.Visible = false;
             }
         }
 
@@ -1077,6 +1075,7 @@ namespace SettlersofChaos
 
         public void PlrTwoLost()
         {
+            LblFortify.Visible = false;
             TmrGameEnd.Enabled = true;
             LblYouWon.Visible = true;
             LblPlayerLost.Visible = false;
@@ -1106,7 +1105,32 @@ namespace SettlersofChaos
             PBPlayerTwo.Enabled = false;
             BtnExit.Enabled = false;
             BtnExit.Visible = false;
+            GameEnded = true;
+        }
+        private void ThemeBlue()
+        {
+            strtheme = " Blue";
+            plrone.themedark = false;
+            plrone.themepink = false;
+            plrone.themeblue = true;
+            plrtwo.themedark = false;
+            plrtwo.themepink = false;
+            plrtwo.themeblue = true;
+            gamehotbar.themepink = false;
+            gamehotbar.themeblue = true;
+            gamehotbar.themedark = false;
+            menugameinfo.themepink = false;
+            menugameinfo.themeblue = true;
+            menugameinfo.themedark = false;
+            menuplayerinfo.themepink = false;
+            menuplayerinfo.themeblue = true;
+            menuplayerinfo.themedark = false;
+            LblAIAction.BackColor = (Color.FromArgb(39, 61, 227));
+            PnlHome.BackColor = (Color.FromArgb(150, 182, 250));
+            LblGameDiffSettings.Text = ("Your game difficulty is" + strdifficulty);
+            LblGameLengthSettings.Text = ("Your game length is" + strlength);
+            LblGameThemeSettings.Text = ("Your game theme is" + strtheme);
+            PnlSettings.Invalidate();
         }
     }
 }
-

@@ -112,24 +112,6 @@
     <None Include="Resources\shootbullet.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\TutorialChapterFive.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\TutorialChapterFour.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\TutorialChapterOne.PNG" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\TutorialChapterThree.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\TutorialChapterTwo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\TutorialChapterSix.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\10-108039_clipart-person-icon-cliparts-transparent-background-person-icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +119,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
+    <None Include="Resources\TutorialChapterFive.PNG" />
+    <None Include="Resources\TutorialChapterFour.PNG" />
+    <None Include="Resources\TutorialChapterSix.PNG" />
+    <None Include="Resources\TutorialChapterTwo.PNG" />
+    <None Include="Resources\TutorialChapterThree.PNG" />
+    <None Include="Resources\TutorialChapterOne.PNG" />
     <None Include="Resources\Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

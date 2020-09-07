@@ -32,10 +32,10 @@
             this.PnlBackSplash = new System.Windows.Forms.Panel();
             this.PnlMenu = new System.Windows.Forms.Panel();
             this.PnlHome = new System.Windows.Forms.Panel();
-            this.LblDebug = new System.Windows.Forms.Label();
             this.LblTurnName = new System.Windows.Forms.Label();
             this.LblTurn = new System.Windows.Forms.Label();
             this.LblAIAction = new System.Windows.Forms.Label();
+            this.LblYouWon = new System.Windows.Forms.Label();
             this.LblPlayerLost = new System.Windows.Forms.Label();
             this.PBPlayerTwo = new System.Windows.Forms.PictureBox();
             this.PBPlayerOne = new System.Windows.Forms.PictureBox();
@@ -54,7 +54,6 @@
             this.LblTargetHit = new System.Windows.Forms.Label();
             this.BtnFortify = new System.Windows.Forms.Button();
             this.BtnExit = new System.Windows.Forms.Button();
-            this.LblYouWon = new System.Windows.Forms.Label();
             this.PnlTutorial = new System.Windows.Forms.Panel();
             this.TbUsername = new System.Windows.Forms.TextBox();
             this.BtnSettings = new System.Windows.Forms.Button();
@@ -105,7 +104,7 @@
             this.PnlBackSplash.Location = new System.Drawing.Point(0, 0);
             this.PnlBackSplash.Name = "PnlBackSplash";
             this.PnlBackSplash.Size = new System.Drawing.Size(784, 461);
-            this.PnlBackSplash.TabIndex = 0;
+            this.PnlBackSplash.TabIndex = 1;
             this.PnlBackSplash.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlGame_Paint);
             this.PnlBackSplash.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PnlGame_MouseDown);
             // 
@@ -136,10 +135,10 @@
             // PnlHome
             // 
             this.PnlHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(161)))), ((int)(((byte)(188)))));
-            this.PnlHome.Controls.Add(this.LblDebug);
             this.PnlHome.Controls.Add(this.LblTurnName);
             this.PnlHome.Controls.Add(this.LblTurn);
             this.PnlHome.Controls.Add(this.LblAIAction);
+            this.PnlHome.Controls.Add(this.LblYouWon);
             this.PnlHome.Controls.Add(this.LblPlayerLost);
             this.PnlHome.Controls.Add(this.PBPlayerTwo);
             this.PnlHome.Controls.Add(this.PBPlayerOne);
@@ -154,24 +153,12 @@
             this.PnlHome.Controls.Add(this.PnlFight);
             this.PnlHome.Controls.Add(this.BtnFortify);
             this.PnlHome.Controls.Add(this.BtnExit);
-            this.PnlHome.Controls.Add(this.LblYouWon);
             this.PnlHome.Location = new System.Drawing.Point(0, 0);
             this.PnlHome.Name = "PnlHome";
             this.PnlHome.Size = new System.Drawing.Size(800, 500);
             this.PnlHome.TabIndex = 4;
             this.PnlHome.Visible = false;
             this.PnlHome.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlHome_Paint);
-            // 
-            // LblDebug
-            // 
-            this.LblDebug.AutoSize = true;
-            this.LblDebug.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.LblDebug.Location = new System.Drawing.Point(467, 424);
-            this.LblDebug.Name = "LblDebug";
-            this.LblDebug.Size = new System.Drawing.Size(13, 13);
-            this.LblDebug.TabIndex = 13;
-            this.LblDebug.Text = "0";
-            this.LblDebug.Visible = false;
             // 
             // LblTurnName
             // 
@@ -207,6 +194,19 @@
             this.LblAIAction.TabIndex = 2;
             this.LblAIAction.Text = "Player Two Attacks";
             this.LblAIAction.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // LblYouWon
+            // 
+            this.LblYouWon.AutoSize = true;
+            this.LblYouWon.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.LblYouWon.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblYouWon.ForeColor = System.Drawing.Color.Lime;
+            this.LblYouWon.Location = new System.Drawing.Point(153, 150);
+            this.LblYouWon.Name = "LblYouWon";
+            this.LblYouWon.Size = new System.Drawing.Size(467, 110);
+            this.LblYouWon.TabIndex = 2;
+            this.LblYouWon.Text = "You Won!";
+            this.LblYouWon.Visible = false;
             // 
             // LblPlayerLost
             // 
@@ -279,7 +279,7 @@
             this.LblShootTargetHit.Location = new System.Drawing.Point(135, 150);
             this.LblShootTargetHit.Name = "LblShootTargetHit";
             this.LblShootTargetHit.Size = new System.Drawing.Size(529, 108);
-            this.LblShootTargetHit.TabIndex = 0;
+            this.LblShootTargetHit.TabIndex = 1;
             this.LblShootTargetHit.Text = "Good Shot!";
             this.LblShootTargetHit.Visible = false;
             // 
@@ -339,7 +339,7 @@
             this.LblPlayerTwoName.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblPlayerTwoName.Location = new System.Drawing.Point(570, 262);
             this.LblPlayerTwoName.Name = "LblPlayerTwoName";
-            this.LblPlayerTwoName.Size = new System.Drawing.Size(160, 35);
+            this.LblPlayerTwoName.Size = new System.Drawing.Size(160, 70);
             this.LblPlayerTwoName.TabIndex = 3;
             this.LblPlayerTwoName.Text = "JefftheAI";
             this.LblPlayerTwoName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -349,7 +349,7 @@
             this.LblPlayerOneName.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblPlayerOneName.Location = new System.Drawing.Point(70, 262);
             this.LblPlayerOneName.Name = "LblPlayerOneName";
-            this.LblPlayerOneName.Size = new System.Drawing.Size(160, 35);
+            this.LblPlayerOneName.Size = new System.Drawing.Size(160, 70);
             this.LblPlayerOneName.TabIndex = 2;
             this.LblPlayerOneName.Text = "Username";
             this.LblPlayerOneName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -377,7 +377,7 @@
             this.PnlFight.Location = new System.Drawing.Point(60, 457);
             this.PnlFight.Name = "PnlFight";
             this.PnlFight.Size = new System.Drawing.Size(800, 300);
-            this.PnlFight.TabIndex = 0;
+            this.PnlFight.TabIndex = 1;
             this.PnlFight.Visible = false;
             this.PnlFight.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlFight_Paint);
             // 
@@ -391,7 +391,7 @@
             this.YouMissedLBL.Location = new System.Drawing.Point(-357, 176);
             this.YouMissedLBL.Name = "YouMissedLBL";
             this.YouMissedLBL.Size = new System.Drawing.Size(800, 300);
-            this.YouMissedLBL.TabIndex = 0;
+            this.YouMissedLBL.TabIndex = 1;
             this.YouMissedLBL.Text = "You Missed";
             this.YouMissedLBL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.YouMissedLBL.Visible = false;
@@ -435,25 +435,11 @@
             this.BtnExit.Name = "BtnExit";
             this.BtnExit.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.BtnExit.Size = new System.Drawing.Size(163, 41);
-            this.BtnExit.TabIndex = 0;
+            this.BtnExit.TabIndex = 1;
             this.BtnExit.Text = "Forfeit";
             this.BtnExit.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.BtnExit.UseVisualStyleBackColor = false;
             this.BtnExit.Click += new System.EventHandler(this.BtnExit_Click);
-            // 
-            // LblYouWon
-            // 
-            this.LblYouWon.AutoSize = true;
-            this.LblYouWon.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.LblYouWon.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblYouWon.ForeColor = System.Drawing.Color.Lime;
-            this.LblYouWon.Location = new System.Drawing.Point(146, 150);
-            this.LblYouWon.Name = "LblYouWon";
-            this.LblYouWon.Size = new System.Drawing.Size(467, 110);
-            this.LblYouWon.TabIndex = 12;
-            this.LblYouWon.Text = "You Won!";
-            this.LblYouWon.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.LblYouWon.Visible = false;
             // 
             // PnlTutorial
             // 
@@ -534,7 +520,7 @@
             this.BtnThemeDark.Size = new System.Drawing.Size(145, 34);
             this.BtnThemeDark.TabIndex = 9;
             this.BtnThemeDark.TabStop = false;
-            this.BtnThemeDark.Text = "Dark";
+            this.BtnThemeDark.Text = "Grey";
             this.BtnThemeDark.UseVisualStyleBackColor = false;
             this.BtnThemeDark.Visible = false;
             this.BtnThemeDark.Click += new System.EventHandler(this.BtnThemeDark_Click);
@@ -672,7 +658,7 @@
             this.BtnDiffEasy.Location = new System.Drawing.Point(400, 263);
             this.BtnDiffEasy.Name = "BtnDiffEasy";
             this.BtnDiffEasy.Size = new System.Drawing.Size(145, 34);
-            this.BtnDiffEasy.TabIndex = 0;
+            this.BtnDiffEasy.TabIndex = 1;
             this.BtnDiffEasy.TabStop = false;
             this.BtnDiffEasy.Text = "Easy";
             this.BtnDiffEasy.UseVisualStyleBackColor = true;
@@ -772,7 +758,7 @@
             this.BtnStart.Location = new System.Drawing.Point(206, 121);
             this.BtnStart.Name = "BtnStart";
             this.BtnStart.Size = new System.Drawing.Size(384, 90);
-            this.BtnStart.TabIndex = 0;
+            this.BtnStart.TabIndex = 1;
             this.BtnStart.Text = "Start";
             this.BtnStart.UseVisualStyleBackColor = false;
             this.BtnStart.Click += new System.EventHandler(this.button1_Click);
@@ -803,7 +789,7 @@
             // 
             // TmrGameEnd
             // 
-            this.TmrGameEnd.Interval = 13000;
+            this.TmrGameEnd.Interval = 5000;
             this.TmrGameEnd.Tick += new System.EventHandler(this.TmrGameEnd_Tick);
             // 
             // FormGame
@@ -897,7 +883,6 @@
         private System.Windows.Forms.Label LblGameThemeSettings;
         private System.Windows.Forms.Label LblPlayerTwoName;
         private System.Windows.Forms.Label LblPlayerOneName;
-        private System.Windows.Forms.Label LblDebug;
         private System.Windows.Forms.Label LblFortify;
     }
 }
